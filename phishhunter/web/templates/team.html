@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="mx-auto max-w-6xl px-5 py-10">
+  <div class="flex flex-wrap items-end justify-between gap-5">
+    <div><div class="text-xs font-black uppercase tracking-[.24em] text-cyan-400">WORKSPACE / TEAM</div><h1 class="mt-2 text-4xl font-black">{{ user.email.split('@')[1] if '@' in user.email else 'K4' }} workspace</h1><p class="mt-2 text-slate-500">Team members share the same tenant boundary. Investigation data remains scoped to this workspace.</p></div>
+    <a href="/dashboard" class="rounded-xl border border-slate-700 px-4 py-2 text-sm">Back to dashboard</a>
+  </div>
+  <div class="mt-8 grid gap-4 sm:grid-cols-3">
+    <div class="k4-metric-card"><span>Members</span><strong>{{ members|length }}</strong><small>Workspace users</small></div>
+    <div class="k4-metric-card"><span>Your role</span><strong>{{ 'Admin' if user.is_admin else 'Analyst' }}</strong><small>Current access level</small></div>
+    <div class="k4-metric-card"><span>Tenant</span><strong>#{{ user.tenant_id }}</strong><small>SQL-backed workspace</small></div>
+  </div>
+  <section class="mt-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60">
+    <div class="border-b border-slate-800 p-5"><h2 class="text-lg font-black">Workspace members</h2></div>
+    <div class="overflow-x-auto"><table class="k4-table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Last login</th></tr></thead><tbody>{% for m in members %}<tr><td class="font-bold text-slate-200">{{ m.name }}</td><td>{{ m.email }}</td><td>{{ m.role }}</td><td>{{ m.status }}</td><td>{{ m.last_login }}</td></tr>{% endfor %}</tbody></table></div>
+  </section>
+</section>
+{% endblock %}

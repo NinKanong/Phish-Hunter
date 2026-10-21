@@ -1,0 +1,37 @@
+{
+  "version": "22.0.0",
+  "name": "Phish-Hunter-k4 URL & Domain Analyst V22 Global Domain Intelligence",
+  "canonical_runtime": "phishhunter/url_domain_analyst",
+  "source_mirror": "phishhunter/url & domain analyst",
+  "landing": "DNSDumpster-style single URL/domain input",
+  "analysis": [
+    "deep URL and domain anatomy",
+    "current DNS lookup matrix",
+    "RDAP/WHOIS lifecycle and contact normalization",
+    "DomainTools Domain Profile/WHOIS/Iris integration",
+    "certificate transparency and TLS",
+    "attack-surface infrastructure correlation",
+    "provider-backed worldwide IP geolocation",
+    "interactive country map",
+    "provider-backed corporate/branch locations",
+    "defensive C2 and malware infrastructure triage",
+    "relationship graph",
+    "evidence ledger",
+    "risk and analyst reasoning"
+  ],
+  "domain_information_fields": [
+    "Domain", "Registered On", "Expires On", "Updated On", "Status", "Name Servers",
+    "Registrar", "IANA ID", "Abuse Email", "Abuse Phone", "Registrant Contact",
+    "Name", "Organization", "Street", "City", "State", "Postal Code", "Country", "Phone", "Email"
+  ],
+  "map": {
+    "country_interaction": true,
+    "network_points": true,
+    "corporate_branch_points": true,
+    "hover": true,
+    "click": true,
+    "evidence_separation": true
+  },
+  "provider_catalog": "200+ capability contracts and provider adapters; external services require their own credentials/licensing",
+  "safety": "passive-first, safe public metadata, provider-backed evidence, no arbitrary command execution"
+}

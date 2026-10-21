@@ -1,0 +1,16 @@
+title: PhishGuard analyst triage signals
+status: experimental
+description: Host-native defensive triage signals mirrored from the static analyzer.
+logsource:
+  product: phishhunter
+  service: analysis
+detection:
+  selection:
+    evidence:
+      - suspicious-api-imports
+      - office-macro
+      - pdf-active-content
+      - double-extension
+      - embedded-network-iocs
+  condition: selection
+level: high

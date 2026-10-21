@@ -1,0 +1,6 @@
+from fastapi.testclient import TestClient
+from phishhunter.main import app
+
+def test_health():
+    client=TestClient(app)
+    assert client.get("/health").status_code==200

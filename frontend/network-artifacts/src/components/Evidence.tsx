@@ -1,0 +1,2 @@
+import {Card,Empty} from './common';import {useAnalysisStore} from '../store/analysisStore';
+export function Evidence(){const r=useAnalysisStore(s=>s.result);if(!r)return <Empty>Run an investigation first.</Empty>;const ev=(r.raw_evidence as any)?.events||[];return <Card title="Raw evidence locker"><div className="evidence-grid">{ev.slice(0,300).map((x:any,i:number)=><details key={i}><summary>EV-{String(i+1).padStart(5,'0')} · {x.event_type||x.source||'artifact'}</summary><pre>{JSON.stringify(x,null,2)}</pre></details>)}</div></Card>}

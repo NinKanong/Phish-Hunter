@@ -1,0 +1,6 @@
+VERSION='21.0.0'
+NAME='URL & Domain Analyst — V21 Ultra Deep World Intelligence'
+LANDING='DNSDumpster-style minimal URL/domain intake with real asynchronous investigation'
+PIPELINE='passive-first deep OSINT, infrastructure, geography, C2 triage, graph, evidence and risk correlation'
+CANONICAL_RUNTIME='phishhunter/url_domain_analyst'
+SOURCE_MIRROR='phishhunter/url & domain analyst'

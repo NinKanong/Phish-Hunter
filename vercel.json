@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "python -m pip install -r requirements.txt",
+  "functions": {
+    "index.py": {
+      "maxDuration": 300,
+      "includeFiles": "{phishhunter/web/templates/**,phishhunter/web/static/**,admin/templates/**,data/spec/**,data/sigma/**,data/yara/**}",
+      "excludeFiles": "{tests/**,docs/**,deploy/**,Backend/**,frontend/**,infrastructure/**,dominus_ultimate/**,ops/**,scripts/**,**/*.md,**/*.ps1,**/*.sh,**/*.backup,FILE_MANIFEST.json,data/storage/**,.git/**,.venv/**,node_modules/**}"
+    }
+  }
+}

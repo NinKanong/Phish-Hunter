@@ -1,0 +1,25 @@
+{
+  "version": "20.0.0",
+  "name": "Phish-Hunter URL & Domain Analyst V20",
+  "canonical_runtime": "phishhunter/url_domain_analyst",
+  "source_mirror": "phishhunter/url & domain analyst",
+  "runtime_python_files": 312,
+  "runtime_files": 636,
+  "named_integrations": 288,
+  "capability_points": 778,
+  "landing": "DNSDumpster-style one-field URL/domain intake with Start Test!",
+  "job_api": [
+    "POST /services/url-domain-analyst/scan",
+    "GET /services/url-domain-analyst/scan/{job}/events",
+    "GET /services/url-domain-analyst/scan/{job}/status",
+    "GET /services/url-domain-analyst/scan/{job}/result"
+  ],
+  "pipeline": "passive-first bounded collection + deep evidence correlation + explainable risk + graph + OSINT",
+  "safety": [
+    "no arbitrary command execution",
+    "no dynamic target JavaScript execution",
+    "no direct dark-web crawl",
+    "provider provenance required",
+    "authorized provider integrations only"
+  ]
+}

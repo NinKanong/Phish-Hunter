@@ -1,0 +1,9 @@
+{
+  "service": "pcap-analyst",
+  "workspace": "network-artifacts",
+  "siblings": ["pcap", "zeek", "suricata", "netflow", "firewall", "proxy", "dns", "dhcp"],
+  "frontend": ["upload", "investigation", "ioc", "timeline", "graph", "report"],
+  "api": ["upload", "analyze", "jobs", "iocs", "artifacts", "report", "ws"],
+  "analysis": ["parse", "correlate", "behavior", "mitre", "evidence", "timeline"],
+  "safety": {"payload_execution": false, "active_scanning": false, "attribution_from_pcap_only": false}
+}

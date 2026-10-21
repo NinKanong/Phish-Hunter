@@ -1,0 +1,2 @@
+import {Card,Empty} from '../common';import {useAnalysisStore} from '../../store/analysisStore';
+export function IocExplorer(){const r=useAnalysisStore(s=>s.result);if(!r)return <Empty>Run an investigation first.</Empty>;return <div className="grid2">{Object.entries(r.iocs).map(([kind,values])=><Card key={kind} title={kind}><div className="ioc-list">{(values as string[]).map(v=><code key={v}>{v}</code>)}</div></Card>)}</div>}

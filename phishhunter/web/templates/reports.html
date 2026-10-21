@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="k4-reports-page">
+  <div class="k4-page-head-row">
+    <div><span class="k4-page-kicker">ANALYSIS / REPORTS</span><h1 class="k4-page-title-sm">My scans &amp; reports</h1><p class="k4-page-lead-sm">A focused evidence library for every analysis you have completed in this workspace.</p></div>
+    <a href="/services" class="k4-primary-button">Start new analysis <span>→</span></a>
+  </div>
+
+  <div class="k4-report-stat-grid">
+    <div><span>TOTAL SCANS</span><b>{{ totals.scans }}</b><small>latest 80 shown</small></div>
+    <div><span>HIGH RISK</span><b>{{ totals.high }}</b><small>risk score ≥ 60</small></div>
+    <div><span>INDICATORS</span><b>{{ totals.iocs }}</b><small>IOCs extracted</small></div>
+    <div><span>REPORTS</span><b>{{ totals.reports }}</b><small>stored outputs</small></div>
+  </div>
+
+  <div class="k4-report-toolbar">
+    <div><span class="k4-search-icon">⌕</span><input id="reportSearch" type="search" placeholder="Search target, scan type, verdict or ID…" autocomplete="off"></div>
+    <div class="k4-report-filter"><button type="button" class="active" data-filter="all">All</button><button type="button" data-filter="high">High risk</button><button type="button" data-filter="low">Lower risk</button></div>
+  </div>
+
+  <div id="reportList" class="k4-report-list">
+    {% for row in scans %}
+    <article class="k4-report-card" data-risk="{{ 'high' if row.scan.risk_score >= 60 else 'low' }}" data-search="{{ row.scan.id }} {{ row.scan.scan_type }} {{ row.scan.target }} {{ row.scan.verdict }}">
+      <div class="k4-report-index">{{ '%02d'|format(loop.index) }}</div>
+      <div class="k4-report-body">
+        <div class="k4-report-top"><div><span class="k4-report-type">{{ row.scan.scan_type|upper }}</span><h2>#{{ row.scan.id }} · {{ row.scan.target }}</h2></div><span class="k4-risk-pill {{ 'high' if row.scan.risk_score >= 60 else 'low' }}">{{ row.risk_label }} · {{ row.scan.risk_score }}</span></div>
+        <p>{{ row.summary }}</p>
+        <div class="k4-report-meta"><span>{{ row.scan.verdict|title }}</span><span>{{ row.ioc_count }} IOCs</span><span>{{ row.scan.status|title }}</span><span>{{ row.scan.created_at.strftime('%d %b %Y · %H:%M') }}</span></div>
+        <div class="k4-report-actions"><a href="/reports/{{ row.scan.id }}/html">HTML <span>↗</span></a><a href="/reports/{{ row.scan.id }}/json">JSON <span>↗</span></a><a href="/reports/{{ row.scan.id }}/stix">STIX <span>↗</span></a></div>
+      </div>
+    </article>
+    {% else %}
+    <div class="k4-empty-report"><div>◌</div><h2>No scans yet</h2><p>Run your first URL, email, file or PCAP analysis and the evidence will appear here.</p><a href="/services" class="k4-primary-button">Explore analysis services →</a></div>
+    {% endfor %}
+  </div>
+</section>
+<script>
+(() => {
+  const input=document.getElementById('reportSearch'); const cards=[...document.querySelectorAll('.k4-report-card')]; const buttons=[...document.querySelectorAll('[data-filter]')]; let filter='all';
+  function apply(){const q=(input?.value||'').toLowerCase().trim();cards.forEach(c=>{const hit=!q||c.dataset.search.toLowerCase().includes(q);const risk=filter==='all'||c.dataset.risk===filter;c.hidden=!(hit&&risk);});}
+  input?.addEventListener('input',apply); buttons.forEach(b=>b.addEventListener('click',()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;apply();}));
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.black_cache/
+.mypy_cache/
+*.egg-info/
+
+# Local secrets and runtime data
+.env
+.env.*.local
+*.db
+*.sqlite
+*.sqlite3
+data/storage/
+reports/generated/
+*.log
+
+# Frontend/deployment outputs (keep their source files)
+node_modules/
+frontend/app/node_modules/
+frontend/app/dist/
+frontend/network-artifacts/node_modules/
+frontend/network-artifacts/dist/
+.vercel/
+build/
+dist/
+.coverage
+htmlcov/
+*.zip

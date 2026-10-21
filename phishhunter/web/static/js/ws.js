@@ -1,0 +1,1 @@
+export function connectAnalysisSocket(url,onMessage,onError){const socket=new WebSocket(url);socket.addEventListener('message',(event)=>onMessage(JSON.parse(event.data)));socket.addEventListener('error',onError);return socket;}

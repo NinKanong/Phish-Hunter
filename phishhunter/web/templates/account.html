@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="k4-account-page">
+  <div class="k4-page-head-row">
+    <div><span class="k4-page-kicker">ACCOUNT / PROFILE</span><h1 class="k4-page-title-sm">Your analyst profile</h1><p class="k4-page-lead-sm">Manage the identity that appears across your investigations, reports and K4 workspace.</p></div>
+    <a href="/dashboard" class="k4-outline-button">Back to dashboard</a>
+  </div>
+  {% if request.query_params.get('saved') %}<div class="k4-success-banner"><span>✓</span><div><b>Profile updated</b><small>Your profile changes are now active across the workspace.</small></div></div>{% endif %}
+
+  <div class="k4-account-grid">
+    <aside class="k4-profile-card">
+      <div class="k4-profile-cover"></div>
+      <div class="k4-profile-main">
+        <div class="k4-profile-avatar-xl">
+          {% if profile.avatar_url %}<img src="{{ profile.avatar_url }}" alt="Profile photo">{% else %}<span>{{ profile.display_name[:1]|upper }}</span>{% endif %}
+        </div>
+        <div class="k4-profile-name">{{ profile.display_name }}</div>
+        <div class="k4-profile-role">{{ profile.job_title }}</div>
+        <div class="k4-profile-email">{{ user.email }}</div>
+        <div class="k4-profile-badges"><span>{{ 'Administrator' if user.is_admin else 'Analyst' }}</span><span>Workspace #{{ user.tenant_id }}</span></div>
+      </div>
+      <div class="k4-profile-meta">
+        <div><small>Account created</small><b>{{ user.created_at.strftime('%d %b %Y') if user.created_at else '—' }}</b></div>
+        <div><small>Last sign-in</small><b>{{ last_login.strftime('%d %b %Y · %H:%M') if last_login else 'First session' }}</b></div>
+      </div>
+    </aside>
+
+    <div class="k4-account-main">
+      <div class="k4-stat-grid">
+        <div class="k4-mini-stat"><span>SCANS</span><b>{{ account_stats.scans }}</b><small>analysis records</small></div>
+        <div class="k4-mini-stat"><span>REPORTS</span><b>{{ account_stats.reports }}</b><small>generated outputs</small></div>
+        <div class="k4-mini-stat"><span>IOCs</span><b>{{ account_stats.iocs }}</b><small>stored indicators</small></div>
+        <div class="k4-mini-stat"><span>AUDIT</span><b>{{ account_stats.audit }}</b><small>workspace events</small></div>
+      </div>
+
+      <form method="post" action="/account" enctype="multipart/form-data" class="k4-editor-card">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="k4-editor-head"><div><span class="k4-section-kicker">PROFILE EDITOR</span><h2>Personal identity</h2></div><span class="k4-editor-status">SQL PROFILE</span></div>
+        <div class="k4-photo-editor">
+          <div class="k4-photo-preview">{% if profile.avatar_url %}<img src="{{ profile.avatar_url }}" alt="Current profile photo">{% else %}<span>{{ profile.display_name[:1]|upper }}</span>{% endif %}</div>
+          <div><b>Profile photo</b><p>Upload your own PNG, JPG, WEBP or GIF. Maximum size: 2 MB.</p><label class="k4-upload-button">Choose photo<input type="file" name="avatar" accept="image/png,image/jpeg,image/webp,image/gif"></label></div>
+        </div>
+        <div class="k4-form-grid">
+          <label><span>Display name</span><input name="display_name" value="{{ profile.display_name }}" maxlength="120" required></label>
+          <label><span>Job title</span><input name="job_title" value="{{ profile.job_title }}" maxlength="160"></label>
+          <label class="full"><span>Avatar URL <em>optional</em></span><input name="avatar_url" value="{{ profile.avatar_url if profile.avatar_url and not profile.avatar_url.startswith('/static/uploads/') else '' }}" maxlength="500" placeholder="https://..."></label>
+          <label><span>Timezone</span><input name="timezone" value="{{ profile.timezone }}" maxlength="64"></label>
+          <label><span>Role</span><input value="{{ 'Administrator' if user.is_admin else 'Analyst' }}" disabled></label>
+        </div>
+        <div class="k4-editor-actions"><a href="/settings" class="k4-outline-button">Manage account</a><button class="k4-primary-button" type="submit">Save profile <span>→</span></button></div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=78.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phishhunter"
+version = "2.5.0"
+description = "Host-native phishing, URL, email, and malware triage platform"
+requires-python = ">=3.12,<3.15"
+readme = "README.md"
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+pythonpath = [".", "libs/py-common"]
+addopts = "-q"
+
+# Keep package discovery limited to the active application and shared helpers.
+# This prevents setuptools from treating docs, data, frontend, deployment, and
+# legacy scaffolding directories as installable Python packages.
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["phishhunter", "phishhunter.*", "phishhunter_common", "phishhunter_common.*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+phishhunter = ["web/templates/**/*", "web/static/**/*"]

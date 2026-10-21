@@ -1,0 +1,3646 @@
+{
+  "version": "23.0.0",
+  "source_count": 520,
+  "sources": [
+    {
+      "id": "SRC-0001",
+      "name": "Intelligence Source 0001",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0002",
+      "name": "Intelligence Source 0002",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0003",
+      "name": "Intelligence Source 0003",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0004",
+      "name": "Intelligence Source 0004",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0005",
+      "name": "Intelligence Source 0005",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0006",
+      "name": "Intelligence Source 0006",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0007",
+      "name": "Intelligence Source 0007",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0008",
+      "name": "Intelligence Source 0008",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0009",
+      "name": "Intelligence Source 0009",
+      "category": "technology",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0010",
+      "name": "Intelligence Source 0010",
+      "category": "email_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0011",
+      "name": "Intelligence Source 0011",
+      "category": "cloud_infrastructure",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0012",
+      "name": "Intelligence Source 0012",
+      "category": "social_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0013",
+      "name": "Intelligence Source 0013",
+      "category": "code_secrets",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0014",
+      "name": "Intelligence Source 0014",
+      "category": "dark_web_provider_feeds",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0015",
+      "name": "Intelligence Source 0015",
+      "category": "ransomware_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0016",
+      "name": "Intelligence Source 0016",
+      "category": "malware_sandbox",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0017",
+      "name": "Intelligence Source 0017",
+      "category": "vulnerability_cve",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0018",
+      "name": "Intelligence Source 0018",
+      "category": "asm",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0019",
+      "name": "Intelligence Source 0019",
+      "category": "email_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0020",
+      "name": "Intelligence Source 0020",
+      "category": "waf_cdn",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0021",
+      "name": "Intelligence Source 0021",
+      "category": "subdomain_takeover",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0022",
+      "name": "Intelligence Source 0022",
+      "category": "http_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0023",
+      "name": "Intelligence Source 0023",
+      "category": "mobile",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0024",
+      "name": "Intelligence Source 0024",
+      "category": "iot_ics_ot",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0025",
+      "name": "Intelligence Source 0025",
+      "category": "wireless_rf",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0026",
+      "name": "Intelligence Source 0026",
+      "category": "satellite_imagery",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0027",
+      "name": "Intelligence Source 0027",
+      "category": "geolocation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0028",
+      "name": "Intelligence Source 0028",
+      "category": "financial_crypto",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0029",
+      "name": "Intelligence Source 0029",
+      "category": "corporate_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0030",
+      "name": "Intelligence Source 0030",
+      "category": "legal_public_records",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0031",
+      "name": "Intelligence Source 0031",
+      "category": "media_sentiment",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0032",
+      "name": "Intelligence Source 0032",
+      "category": "geospatial",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0033",
+      "name": "Intelligence Source 0033",
+      "category": "pcap_dfir",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0034",
+      "name": "Intelligence Source 0034",
+      "category": "siem_soar",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0035",
+      "name": "Intelligence Source 0035",
+      "category": "case_management",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0036",
+      "name": "Intelligence Source 0036",
+      "category": "privacy",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0037",
+      "name": "Intelligence Source 0037",
+      "category": "identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0038",
+      "name": "Intelligence Source 0038",
+      "category": "ai_ml",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0039",
+      "name": "Intelligence Source 0039",
+      "category": "url_parsers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0040",
+      "name": "Intelligence Source 0040",
+      "category": "unshorteners",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0041",
+      "name": "Intelligence Source 0041",
+      "category": "resolvers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0042",
+      "name": "Intelligence Source 0042",
+      "category": "dnssec",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0043",
+      "name": "Intelligence Source 0043",
+      "category": "tls",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0044",
+      "name": "Intelligence Source 0044",
+      "category": "http_probers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0045",
+      "name": "Intelligence Source 0045",
+      "category": "crawlers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0046",
+      "name": "Intelligence Source 0046",
+      "category": "robots_sitemaps",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0047",
+      "name": "Intelligence Source 0047",
+      "category": "javascript_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0048",
+      "name": "Intelligence Source 0048",
+      "category": "url_reputation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0049",
+      "name": "Intelligence Source 0049",
+      "category": "anti_phishing",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0050",
+      "name": "Intelligence Source 0050",
+      "category": "sandboxes",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0051",
+      "name": "Intelligence Source 0051",
+      "category": "blocklists",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0052",
+      "name": "Intelligence Source 0052",
+      "category": "domain_age",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0053",
+      "name": "Intelligence Source 0053",
+      "category": "screenshots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0054",
+      "name": "Intelligence Source 0054",
+      "category": "content_text",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0055",
+      "name": "Intelligence Source 0055",
+      "category": "image_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0056",
+      "name": "Intelligence Source 0056",
+      "category": "reverse_pivots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0057",
+      "name": "Intelligence Source 0057",
+      "category": "analytics_fingerprints",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0058",
+      "name": "Intelligence Source 0058",
+      "category": "favicon_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0059",
+      "name": "Intelligence Source 0059",
+      "category": "brand_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0060",
+      "name": "Intelligence Source 0060",
+      "category": "registrar_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0061",
+      "name": "Intelligence Source 0061",
+      "category": "rdap_registry",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0062",
+      "name": "Intelligence Source 0062",
+      "category": "evidence_chain",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0063",
+      "name": "Intelligence Source 0063",
+      "category": "reporting",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0064",
+      "name": "Intelligence Source 0064",
+      "category": "monitoring",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0065",
+      "name": "Intelligence Source 0065",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0066",
+      "name": "Intelligence Source 0066",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0067",
+      "name": "Intelligence Source 0067",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0068",
+      "name": "Intelligence Source 0068",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0069",
+      "name": "Intelligence Source 0069",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0070",
+      "name": "Intelligence Source 0070",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0071",
+      "name": "Intelligence Source 0071",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0072",
+      "name": "Intelligence Source 0072",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0073",
+      "name": "Intelligence Source 0073",
+      "category": "technology",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0074",
+      "name": "Intelligence Source 0074",
+      "category": "email_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0075",
+      "name": "Intelligence Source 0075",
+      "category": "cloud_infrastructure",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0076",
+      "name": "Intelligence Source 0076",
+      "category": "social_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0077",
+      "name": "Intelligence Source 0077",
+      "category": "code_secrets",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0078",
+      "name": "Intelligence Source 0078",
+      "category": "dark_web_provider_feeds",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0079",
+      "name": "Intelligence Source 0079",
+      "category": "ransomware_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0080",
+      "name": "Intelligence Source 0080",
+      "category": "malware_sandbox",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0081",
+      "name": "Intelligence Source 0081",
+      "category": "vulnerability_cve",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0082",
+      "name": "Intelligence Source 0082",
+      "category": "asm",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0083",
+      "name": "Intelligence Source 0083",
+      "category": "email_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0084",
+      "name": "Intelligence Source 0084",
+      "category": "waf_cdn",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0085",
+      "name": "Intelligence Source 0085",
+      "category": "subdomain_takeover",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0086",
+      "name": "Intelligence Source 0086",
+      "category": "http_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0087",
+      "name": "Intelligence Source 0087",
+      "category": "mobile",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0088",
+      "name": "Intelligence Source 0088",
+      "category": "iot_ics_ot",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0089",
+      "name": "Intelligence Source 0089",
+      "category": "wireless_rf",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0090",
+      "name": "Intelligence Source 0090",
+      "category": "satellite_imagery",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0091",
+      "name": "Intelligence Source 0091",
+      "category": "geolocation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0092",
+      "name": "Intelligence Source 0092",
+      "category": "financial_crypto",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0093",
+      "name": "Intelligence Source 0093",
+      "category": "corporate_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0094",
+      "name": "Intelligence Source 0094",
+      "category": "legal_public_records",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0095",
+      "name": "Intelligence Source 0095",
+      "category": "media_sentiment",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0096",
+      "name": "Intelligence Source 0096",
+      "category": "geospatial",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0097",
+      "name": "Intelligence Source 0097",
+      "category": "pcap_dfir",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0098",
+      "name": "Intelligence Source 0098",
+      "category": "siem_soar",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0099",
+      "name": "Intelligence Source 0099",
+      "category": "case_management",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0100",
+      "name": "Intelligence Source 0100",
+      "category": "privacy",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0101",
+      "name": "Intelligence Source 0101",
+      "category": "identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0102",
+      "name": "Intelligence Source 0102",
+      "category": "ai_ml",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0103",
+      "name": "Intelligence Source 0103",
+      "category": "url_parsers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0104",
+      "name": "Intelligence Source 0104",
+      "category": "unshorteners",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0105",
+      "name": "Intelligence Source 0105",
+      "category": "resolvers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0106",
+      "name": "Intelligence Source 0106",
+      "category": "dnssec",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0107",
+      "name": "Intelligence Source 0107",
+      "category": "tls",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0108",
+      "name": "Intelligence Source 0108",
+      "category": "http_probers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0109",
+      "name": "Intelligence Source 0109",
+      "category": "crawlers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0110",
+      "name": "Intelligence Source 0110",
+      "category": "robots_sitemaps",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0111",
+      "name": "Intelligence Source 0111",
+      "category": "javascript_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0112",
+      "name": "Intelligence Source 0112",
+      "category": "url_reputation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0113",
+      "name": "Intelligence Source 0113",
+      "category": "anti_phishing",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0114",
+      "name": "Intelligence Source 0114",
+      "category": "sandboxes",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0115",
+      "name": "Intelligence Source 0115",
+      "category": "blocklists",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0116",
+      "name": "Intelligence Source 0116",
+      "category": "domain_age",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0117",
+      "name": "Intelligence Source 0117",
+      "category": "screenshots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0118",
+      "name": "Intelligence Source 0118",
+      "category": "content_text",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0119",
+      "name": "Intelligence Source 0119",
+      "category": "image_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0120",
+      "name": "Intelligence Source 0120",
+      "category": "reverse_pivots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0121",
+      "name": "Intelligence Source 0121",
+      "category": "analytics_fingerprints",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0122",
+      "name": "Intelligence Source 0122",
+      "category": "favicon_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0123",
+      "name": "Intelligence Source 0123",
+      "category": "brand_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0124",
+      "name": "Intelligence Source 0124",
+      "category": "registrar_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0125",
+      "name": "Intelligence Source 0125",
+      "category": "rdap_registry",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0126",
+      "name": "Intelligence Source 0126",
+      "category": "evidence_chain",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0127",
+      "name": "Intelligence Source 0127",
+      "category": "reporting",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0128",
+      "name": "Intelligence Source 0128",
+      "category": "monitoring",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0129",
+      "name": "Intelligence Source 0129",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0130",
+      "name": "Intelligence Source 0130",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0131",
+      "name": "Intelligence Source 0131",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0132",
+      "name": "Intelligence Source 0132",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0133",
+      "name": "Intelligence Source 0133",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0134",
+      "name": "Intelligence Source 0134",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0135",
+      "name": "Intelligence Source 0135",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0136",
+      "name": "Intelligence Source 0136",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0137",
+      "name": "Intelligence Source 0137",
+      "category": "technology",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0138",
+      "name": "Intelligence Source 0138",
+      "category": "email_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0139",
+      "name": "Intelligence Source 0139",
+      "category": "cloud_infrastructure",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0140",
+      "name": "Intelligence Source 0140",
+      "category": "social_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0141",
+      "name": "Intelligence Source 0141",
+      "category": "code_secrets",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0142",
+      "name": "Intelligence Source 0142",
+      "category": "dark_web_provider_feeds",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0143",
+      "name": "Intelligence Source 0143",
+      "category": "ransomware_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0144",
+      "name": "Intelligence Source 0144",
+      "category": "malware_sandbox",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0145",
+      "name": "Intelligence Source 0145",
+      "category": "vulnerability_cve",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0146",
+      "name": "Intelligence Source 0146",
+      "category": "asm",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0147",
+      "name": "Intelligence Source 0147",
+      "category": "email_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0148",
+      "name": "Intelligence Source 0148",
+      "category": "waf_cdn",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0149",
+      "name": "Intelligence Source 0149",
+      "category": "subdomain_takeover",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0150",
+      "name": "Intelligence Source 0150",
+      "category": "http_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0151",
+      "name": "Intelligence Source 0151",
+      "category": "mobile",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0152",
+      "name": "Intelligence Source 0152",
+      "category": "iot_ics_ot",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0153",
+      "name": "Intelligence Source 0153",
+      "category": "wireless_rf",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0154",
+      "name": "Intelligence Source 0154",
+      "category": "satellite_imagery",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0155",
+      "name": "Intelligence Source 0155",
+      "category": "geolocation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0156",
+      "name": "Intelligence Source 0156",
+      "category": "financial_crypto",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0157",
+      "name": "Intelligence Source 0157",
+      "category": "corporate_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0158",
+      "name": "Intelligence Source 0158",
+      "category": "legal_public_records",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0159",
+      "name": "Intelligence Source 0159",
+      "category": "media_sentiment",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0160",
+      "name": "Intelligence Source 0160",
+      "category": "geospatial",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0161",
+      "name": "Intelligence Source 0161",
+      "category": "pcap_dfir",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0162",
+      "name": "Intelligence Source 0162",
+      "category": "siem_soar",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0163",
+      "name": "Intelligence Source 0163",
+      "category": "case_management",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0164",
+      "name": "Intelligence Source 0164",
+      "category": "privacy",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0165",
+      "name": "Intelligence Source 0165",
+      "category": "identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0166",
+      "name": "Intelligence Source 0166",
+      "category": "ai_ml",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0167",
+      "name": "Intelligence Source 0167",
+      "category": "url_parsers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0168",
+      "name": "Intelligence Source 0168",
+      "category": "unshorteners",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0169",
+      "name": "Intelligence Source 0169",
+      "category": "resolvers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0170",
+      "name": "Intelligence Source 0170",
+      "category": "dnssec",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0171",
+      "name": "Intelligence Source 0171",
+      "category": "tls",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0172",
+      "name": "Intelligence Source 0172",
+      "category": "http_probers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0173",
+      "name": "Intelligence Source 0173",
+      "category": "crawlers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0174",
+      "name": "Intelligence Source 0174",
+      "category": "robots_sitemaps",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0175",
+      "name": "Intelligence Source 0175",
+      "category": "javascript_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0176",
+      "name": "Intelligence Source 0176",
+      "category": "url_reputation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0177",
+      "name": "Intelligence Source 0177",
+      "category": "anti_phishing",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0178",
+      "name": "Intelligence Source 0178",
+      "category": "sandboxes",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0179",
+      "name": "Intelligence Source 0179",
+      "category": "blocklists",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0180",
+      "name": "Intelligence Source 0180",
+      "category": "domain_age",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0181",
+      "name": "Intelligence Source 0181",
+      "category": "screenshots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0182",
+      "name": "Intelligence Source 0182",
+      "category": "content_text",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0183",
+      "name": "Intelligence Source 0183",
+      "category": "image_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0184",
+      "name": "Intelligence Source 0184",
+      "category": "reverse_pivots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0185",
+      "name": "Intelligence Source 0185",
+      "category": "analytics_fingerprints",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0186",
+      "name": "Intelligence Source 0186",
+      "category": "favicon_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0187",
+      "name": "Intelligence Source 0187",
+      "category": "brand_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0188",
+      "name": "Intelligence Source 0188",
+      "category": "registrar_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0189",
+      "name": "Intelligence Source 0189",
+      "category": "rdap_registry",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0190",
+      "name": "Intelligence Source 0190",
+      "category": "evidence_chain",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0191",
+      "name": "Intelligence Source 0191",
+      "category": "reporting",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0192",
+      "name": "Intelligence Source 0192",
+      "category": "monitoring",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0193",
+      "name": "Intelligence Source 0193",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0194",
+      "name": "Intelligence Source 0194",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0195",
+      "name": "Intelligence Source 0195",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0196",
+      "name": "Intelligence Source 0196",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0197",
+      "name": "Intelligence Source 0197",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0198",
+      "name": "Intelligence Source 0198",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0199",
+      "name": "Intelligence Source 0199",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0200",
+      "name": "Intelligence Source 0200",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0201",
+      "name": "Intelligence Source 0201",
+      "category": "technology",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0202",
+      "name": "Intelligence Source 0202",
+      "category": "email_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0203",
+      "name": "Intelligence Source 0203",
+      "category": "cloud_infrastructure",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0204",
+      "name": "Intelligence Source 0204",
+      "category": "social_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0205",
+      "name": "Intelligence Source 0205",
+      "category": "code_secrets",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0206",
+      "name": "Intelligence Source 0206",
+      "category": "dark_web_provider_feeds",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0207",
+      "name": "Intelligence Source 0207",
+      "category": "ransomware_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0208",
+      "name": "Intelligence Source 0208",
+      "category": "malware_sandbox",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0209",
+      "name": "Intelligence Source 0209",
+      "category": "vulnerability_cve",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0210",
+      "name": "Intelligence Source 0210",
+      "category": "asm",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0211",
+      "name": "Intelligence Source 0211",
+      "category": "email_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0212",
+      "name": "Intelligence Source 0212",
+      "category": "waf_cdn",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0213",
+      "name": "Intelligence Source 0213",
+      "category": "subdomain_takeover",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0214",
+      "name": "Intelligence Source 0214",
+      "category": "http_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0215",
+      "name": "Intelligence Source 0215",
+      "category": "mobile",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0216",
+      "name": "Intelligence Source 0216",
+      "category": "iot_ics_ot",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0217",
+      "name": "Intelligence Source 0217",
+      "category": "wireless_rf",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0218",
+      "name": "Intelligence Source 0218",
+      "category": "satellite_imagery",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0219",
+      "name": "Intelligence Source 0219",
+      "category": "geolocation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0220",
+      "name": "Intelligence Source 0220",
+      "category": "financial_crypto",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0221",
+      "name": "Intelligence Source 0221",
+      "category": "corporate_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0222",
+      "name": "Intelligence Source 0222",
+      "category": "legal_public_records",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0223",
+      "name": "Intelligence Source 0223",
+      "category": "media_sentiment",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0224",
+      "name": "Intelligence Source 0224",
+      "category": "geospatial",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0225",
+      "name": "Intelligence Source 0225",
+      "category": "pcap_dfir",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0226",
+      "name": "Intelligence Source 0226",
+      "category": "siem_soar",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0227",
+      "name": "Intelligence Source 0227",
+      "category": "case_management",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0228",
+      "name": "Intelligence Source 0228",
+      "category": "privacy",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0229",
+      "name": "Intelligence Source 0229",
+      "category": "identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0230",
+      "name": "Intelligence Source 0230",
+      "category": "ai_ml",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0231",
+      "name": "Intelligence Source 0231",
+      "category": "url_parsers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0232",
+      "name": "Intelligence Source 0232",
+      "category": "unshorteners",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0233",
+      "name": "Intelligence Source 0233",
+      "category": "resolvers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0234",
+      "name": "Intelligence Source 0234",
+      "category": "dnssec",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0235",
+      "name": "Intelligence Source 0235",
+      "category": "tls",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0236",
+      "name": "Intelligence Source 0236",
+      "category": "http_probers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0237",
+      "name": "Intelligence Source 0237",
+      "category": "crawlers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0238",
+      "name": "Intelligence Source 0238",
+      "category": "robots_sitemaps",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0239",
+      "name": "Intelligence Source 0239",
+      "category": "javascript_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0240",
+      "name": "Intelligence Source 0240",
+      "category": "url_reputation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0241",
+      "name": "Intelligence Source 0241",
+      "category": "anti_phishing",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0242",
+      "name": "Intelligence Source 0242",
+      "category": "sandboxes",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0243",
+      "name": "Intelligence Source 0243",
+      "category": "blocklists",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0244",
+      "name": "Intelligence Source 0244",
+      "category": "domain_age",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0245",
+      "name": "Intelligence Source 0245",
+      "category": "screenshots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0246",
+      "name": "Intelligence Source 0246",
+      "category": "content_text",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0247",
+      "name": "Intelligence Source 0247",
+      "category": "image_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0248",
+      "name": "Intelligence Source 0248",
+      "category": "reverse_pivots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0249",
+      "name": "Intelligence Source 0249",
+      "category": "analytics_fingerprints",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0250",
+      "name": "Intelligence Source 0250",
+      "category": "favicon_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0251",
+      "name": "Intelligence Source 0251",
+      "category": "brand_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0252",
+      "name": "Intelligence Source 0252",
+      "category": "registrar_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0253",
+      "name": "Intelligence Source 0253",
+      "category": "rdap_registry",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0254",
+      "name": "Intelligence Source 0254",
+      "category": "evidence_chain",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0255",
+      "name": "Intelligence Source 0255",
+      "category": "reporting",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0256",
+      "name": "Intelligence Source 0256",
+      "category": "monitoring",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0257",
+      "name": "Intelligence Source 0257",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0258",
+      "name": "Intelligence Source 0258",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0259",
+      "name": "Intelligence Source 0259",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0260",
+      "name": "Intelligence Source 0260",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0261",
+      "name": "Intelligence Source 0261",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0262",
+      "name": "Intelligence Source 0262",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0263",
+      "name": "Intelligence Source 0263",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0264",
+      "name": "Intelligence Source 0264",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0265",
+      "name": "Intelligence Source 0265",
+      "category": "technology",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0266",
+      "name": "Intelligence Source 0266",
+      "category": "email_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0267",
+      "name": "Intelligence Source 0267",
+      "category": "cloud_infrastructure",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0268",
+      "name": "Intelligence Source 0268",
+      "category": "social_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0269",
+      "name": "Intelligence Source 0269",
+      "category": "code_secrets",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0270",
+      "name": "Intelligence Source 0270",
+      "category": "dark_web_provider_feeds",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0271",
+      "name": "Intelligence Source 0271",
+      "category": "ransomware_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0272",
+      "name": "Intelligence Source 0272",
+      "category": "malware_sandbox",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0273",
+      "name": "Intelligence Source 0273",
+      "category": "vulnerability_cve",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0274",
+      "name": "Intelligence Source 0274",
+      "category": "asm",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0275",
+      "name": "Intelligence Source 0275",
+      "category": "email_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0276",
+      "name": "Intelligence Source 0276",
+      "category": "waf_cdn",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0277",
+      "name": "Intelligence Source 0277",
+      "category": "subdomain_takeover",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0278",
+      "name": "Intelligence Source 0278",
+      "category": "http_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0279",
+      "name": "Intelligence Source 0279",
+      "category": "mobile",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0280",
+      "name": "Intelligence Source 0280",
+      "category": "iot_ics_ot",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0281",
+      "name": "Intelligence Source 0281",
+      "category": "wireless_rf",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0282",
+      "name": "Intelligence Source 0282",
+      "category": "satellite_imagery",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0283",
+      "name": "Intelligence Source 0283",
+      "category": "geolocation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0284",
+      "name": "Intelligence Source 0284",
+      "category": "financial_crypto",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0285",
+      "name": "Intelligence Source 0285",
+      "category": "corporate_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0286",
+      "name": "Intelligence Source 0286",
+      "category": "legal_public_records",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0287",
+      "name": "Intelligence Source 0287",
+      "category": "media_sentiment",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0288",
+      "name": "Intelligence Source 0288",
+      "category": "geospatial",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0289",
+      "name": "Intelligence Source 0289",
+      "category": "pcap_dfir",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0290",
+      "name": "Intelligence Source 0290",
+      "category": "siem_soar",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0291",
+      "name": "Intelligence Source 0291",
+      "category": "case_management",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0292",
+      "name": "Intelligence Source 0292",
+      "category": "privacy",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0293",
+      "name": "Intelligence Source 0293",
+      "category": "identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0294",
+      "name": "Intelligence Source 0294",
+      "category": "ai_ml",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0295",
+      "name": "Intelligence Source 0295",
+      "category": "url_parsers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0296",
+      "name": "Intelligence Source 0296",
+      "category": "unshorteners",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0297",
+      "name": "Intelligence Source 0297",
+      "category": "resolvers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0298",
+      "name": "Intelligence Source 0298",
+      "category": "dnssec",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0299",
+      "name": "Intelligence Source 0299",
+      "category": "tls",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0300",
+      "name": "Intelligence Source 0300",
+      "category": "http_probers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0301",
+      "name": "Intelligence Source 0301",
+      "category": "crawlers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0302",
+      "name": "Intelligence Source 0302",
+      "category": "robots_sitemaps",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0303",
+      "name": "Intelligence Source 0303",
+      "category": "javascript_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0304",
+      "name": "Intelligence Source 0304",
+      "category": "url_reputation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0305",
+      "name": "Intelligence Source 0305",
+      "category": "anti_phishing",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0306",
+      "name": "Intelligence Source 0306",
+      "category": "sandboxes",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0307",
+      "name": "Intelligence Source 0307",
+      "category": "blocklists",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0308",
+      "name": "Intelligence Source 0308",
+      "category": "domain_age",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0309",
+      "name": "Intelligence Source 0309",
+      "category": "screenshots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0310",
+      "name": "Intelligence Source 0310",
+      "category": "content_text",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0311",
+      "name": "Intelligence Source 0311",
+      "category": "image_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0312",
+      "name": "Intelligence Source 0312",
+      "category": "reverse_pivots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0313",
+      "name": "Intelligence Source 0313",
+      "category": "analytics_fingerprints",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0314",
+      "name": "Intelligence Source 0314",
+      "category": "favicon_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0315",
+      "name": "Intelligence Source 0315",
+      "category": "brand_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0316",
+      "name": "Intelligence Source 0316",
+      "category": "registrar_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0317",
+      "name": "Intelligence Source 0317",
+      "category": "rdap_registry",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0318",
+      "name": "Intelligence Source 0318",
+      "category": "evidence_chain",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0319",
+      "name": "Intelligence Source 0319",
+      "category": "reporting",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0320",
+      "name": "Intelligence Source 0320",
+      "category": "monitoring",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0321",
+      "name": "Intelligence Source 0321",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0322",
+      "name": "Intelligence Source 0322",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0323",
+      "name": "Intelligence Source 0323",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0324",
+      "name": "Intelligence Source 0324",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0325",
+      "name": "Intelligence Source 0325",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0326",
+      "name": "Intelligence Source 0326",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0327",
+      "name": "Intelligence Source 0327",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0328",
+      "name": "Intelligence Source 0328",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0329",
+      "name": "Intelligence Source 0329",
+      "category": "technology",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0330",
+      "name": "Intelligence Source 0330",
+      "category": "email_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0331",
+      "name": "Intelligence Source 0331",
+      "category": "cloud_infrastructure",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0332",
+      "name": "Intelligence Source 0332",
+      "category": "social_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0333",
+      "name": "Intelligence Source 0333",
+      "category": "code_secrets",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0334",
+      "name": "Intelligence Source 0334",
+      "category": "dark_web_provider_feeds",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0335",
+      "name": "Intelligence Source 0335",
+      "category": "ransomware_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0336",
+      "name": "Intelligence Source 0336",
+      "category": "malware_sandbox",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0337",
+      "name": "Intelligence Source 0337",
+      "category": "vulnerability_cve",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0338",
+      "name": "Intelligence Source 0338",
+      "category": "asm",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0339",
+      "name": "Intelligence Source 0339",
+      "category": "email_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0340",
+      "name": "Intelligence Source 0340",
+      "category": "waf_cdn",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0341",
+      "name": "Intelligence Source 0341",
+      "category": "subdomain_takeover",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0342",
+      "name": "Intelligence Source 0342",
+      "category": "http_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0343",
+      "name": "Intelligence Source 0343",
+      "category": "mobile",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0344",
+      "name": "Intelligence Source 0344",
+      "category": "iot_ics_ot",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0345",
+      "name": "Intelligence Source 0345",
+      "category": "wireless_rf",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0346",
+      "name": "Intelligence Source 0346",
+      "category": "satellite_imagery",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0347",
+      "name": "Intelligence Source 0347",
+      "category": "geolocation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0348",
+      "name": "Intelligence Source 0348",
+      "category": "financial_crypto",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0349",
+      "name": "Intelligence Source 0349",
+      "category": "corporate_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0350",
+      "name": "Intelligence Source 0350",
+      "category": "legal_public_records",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0351",
+      "name": "Intelligence Source 0351",
+      "category": "media_sentiment",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0352",
+      "name": "Intelligence Source 0352",
+      "category": "geospatial",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0353",
+      "name": "Intelligence Source 0353",
+      "category": "pcap_dfir",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0354",
+      "name": "Intelligence Source 0354",
+      "category": "siem_soar",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0355",
+      "name": "Intelligence Source 0355",
+      "category": "case_management",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0356",
+      "name": "Intelligence Source 0356",
+      "category": "privacy",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0357",
+      "name": "Intelligence Source 0357",
+      "category": "identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0358",
+      "name": "Intelligence Source 0358",
+      "category": "ai_ml",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0359",
+      "name": "Intelligence Source 0359",
+      "category": "url_parsers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0360",
+      "name": "Intelligence Source 0360",
+      "category": "unshorteners",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0361",
+      "name": "Intelligence Source 0361",
+      "category": "resolvers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0362",
+      "name": "Intelligence Source 0362",
+      "category": "dnssec",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0363",
+      "name": "Intelligence Source 0363",
+      "category": "tls",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0364",
+      "name": "Intelligence Source 0364",
+      "category": "http_probers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0365",
+      "name": "Intelligence Source 0365",
+      "category": "crawlers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0366",
+      "name": "Intelligence Source 0366",
+      "category": "robots_sitemaps",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0367",
+      "name": "Intelligence Source 0367",
+      "category": "javascript_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0368",
+      "name": "Intelligence Source 0368",
+      "category": "url_reputation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0369",
+      "name": "Intelligence Source 0369",
+      "category": "anti_phishing",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0370",
+      "name": "Intelligence Source 0370",
+      "category": "sandboxes",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0371",
+      "name": "Intelligence Source 0371",
+      "category": "blocklists",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0372",
+      "name": "Intelligence Source 0372",
+      "category": "domain_age",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0373",
+      "name": "Intelligence Source 0373",
+      "category": "screenshots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0374",
+      "name": "Intelligence Source 0374",
+      "category": "content_text",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0375",
+      "name": "Intelligence Source 0375",
+      "category": "image_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0376",
+      "name": "Intelligence Source 0376",
+      "category": "reverse_pivots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0377",
+      "name": "Intelligence Source 0377",
+      "category": "analytics_fingerprints",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0378",
+      "name": "Intelligence Source 0378",
+      "category": "favicon_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0379",
+      "name": "Intelligence Source 0379",
+      "category": "brand_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0380",
+      "name": "Intelligence Source 0380",
+      "category": "registrar_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0381",
+      "name": "Intelligence Source 0381",
+      "category": "rdap_registry",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0382",
+      "name": "Intelligence Source 0382",
+      "category": "evidence_chain",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0383",
+      "name": "Intelligence Source 0383",
+      "category": "reporting",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0384",
+      "name": "Intelligence Source 0384",
+      "category": "monitoring",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0385",
+      "name": "Intelligence Source 0385",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0386",
+      "name": "Intelligence Source 0386",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0387",
+      "name": "Intelligence Source 0387",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0388",
+      "name": "Intelligence Source 0388",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0389",
+      "name": "Intelligence Source 0389",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0390",
+      "name": "Intelligence Source 0390",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0391",
+      "name": "Intelligence Source 0391",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0392",
+      "name": "Intelligence Source 0392",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0393",
+      "name": "Intelligence Source 0393",
+      "category": "technology",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0394",
+      "name": "Intelligence Source 0394",
+      "category": "email_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0395",
+      "name": "Intelligence Source 0395",
+      "category": "cloud_infrastructure",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0396",
+      "name": "Intelligence Source 0396",
+      "category": "social_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0397",
+      "name": "Intelligence Source 0397",
+      "category": "code_secrets",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0398",
+      "name": "Intelligence Source 0398",
+      "category": "dark_web_provider_feeds",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0399",
+      "name": "Intelligence Source 0399",
+      "category": "ransomware_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0400",
+      "name": "Intelligence Source 0400",
+      "category": "malware_sandbox",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0401",
+      "name": "Intelligence Source 0401",
+      "category": "vulnerability_cve",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0402",
+      "name": "Intelligence Source 0402",
+      "category": "asm",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0403",
+      "name": "Intelligence Source 0403",
+      "category": "email_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0404",
+      "name": "Intelligence Source 0404",
+      "category": "waf_cdn",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0405",
+      "name": "Intelligence Source 0405",
+      "category": "subdomain_takeover",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0406",
+      "name": "Intelligence Source 0406",
+      "category": "http_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0407",
+      "name": "Intelligence Source 0407",
+      "category": "mobile",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0408",
+      "name": "Intelligence Source 0408",
+      "category": "iot_ics_ot",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0409",
+      "name": "Intelligence Source 0409",
+      "category": "wireless_rf",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0410",
+      "name": "Intelligence Source 0410",
+      "category": "satellite_imagery",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0411",
+      "name": "Intelligence Source 0411",
+      "category": "geolocation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0412",
+      "name": "Intelligence Source 0412",
+      "category": "financial_crypto",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0413",
+      "name": "Intelligence Source 0413",
+      "category": "corporate_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0414",
+      "name": "Intelligence Source 0414",
+      "category": "legal_public_records",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0415",
+      "name": "Intelligence Source 0415",
+      "category": "media_sentiment",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0416",
+      "name": "Intelligence Source 0416",
+      "category": "geospatial",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0417",
+      "name": "Intelligence Source 0417",
+      "category": "pcap_dfir",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0418",
+      "name": "Intelligence Source 0418",
+      "category": "siem_soar",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0419",
+      "name": "Intelligence Source 0419",
+      "category": "case_management",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0420",
+      "name": "Intelligence Source 0420",
+      "category": "privacy",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0421",
+      "name": "Intelligence Source 0421",
+      "category": "identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0422",
+      "name": "Intelligence Source 0422",
+      "category": "ai_ml",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0423",
+      "name": "Intelligence Source 0423",
+      "category": "url_parsers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0424",
+      "name": "Intelligence Source 0424",
+      "category": "unshorteners",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0425",
+      "name": "Intelligence Source 0425",
+      "category": "resolvers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0426",
+      "name": "Intelligence Source 0426",
+      "category": "dnssec",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0427",
+      "name": "Intelligence Source 0427",
+      "category": "tls",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0428",
+      "name": "Intelligence Source 0428",
+      "category": "http_probers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0429",
+      "name": "Intelligence Source 0429",
+      "category": "crawlers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0430",
+      "name": "Intelligence Source 0430",
+      "category": "robots_sitemaps",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0431",
+      "name": "Intelligence Source 0431",
+      "category": "javascript_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0432",
+      "name": "Intelligence Source 0432",
+      "category": "url_reputation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0433",
+      "name": "Intelligence Source 0433",
+      "category": "anti_phishing",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0434",
+      "name": "Intelligence Source 0434",
+      "category": "sandboxes",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0435",
+      "name": "Intelligence Source 0435",
+      "category": "blocklists",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0436",
+      "name": "Intelligence Source 0436",
+      "category": "domain_age",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0437",
+      "name": "Intelligence Source 0437",
+      "category": "screenshots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0438",
+      "name": "Intelligence Source 0438",
+      "category": "content_text",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0439",
+      "name": "Intelligence Source 0439",
+      "category": "image_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0440",
+      "name": "Intelligence Source 0440",
+      "category": "reverse_pivots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0441",
+      "name": "Intelligence Source 0441",
+      "category": "analytics_fingerprints",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0442",
+      "name": "Intelligence Source 0442",
+      "category": "favicon_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0443",
+      "name": "Intelligence Source 0443",
+      "category": "brand_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0444",
+      "name": "Intelligence Source 0444",
+      "category": "registrar_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0445",
+      "name": "Intelligence Source 0445",
+      "category": "rdap_registry",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0446",
+      "name": "Intelligence Source 0446",
+      "category": "evidence_chain",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0447",
+      "name": "Intelligence Source 0447",
+      "category": "reporting",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0448",
+      "name": "Intelligence Source 0448",
+      "category": "monitoring",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0449",
+      "name": "Intelligence Source 0449",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0450",
+      "name": "Intelligence Source 0450",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0451",
+      "name": "Intelligence Source 0451",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0452",
+      "name": "Intelligence Source 0452",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0453",
+      "name": "Intelligence Source 0453",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0454",
+      "name": "Intelligence Source 0454",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0455",
+      "name": "Intelligence Source 0455",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0456",
+      "name": "Intelligence Source 0456",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0457",
+      "name": "Intelligence Source 0457",
+      "category": "technology",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0458",
+      "name": "Intelligence Source 0458",
+      "category": "email_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0459",
+      "name": "Intelligence Source 0459",
+      "category": "cloud_infrastructure",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0460",
+      "name": "Intelligence Source 0460",
+      "category": "social_identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0461",
+      "name": "Intelligence Source 0461",
+      "category": "code_secrets",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0462",
+      "name": "Intelligence Source 0462",
+      "category": "dark_web_provider_feeds",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0463",
+      "name": "Intelligence Source 0463",
+      "category": "ransomware_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0464",
+      "name": "Intelligence Source 0464",
+      "category": "malware_sandbox",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0465",
+      "name": "Intelligence Source 0465",
+      "category": "vulnerability_cve",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0466",
+      "name": "Intelligence Source 0466",
+      "category": "asm",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0467",
+      "name": "Intelligence Source 0467",
+      "category": "email_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0468",
+      "name": "Intelligence Source 0468",
+      "category": "waf_cdn",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0469",
+      "name": "Intelligence Source 0469",
+      "category": "subdomain_takeover",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0470",
+      "name": "Intelligence Source 0470",
+      "category": "http_security",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0471",
+      "name": "Intelligence Source 0471",
+      "category": "mobile",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0472",
+      "name": "Intelligence Source 0472",
+      "category": "iot_ics_ot",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0473",
+      "name": "Intelligence Source 0473",
+      "category": "wireless_rf",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0474",
+      "name": "Intelligence Source 0474",
+      "category": "satellite_imagery",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0475",
+      "name": "Intelligence Source 0475",
+      "category": "geolocation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0476",
+      "name": "Intelligence Source 0476",
+      "category": "financial_crypto",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0477",
+      "name": "Intelligence Source 0477",
+      "category": "corporate_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0478",
+      "name": "Intelligence Source 0478",
+      "category": "legal_public_records",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0479",
+      "name": "Intelligence Source 0479",
+      "category": "media_sentiment",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0480",
+      "name": "Intelligence Source 0480",
+      "category": "geospatial",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0481",
+      "name": "Intelligence Source 0481",
+      "category": "pcap_dfir",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0482",
+      "name": "Intelligence Source 0482",
+      "category": "siem_soar",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0483",
+      "name": "Intelligence Source 0483",
+      "category": "case_management",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0484",
+      "name": "Intelligence Source 0484",
+      "category": "privacy",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0485",
+      "name": "Intelligence Source 0485",
+      "category": "identity",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0486",
+      "name": "Intelligence Source 0486",
+      "category": "ai_ml",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0487",
+      "name": "Intelligence Source 0487",
+      "category": "url_parsers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0488",
+      "name": "Intelligence Source 0488",
+      "category": "unshorteners",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0489",
+      "name": "Intelligence Source 0489",
+      "category": "resolvers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0490",
+      "name": "Intelligence Source 0490",
+      "category": "dnssec",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0491",
+      "name": "Intelligence Source 0491",
+      "category": "tls",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0492",
+      "name": "Intelligence Source 0492",
+      "category": "http_probers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0493",
+      "name": "Intelligence Source 0493",
+      "category": "crawlers",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0494",
+      "name": "Intelligence Source 0494",
+      "category": "robots_sitemaps",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0495",
+      "name": "Intelligence Source 0495",
+      "category": "javascript_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0496",
+      "name": "Intelligence Source 0496",
+      "category": "url_reputation",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0497",
+      "name": "Intelligence Source 0497",
+      "category": "anti_phishing",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0498",
+      "name": "Intelligence Source 0498",
+      "category": "sandboxes",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0499",
+      "name": "Intelligence Source 0499",
+      "category": "blocklists",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0500",
+      "name": "Intelligence Source 0500",
+      "category": "domain_age",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0501",
+      "name": "Intelligence Source 0501",
+      "category": "screenshots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0502",
+      "name": "Intelligence Source 0502",
+      "category": "content_text",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0503",
+      "name": "Intelligence Source 0503",
+      "category": "image_analysis",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0504",
+      "name": "Intelligence Source 0504",
+      "category": "reverse_pivots",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0505",
+      "name": "Intelligence Source 0505",
+      "category": "analytics_fingerprints",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0506",
+      "name": "Intelligence Source 0506",
+      "category": "favicon_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0507",
+      "name": "Intelligence Source 0507",
+      "category": "brand_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0508",
+      "name": "Intelligence Source 0508",
+      "category": "registrar_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0509",
+      "name": "Intelligence Source 0509",
+      "category": "rdap_registry",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0510",
+      "name": "Intelligence Source 0510",
+      "category": "evidence_chain",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0511",
+      "name": "Intelligence Source 0511",
+      "category": "reporting",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0512",
+      "name": "Intelligence Source 0512",
+      "category": "monitoring",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0513",
+      "name": "Intelligence Source 0513",
+      "category": "dns_recon",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0514",
+      "name": "Intelligence Source 0514",
+      "category": "certificate_transparency",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0515",
+      "name": "Intelligence Source 0515",
+      "category": "passive_dns",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0516",
+      "name": "Intelligence Source 0516",
+      "category": "whois_rdap",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0517",
+      "name": "Intelligence Source 0517",
+      "category": "threat_intel",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0518",
+      "name": "Intelligence Source 0518",
+      "category": "url_web",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0519",
+      "name": "Intelligence Source 0519",
+      "category": "web_crawling",
+      "status": "not_configured",
+      "provenance_required": true
+    },
+    {
+      "id": "SRC-0520",
+      "name": "Intelligence Source 0520",
+      "category": "port_service_metadata",
+      "status": "not_configured",
+      "provenance_required": true
+    }
+  ]
+}

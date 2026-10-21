@@ -1,0 +1,358 @@
+# email-analyst — Deep Capability Contract
+
+Sections: 20  
+Capability fields: 300
+
+## Universal requirements
+### Evidence
+- raw evidence
+- interpretation
+- source reference
+- first seen / last seen
+### Confidence
+- 0-100 calibrated confidence
+- confidence rationale
+### Threat Intelligence
+- configured-provider lookups
+- lookup timestamps
+- provider status
+### Timeline
+- event timestamp
+- observation timestamp
+- first/last seen
+### Correlation
+- related findings
+- related IOCs
+- graph pivot identifiers
+### MITRE ATT&CK
+- technique ID
+- technique name
+- evidence reference
+- confidence
+### Reporting
+- raw evidence appendix
+- machine-readable result
+- analyst report
+- self-verification
+
+## Deep sections
+### EMAIL OVERVIEW
+- File format (EML / MSG / MBOX / PST / EMLX / MHT)
+- File size
+- Message size (decoded)
+- Message ID
+- Subject (decoded + raw)
+- Date (parsed + raw + timezone + UTC)
+- From (display name + address + raw)
+- To (every recipient with display name + address)
+- CC, BCC (every recipient)
+- Reply-To (address + mismatch check)
+- Return-Path (address + mismatch check)
+- Sender (address + mismatch check)
+- Envelope-From (from SMTP)
+- Envelope-To (from SMTP)
+- X-Mailer / User-Agent
+- MIME-Version
+- Content-Type
+- Content-Transfer-Encoding
+- Priority / Importance / X-Priority
+- Language (detected + confidence)
+- Attachment count
+- URL count
+- Embedded image count
+- Tracking pixel count
+- Verdict: legitimate / spam / phishing / BEC / malware
+- HEADER ANALYSIS (every header, every value)
+- Header name
+- Raw value
+- Parsed value
+- RFC compliance (valid / malformed)
+- Interpretation (why it matters)
+- Suspicious flag (yes/no)
+- Cross-reference with other headers
+- RECEIVED CHAIN (every hop)
+- Hop number
+- From hostname + IP
+- By hostname + IP
+- With protocol (SMTP, ESMTP, ESMTPS, ESMTPSA)
+- ID
+- Timestamp (raw + UTC)
+- Delay from previous hop (seconds)
+- Cumulative delay
+- IP geolocation (country, city)
+- ASN + ASN name
+- Reverse DNS
+- IP reputation (AbuseIPDB, IPQS, GreyNoise)
+- SPF result at this hop
+- DKIM result at this hop
+- DMARC result at this hop
+- TLS info (version, cipher, cert)
+- Anomalies (delay > 60s, private IP after public, etc.)
+- Verdict per hop
+### AUTHENTICATION
+### SPF:
+- Envelope-from domain
+- SPF record (raw TXT)
+- DNS lookups used (of 10)
+- Every mechanism evaluated (a, mx, ip4, ip6, include, exists, ptr, all)
+- Match result (pass / fail / softfail / neutral / none / permerror)
+- Qualifier (~all, -all, ?all, +all)
+- Explanation
+- Sending IP vs SPF record
+- include resolution (every IP)
+- Historical SPF changes
+- Verdict
+### DKIM:
+- Every DKIM-Signature header
+- Selector
+- Domain (d=)
+- Algorithm (rsa-sha256, ed25519-sha256)
+- Canonicalization (relaxed/relaxed, simple/simple)
+- Body hash (bh=)
+- Header hash (b=)
+- Public key DNS TXT record
+- Signature verification (pass / fail / permfail / temperror)
+- Signed headers list (h=)
+- Timestamp (t=)
+- Expiration (x=)
+- Body length (l=)
+- Verification error (if any)
+- Verdict
+### DMARC:
+- DMARC record (raw TXT)
+- Policy (p=none / quarantine / reject)
+- Subdomain policy (sp=)
+- Alignment mode (adkim, aspf: r or s)
+- Aggregate report URI (rua=)
+- Forensic report URI (ruf=)
+- SPF alignment (pass / fail)
+- DKIM alignment (pass / fail)
+- DMARC result (pass / fail / none / temperror)
+- Lookalike domain confidence
+- Verdict
+### ARC:
+- ARC-Seal
+- ARC-Message-Signature
+- ARC-Authentication-Results
+- Chain validation (pass / fail)
+- Instance number
+- Signer
+- Verdict
+### BIMI:
+- BIMI record (raw TXT)
+- Logo URL
+- VMC (Verified Mark Certificate)
+- Certificate validity
+- Verdict
+### MTA-STS:
+- MTA-STS TXT record
+- Policy file (fetched)
+- Mode (enforce / testing / none)
+- Verdict
+### DANE/TLSA:
+- TLSA record
+- Certificate match
+- Verdict
+### SENDER ANALYSIS
+- Sender domain:
+- Registered domain
+- Domain age (WHOIS)
+- Registrar
+- Nameservers
+- Privacy protection
+- Historical WHOIS changes
+- Domain reputation
+- Lookalike of known brands (Levenshtein, homoglyph)
+- Verdict
+- Sender IP:
+- Every sending IP from Received chain
+- ASN + ASN name
+- Geolocation (country, city, coordinates)
+- Reverse DNS
+- Reputation (AbuseIPDB score, IPQS risk, GreyNoise class)
+- Open ports (via Shodan/Censys if key)
+- Blocklist status (Spamhaus, Barracuda, SORBS, etc.)
+- Historical activity
+- Verdict
+- Infrastructure:
+- Mail server hostname
+- Mail server software (Postfix, Exim, Sendmail)
+- TLS version
+- TLS cipher
+- Certificate (issuer, subject, validity)
+- HELO/EHLO name
+- HELO/EHLO validation
+- Verdict
+### CONTENT ANALYSIS
+- Subject:
+- Raw
+- Decoded (MIME encoded-word)
+- Language
+- Urgency score
+- Threat score
+- Manipulation score
+- Brand impersonation score
+- Keyword matches (from phishing keyword list)
+- Verdict
+- Body (plain text):
+- Full text
+- Language
+- Urgency score
+- Threat score
+- Manipulation score
+- Sentiment
+- Every URL extracted (defanged)
+- Every email address
+- Every phone number
+- Every crypto wallet address
+- Every Telegram/WhatsApp link
+- Every sentence with urgency keywords highlighted
+- Verdict
+- Body (HTML):
+- Raw HTML
+- Sanitized HTML (for safe rendering)
+- Every <a> tag (href, text, mismatch check)
+- Every <form> (action, method, every field)
+- Every <img> (src, alt, tracking pixel check)
+- Every <script> (external + inline)
+- Every CSS rule (hidden text, offscreen, tiny fonts)
+- Hidden text detection (white-on-white, zero-width, RTL override)
+- Invisible form detection
+- Overlay trick detection
+- Tracking pixel detection (1x1, unique URL)
+- Web bug detection
+- Base64-encoded content decoded
+- Hex-encoded content decoded
+- ROT13 / JS obfuscation detection
+- Every external resource
+- Verdict
+- Links:
+- Every URL (raw + defanged)
+- Anchor text
+- Anchor text vs href mismatch check
+- Redirect chain (if resolvable)
+- Domain reputation
+- URL risk score
+- Typo-squatting check
+- Homoglyph check
+- Verdict per URL
+- Forms:
+- Every <form>
+- Action URL (internal / external)
+- Method (GET / POST)
+- Every field (name, type, placeholder, required, pattern)
+- Password fields
+- Credit card fields
+- OTP fields
+- Hidden fields
+- CSRF token presence
+- Brand match
+- Verdict
+- Social Engineering:
+- Urgency phrases ("urgent", "immediate action", "account suspended")
+- Threat phrases ("account will be closed", "legal action")
+- Authority phrases ("CEO", "IT department", "bank")
+- Reward phrases ("prize", "bonus", "refund")
+- Fear phrases ("hacked", "compromised", "unusual activity")
+- Trust phrases ("verified", "official", "secure")
+- Every matched phrase with position
+- Verdict
+- URL ANALYSIS (within email)
+- Raw URL
+- Defanged URL
+- Scheme, host, path, query, fragment
+- Domain age
+- Domain reputation
+- IP resolution
+### ATTACHMENT ANALYSIS
+- Filename (raw + decoded)
+- Filename anomaly (double extension, RTLO, unicode tricks)
+- MIME type (declared)
+- MIME type (magic bytes)
+- MIME type mismatch check
+- Size
+- Hashes (MD5, SHA1, SHA256, ssdeep, TLSH)
+- File type (TRID)
+- Metadata (author, company, created, modified)
+- Macro detection (VBA, XLM, Excel 4.0)
+- OLE extraction
+- PDF JS extraction
+- Embedded file extraction
+- Password-protected archive detection
+- Password brute-force (10,000 common passwords)
+- Nested archive extraction (10 levels)
+- Every extracted file → FILE ANALYZER (recursive)
+- Threat intel lookup
+- Verdict per attachment
+### IOC EXTRACTION
+- Every IP (defanged)
+- Every domain (defanged)
+- Every URL (defanged)
+- Every hash (MD5/SHA1/SHA256)
+- Every email address
+- Every crypto wallet
+- Every Telegram bot token
+- Every Discord webhook
+- Every Slack webhook
+- Every mutex
+- Every registry key
+- Every file path
+- Deduplicated with confidence + first/last seen
+### THREAT INTELLIGENCE
+- VirusTotal (every engine)
+- URLScan.io
+- Google Safe Browsing
+- Microsoft SmartScreen
+- PhishTank
+- OpenPhish
+- URLhaus
+- Spamhaus
+- AlienVault OTX
+- AbuseIPDB
+- IPQualityScore
+- GreyNoise
+- MISP (internal)
+- OpenCTI (internal)
+- Aggregate verdict
+### PHISHING DETECTION (ML)
+- Classifier score (0-100)
+- Verdict (phishing / BEC / spam / legitimate)
+- Feature importance (top 20 features)
+- Similar past phishing samples (vector search)
+- Campaign attribution
+### RISK SCORE
+- Score: 0-100
+- Verdict: Malicious / Suspicious / Clean / Unknown
+- Confidence: 0-100
+- Every signal with weight + contribution
+- Top contributing signals
+- Counter-signals
+- Explanation paragraph
+### MITRE ATT&CK
+- Every technique identified
+- Technique ID + name + tactic
+- Evidence per technique
+- Confidence per technique
+- Sub-techniques
+### EVIDENCE
+- Raw headers (full)
+- Raw body (plain + HTML)
+- Raw attachments (with hashes)
+- Raw Received chain
+- Raw auth results
+- Raw URLs (defanged)
+- Raw IOCs
+- Screenshots
+### TIMELINE
+- Email sent (from Date header)
+- Every hop timestamp
+- Every URL resolution
+- Every threat intel lookup
+- Every file scan
+- Chronological view
+### INVESTIGATION REPORT
+- All sections above
+- 30+ export formats
+- Raw evidence appendix
+- Self-verification passed
+- ---

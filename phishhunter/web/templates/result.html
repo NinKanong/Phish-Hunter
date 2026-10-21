@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex flex-wrap items-start justify-between gap-5">
+  <div><div class="text-xs font-bold uppercase tracking-[0.25em] text-red-400">Analysis result</div><h1 class="mt-2 text-4xl font-black">{{ title }}</h1><p class="mt-2 max-w-4xl truncate text-slate-500">Scan #{{ scan.id }} · {{ scan.target }}</p></div>
+  <div class="rounded-2xl border border-slate-800 bg-slate-900 px-6 py-4 text-center"><div class="text-5xl font-black {% if scan.risk_score >= 60 %}text-red-400{% elif scan.risk_score >= 25 %}text-amber-300{% else %}text-emerald-400{% endif %}">{{ scan.risk_score }}</div><div class="text-xs uppercase tracking-widest text-slate-500">risk score</div></div>
+</div>
+<div class="mt-7 flex flex-wrap gap-2">
+  <a class="rounded-lg border border-slate-800 px-3 py-2 text-sm hover:border-red-500/50" href="/reports/{{ scan.id }}/html">HTML</a>
+  <a class="rounded-lg border border-slate-800 px-3 py-2 text-sm hover:border-red-500/50" href="/reports/{{ scan.id }}/json">JSON</a>
+  <a class="rounded-lg border border-slate-800 px-3 py-2 text-sm hover:border-red-500/50" href="/reports/{{ scan.id }}/markdown">Markdown</a>
+  <a class="rounded-lg border border-slate-800 px-3 py-2 text-sm hover:border-red-500/50" href="/reports/{{ scan.id }}/stix">STIX 2.1</a>
+  <a class="rounded-lg bg-slate-900 px-3 py-2 text-sm" href="/graph/{{ scan.id }}">IOC graph</a>
+</div>
+<div class="mt-8 grid gap-5 lg:grid-cols-3">
+  <section class="rounded-2xl border border-slate-800 bg-slate-900 p-5"><div class="text-xs uppercase tracking-widest text-slate-500">Verdict</div><div class="mt-2 text-2xl font-black">{{ result.verdict }}</div><div class="mt-5 text-xs uppercase tracking-widest text-slate-500">Analysis engine</div><pre class="mt-2 overflow-auto text-xs text-slate-400">{{ result.analysis_engine | tojson(indent=2) }}</pre></section>
+  <section class="rounded-2xl border border-slate-800 bg-slate-900 p-5"><div class="text-xs uppercase tracking-widest text-slate-500">IOCs</div><pre class="mt-3 max-h-72 overflow-auto text-xs text-slate-400">{{ result.iocs | tojson(indent=2) }}</pre></section>
+  <section class="rounded-2xl border border-slate-800 bg-slate-900 p-5"><div class="text-xs uppercase tracking-widest text-slate-500">Threat-intel</div><pre class="mt-3 max-h-72 overflow-auto text-xs text-slate-400">{{ result.enrichment | tojson(indent=2) }}</pre></section>
+</div>
+<section class="mt-5 rounded-2xl border border-slate-800 bg-slate-900 p-5"><h2 class="text-xl font-bold">Evidence</h2><div class="mt-4 grid gap-3 md:grid-cols-2">{% for item in result.evidence or [] %}<div class="rounded-xl border border-slate-800 bg-slate-950/60 p-4"><div class="flex justify-between gap-4"><span class="font-bold">{{ item.signal }}</span><span class="text-xs uppercase text-slate-500">{{ item.severity }}</span></div><p class="mt-2 text-sm text-slate-400">{{ item.detail }}</p></div>{% else %}<p class="text-slate-500">No additional evidence items were generated.</p>{% endfor %}</div></section>
+<div class="mt-5 grid gap-5 lg:grid-cols-2">
+<section class="rounded-2xl border border-slate-800 bg-slate-900 p-5"><h2 class="text-xl font-bold">ATT&amp;CK-oriented mapping</h2><div class="mt-4 space-y-3">{% for x in result.mitre_techniques or [] %}<div class="rounded-xl border border-slate-800 p-3"><div class="font-bold">{{ x.id }} · {{ x.name }}</div><div class="mt-1 text-sm text-slate-500">Evidence count: {{ x.evidence_count or 0 }}</div></div>{% else %}<div class="text-sm text-slate-500">No mapped techniques in this artifact.</div>{% endfor %}</div></section>
+<section class="rounded-2xl border border-slate-800 bg-slate-900 p-5"><h2 class="text-xl font-bold">Attribution guardrail</h2><pre class="mt-4 max-h-80 overflow-auto text-xs text-slate-400">{{ result.attribution_guardrail | tojson(indent=2) }}</pre></section>
+</div>
+<details class="mt-5 rounded-2xl border border-slate-800 bg-slate-900 p-5"><summary class="cursor-pointer font-bold">Complete analysis JSON</summary><pre class="mt-4 max-h-[48rem] overflow-auto text-xs text-slate-400">{{ result | tojson(indent=2) }}</pre></details>
+{% endblock %}

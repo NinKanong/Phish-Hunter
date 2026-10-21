@@ -1,0 +1,1 @@
+export function renderGraph(container,nodes,edges){if(!container)return;container.textContent='';nodes.forEach((node)=>{const el=document.createElement('div');el.className='rounded-lg border border-slate-700 bg-slate-900 p-2 text-xs';el.textContent=node.label||node.id;container.appendChild(el)});container.dataset.edges=JSON.stringify(edges||[]);}

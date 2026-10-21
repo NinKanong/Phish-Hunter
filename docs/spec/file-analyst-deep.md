@@ -1,0 +1,322 @@
+# file-analyst — Deep Capability Contract
+
+Sections: 16  
+Capability fields: 268
+
+## Universal requirements
+### Evidence
+- raw evidence
+- interpretation
+- source reference
+- first seen / last seen
+### Confidence
+- 0-100 calibrated confidence
+- confidence rationale
+### Threat Intelligence
+- configured-provider lookups
+- lookup timestamps
+- provider status
+### Timeline
+- event timestamp
+- observation timestamp
+- first/last seen
+### Correlation
+- related findings
+- related IOCs
+- graph pivot identifiers
+### MITRE ATT&CK
+- technique ID
+- technique name
+- evidence reference
+- confidence
+### Reporting
+- raw evidence appendix
+- machine-readable result
+- analyst report
+- self-verification
+
+## Deep sections
+### FILE IDENTIFICATION
+- Original filename
+- Filename anomaly (double extension, RTLO, unicode tricks, homoglyph)
+- File size (bytes, KB, MB)
+- Extension
+- MIME (claimed)
+- MIME (magic bytes)
+- MIME (TRID)
+- MIME (libmagic)
+- MIME mismatch check
+- File type confidence
+- MD5, SHA1, SHA256, SHA512
+- ssdeep
+- TLSH
+- imphash (PE)
+- authentihash (PE)
+- Rich header hash (PE)
+- Section hashes (PE/ELF/Mach-O)
+- Fuzzy hash neighbors (in local DB)
+- First seen (VirusTotal)
+- Last seen (VirusTotal)
+- Verdict
+### FILE METADATA
+- Created
+- Modified
+- Accessed
+- Author
+- Company
+- Producer
+- Creator
+- Last saved by
+- Revision number
+- Template
+- Custom properties (every one)
+- EXIF (images)
+- GPS coordinates (if present)
+- Camera make/model (if present)
+- Verdict
+### FILE STRUCTURE
+- Every section/stream/segment
+- Every chunk/atom/box
+- Every table (import, export, resource, reloc, debug, TLS)
+- Every directory entry
+- Every string table
+- Every header field with offset + raw bytes
+- Overlay (offset, size, entropy, carved)
+- Header checksum validation
+- Structural anomalies
+- Verdict
+### STRINGS
+- ASCII strings (min 4, deduplicated, categorized):
+- URLs (with defang + threat intel)
+- Domains
+- IPs
+- Email addresses
+- Windows paths
+- Unix paths
+- Registry keys
+- Mutex names
+- Named pipes
+- User agents
+- API endpoints
+- Command lines
+- Crypto wallet addresses
+- Base64 blobs (>40 chars, decoded + re-scanned)
+- Hex blobs
+- SQL queries
+- Error messages
+- Encryption constants
+- Shellcodes
+- C2 indicators
+- Unicode strings (UTF-16LE/BE)
+- Stack strings (emulated)
+- Tight strings
+- FLOSS strings
+- Each string: offset, encoding, category, threat score
+### ENTROPY
+- Whole-file entropy
+- Per-section entropy
+- Per-chunk entropy (16-byte windows)
+- Entropy chart data
+- High-entropy regions (>7.5) with offsets
+- Low-entropy regions (<1.0) with offsets
+- Compression/encryption indicators
+- Packer likelihood score
+### EMBEDDED OBJECTS
+- Every embedded file extracted
+- Every nested archive extracted (10 levels)
+- Every OLE object extracted
+- Every PDF attachment extracted
+- Every macro extracted
+- Every resource extracted
+- Every image extracted
+- Every script extracted
+- Every extracted file → recursively analyzed
+- Verdict per extracted object
+### PE ANALYSIS
+- DOS header: every field
+- NT headers: every field
+- File header:
+- Machine
+- Number of sections
+- Timestamp (raw + UTC, anomaly check)
+- Characteristics (every flag)
+- Pointer to symbol table
+- Optional header:
+- Magic
+- Entry point
+- Image base
+- Section alignment
+- File alignment
+- Subsystem
+- DllCharacteristics (every flag)
+- Size of stack/heap reserve/commit
+- Checksum (validate)
+- Number of RVA and sizes
+- Every section:
+- Name
+- Virtual address
+- Virtual size
+- Raw pointer
+- Raw size
+- Characteristics (every flag)
+- Entropy
+- MD5
+- SHA256
+- Suspicious strings
+- Suspicious imports
+- Verdict
+- Every import:
+- DLL name
+- Function name (or ordinal)
+- Resolved address
+- Category
+- MITRE technique
+- Suspicion score
+- Evidence
+- Every export:
+- Name
+- Ordinal
+- RVA
+- Forwarder
+- Suspicion
+- Every resource:
+- Type
+- Name
+- Language
+- Size
+- Hash
+- Extracted content
+- Nested PE detection
+- Verdict
+- Manifest:
+- Requested execution level
+- DPI awareness
+- UAC settings
+- Supported OS
+- Verdict
+- Rich header:
+- Every build ID
+- Checksum
+- Anomalies
+- Verdict
+- Debug directory:
+- PDB path
+- GUID
+- Age
+- Timestamp
+- Verdict
+- Authenticode:
+- Signature present
+- Signer
+- Issuer
+- Cert chain
+- Validity
+- Timestamp (RFC 3161)
+- Revocation (OCSP + CRL)
+### YARA
+- For EVERY rule match:
+- Rule name
+- Author
+- Description
+- Reference
+- Tags
+- Every matched string (offset, length, context, hex)
+- Rule severity
+- Rule category
+- Verdict
+### CAPA
+- For EVERY capability:
+- Capability name
+- MITRE ATT&CK technique
+- MBC mapping
+- Function addresses
+- Matching features (strings, APIs, numbers)
+- Confidence
+- Verdict
+### CONFIGURATION EXTRACTION
+- For EVERY family detected:
+- Family name
+- Config type
+- Decryption method
+- Every C2 server
+- Encryption keys
+- Bot tokens
+- Discord webhooks
+- SMTP credentials
+- FTP credentials
+- Bitcoin wallets
+- Campaign IDs
+- Build IDs
+- Verdict
+### THREAT INTELLIGENCE
+- VirusTotal (every engine + result + version + date)
+- MalwareBazaar (family + tags + first seen + signature)
+- ThreatFox (family + confidence + reference + date)
+- Hybrid Analysis (verdict + family + score + date)
+- Joe Sandbox (verdict + family + score + date)
+- ANY.RUN (verdict + family + tags + date)
+- Triage (verdict + family + score + date)
+- Internal cache (prior sightings)
+- Aggregate verdict
+### BEHAVIORAL PREDICTION
+- Based on imports + strings + entropy + structure
+- Likely behavior 1 with evidence + confidence
+- Likely behavior 2 with evidence + confidence
+- ... (every predicted behavior)
+- Verdict
+### IOC EXTRACTION
+- Every IP (defang + first/last seen + confidence)
+- Every domain (defang + first/last seen + confidence)
+- Every URL (defang + first/last seen + confidence)
+- Every hash (MD5/SHA1/SHA256)
+- Every email
+- Every mutex
+- Every registry key
+- Every file path
+- Every named pipe
+- Every crypto wallet
+- Deduplicated + sorted by confidence
+### MITRE ATT&CK
+- Every technique
+- Technique ID + name + tactic
+- Evidence per technique
+- Confidence per technique
+- Sub-techniques
+- RISK SCORE (explainable)
+- Score: 0-100
+- Verdict
+- Confidence
+- Every signal with weight + contribution
+- Top contributing signals
+- Counter-signals
+- Explanation paragraph
+### SIMILARITY & CLUSTERING
+- ssdeep similarity
+- TLSH similarity
+- imphash neighbors
+- Section-hash neighbors
+- String-set similarity
+- Code similarity
+- Cluster ID
+- Family attribution with confidence
+- SANDBOX (deep, optional)
+- Every process spawned
+- Every file touched
+- Every registry key touched
+- Every network connection
+- Every DNS query
+- Every HTTP request/response
+- Every TLS session
+- Every mutex created
+- Every service installed
+- Every scheduled task created
+- Every screenshot
+- Memory dumps with secrets
+- Anti-VM / anti-debug events
+- Multi-stage payload follow-up
+### REPORT
+- All sections populated
+- Raw evidence appendix
+- 30+ export formats
+- Self-verification passed
+- ---

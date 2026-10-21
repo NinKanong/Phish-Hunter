@@ -1,0 +1,2 @@
+import {useAnalysisStore} from '../store/analysisStore';import {useJobSocket} from '../hooks/useWebSocket';
+export function JobProgress(){const job=useAnalysisStore(s=>s.job);useJobSocket(job?.job_id||null);if(!job)return null;return <div className="jobbar"><div><b>{job.status}</b><span>{job.message}</span></div><div className="progress"><i style={{width:`${job.progress}%`}}/></div><strong>{job.progress}%</strong></div>}

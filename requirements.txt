@@ -1,0 +1,2 @@
+# Canonical production dependency set for local, Vercel, Render, Railway, and VPS installs.
+-r requirements/prod.txt

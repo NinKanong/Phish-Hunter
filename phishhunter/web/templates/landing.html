@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="k4-hero k4-home-hero grid-bg relative overflow-hidden">
+  <div class="k4-hero-orb k4-hero-orb-a"></div>
+  <div class="k4-hero-orb k4-hero-orb-b"></div>
+  <div class="k4-hero-grid-glow"></div>
+
+  <div class="mx-auto grid w-full max-w-[1500px] gap-8 px-5 lg:grid-cols-[1fr_1fr] lg:items-center">
+    <div class="relative z-10 max-w-[650px]">
+      <div class="k4-hero-eyebrow">OPEN-SOURCE DEFENSIVE SECURITY PLATFORM</div>
+      <h1 class="k4-home-title"><span>Catch the phish.</span><br><span>Prove what happened.</span></h1>
+      <p class="k4-hero-copy k4-home-copy">Phish-Hunter is a defensive analysis platform for investigating phishing and suspicious artifacts. Inspect URLs, email, files, PCAPs and IOCs, then turn raw evidence into findings you can explain and verify.</p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        {% if authenticated %}
+        <a href="/dashboard" class="k4-hero-primary">Open dashboard <span>→</span></a>
+        <a href="/services" class="k4-hero-secondary">Explore services</a>
+        {% else %}
+        <a href="/services" class="k4-hero-primary">Explore the platform <span>→</span></a>
+        <a href="/register" class="k4-hero-secondary">Create free account</a>
+        {% endif %}
+      </div>
+      <div class="k4-hero-trust k4-home-trust"><span><b>Free</b> to use</span><span><b>Open source</b> project</span><span><b>Local-first</b> analysis</span></div>
+    </div>
+
+    <div class="relative z-10 lg:pl-5">
+      <div class="k4-analyst-stage" aria-label="Phish-Hunter phishing analyst bot">
+        <div class="k4-analyst-grid"></div>
+        <div class="k4-scan-ring k4-scan-ring-a"></div>
+        <div class="k4-scan-ring k4-scan-ring-b"></div>
+        <div class="k4-scan-sweep"></div>
+
+        <div class="k4-threat-chip k4-threat-url"><i></i><span>URL</span><b>SCAN</b></div>
+        <div class="k4-threat-chip k4-threat-mail"><i></i><span>EMAIL</span><b>TRACE</b></div>
+        <div class="k4-threat-chip k4-threat-ioc"><i></i><span>IOC</span><b>LINKED</b></div>
+
+        <div class="k4-analyst-bot">
+          <div class="k4-bot-aura"></div>
+          <div class="k4-bot-float">
+            <svg viewBox="0 0 520 430" role="presentation">
+              <defs>
+                <linearGradient id="k4BotBody" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="#26364d"/>
+                  <stop offset=".55" stop-color="#0b1628"/>
+                  <stop offset="1" stop-color="#020712"/>
+                </linearGradient>
+                <linearGradient id="k4BotHood" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="#182338"/>
+                  <stop offset=".65" stop-color="#060d1b"/>
+                  <stop offset="1" stop-color="#02050d"/>
+                </linearGradient>
+                <linearGradient id="k4BotScreen" x1="0" x2="1">
+                  <stop offset="0" stop-color="#083344"/>
+                  <stop offset="1" stop-color="#0891b2"/>
+                </linearGradient>
+                <filter id="k4BotGlow"><feGaussianBlur stdDeviation="7"/></filter>
+              </defs>
+
+              <ellipse cx="260" cy="384" rx="150" ry="18" fill="#22d3ee" opacity=".10" filter="url(#k4BotGlow)"/>
+              <path d="M115 218c-10-78 43-143 133-143s154 58 154 139v55H115z" fill="url(#k4BotHood)" stroke="#334155" stroke-width="4"/>
+              <path d="M138 207c0-61 45-107 111-110 62-2 112 37 130 91-31-23-69-34-108-31-47 3-88 20-133 50z" fill="#020617"/>
+              <path d="M157 192c22-46 65-73 111-72 44 1 78 21 102 56-28-12-55-17-84-15-47 2-83 14-129 31z" fill="#111827"/>
+
+              <path d="M151 196c28-30 65-45 106-46 42-1 77 13 107 42-3 53-39 91-105 91-63 0-101-34-108-87z" fill="url(#k4BotBody)" stroke="#475569" stroke-width="3"/>
+
+              <ellipse cx="202" cy="216" rx="18" ry="13" fill="#020617" stroke="#22d3ee" stroke-width="3"/>
+              <ellipse cx="302" cy="216" rx="18" ry="13" fill="#020617" stroke="#22d3ee" stroke-width="3"/>
+              <circle class="k4-bot-eye" cx="202" cy="216" r="6" fill="#67e8f9"/>
+              <circle class="k4-bot-eye" cx="302" cy="216" r="6" fill="#67e8f9"/>
+
+              <rect x="184" y="252" width="136" height="53" rx="12" fill="#020617" stroke="#164e63" stroke-width="3"/>
+              <rect x="195" y="263" width="114" height="31" rx="7" fill="url(#k4BotScreen)" opacity=".85"/>
+              <path d="M207 278h17l6-8 8 14 10-9h27" fill="none" stroke="#a5f3fc" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="294" cy="278" r="3" fill="#67e8f9"/>
+
+              <path d="M214 323c24 13 50 13 75 0" fill="none" stroke="#fb7185" stroke-width="4" stroke-linecap="round"/>
+              <path d="M145 286c-50 13-76 39-85 77 31-7 59-23 82-49z" fill="#172033" stroke="#334155" stroke-width="3"/>
+              <path d="M365 286c51 13 77 39 87 76-33-8-60-23-84-49z" fill="#172033" stroke="#334155" stroke-width="3"/>
+
+              <path d="M92 112c-16 35-12 68 12 90" fill="none" stroke="#fb7185" stroke-width="5" stroke-linecap="round"/>
+              <path d="M89 109l-14 7 14 5 3 14 8-13 15-2-12-8-1-14z" fill="#fb7185"/>
+              <circle cx="94" cy="204" r="7" fill="#fb7185"/>
+
+              <path d="M410 116c18 30 18 63-1 90" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round" stroke-dasharray="5 8"/>
+              <path d="M410 111l9 8-11 3-5 12-6-13-11-5 12-5 3-12z" fill="#22d3ee"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="k4-bot-status"><span class="k4-status-dot"></span><strong>Phish-Hunter</strong><small>phishing analyst bot</small><em>ONLINE</em></div>
+        <div class="k4-bot-caption"><span>DEFENSIVE ANALYSIS</span><b>PHISHING DETECTED</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-[1500px] px-5 py-20">
+  <div class="max-w-3xl"><div class="k4-section-kicker">WHAT YOU CAN DO</div><h2 class="k4-section-title">A practical security workspace, not a decorative dashboard.</h2><p class="k4-section-copy">Each module is designed around an investigation task: collect an artifact, inspect evidence, extract indicators, correlate context, document findings and produce a report.</p></div>
+  <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+    {% for x in [('01','URL &amp; Domain intelligence','DNS, HTTP metadata, redirects, forms, domains and suspicious indicators.','/services/url-domain-analyst'),('02','Email forensics','Headers, MIME structure, authentication evidence, links and attachments.','/services/email-analyst'),('03','File & malware triage','Hashes, strings, metadata, entropy and static indicators without executing samples.','/services/file-analyst'),('04','PCAP forensics','Flows, endpoints, protocols and network evidence from packet captures.','/services/pcap-analyst')] %}
+    <a href="{{x[3]}}" class="k4-service-card"><span class="k4-service-num">{{x[0]}}</span><div><h3>{{x[1]}}</h3><p>{{x[2]}}</p></div><span class="k4-card-arrow">→</span></a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="border-y border-slate-800 bg-slate-900/20"><div class="mx-auto max-w-[1500px] px-5 py-20"><div class="grid gap-12 lg:grid-cols-[.8fr_1.2fr]"><div><div class="k4-section-kicker">WHY K4</div><h2 class="k4-section-title">Built to be understandable, inspectable and useful.</h2><p class="k4-section-copy">The project favors clear evidence over unexplained scores. Local analyzers can work without external API credentials, while enrichment can be added when you have authorized access.</p></div><div class="grid gap-4 md:grid-cols-2">{% for x in [('Evidence-first','Results show the underlying indicators and observations so an analyst can validate them.'),('Local-first','Core analysis runs inside the Python application instead of requiring a remote SaaS service.'),('Open-source','The project is intended to be studied, extended and self-hosted for defensive work.'),('One workspace','Investigations, reports, IOCs and cases are connected through the same application identity and database.') ] %}<article class="k4-principle-card"><h3>{{x[0]}}</h3><p>{{x[1]}}</p></article>{% endfor %}</div></div></div></section>
+
+<section class="mx-auto max-w-[1500px] px-5 py-20"><div class="k4-open-card"><div><div class="k4-section-kicker">FREE &amp; OPEN SOURCE</div><h2>Use it, learn from it, extend it.</h2><p>Phish-Hunter is being built as an open project for defensive security education, research and authorized analysis. Read the project story, inspect the architecture and explore the available services.</p></div><div class="flex flex-wrap gap-3"><a href="/about" class="k4-hero-primary">About the project <span>→</span></a><a href="/blog" class="k4-hero-secondary">Read the engineering blog</a></div></div></section>
+{% endblock %}

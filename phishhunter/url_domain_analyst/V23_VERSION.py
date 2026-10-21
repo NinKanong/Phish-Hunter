@@ -1,0 +1,6 @@
+VERSION = '23.0.0'
+NAME = 'DOMINUS ULTIMATE — URL & Domain OSINT Intelligence Platform'
+CODENAME = 'DOMINUS ULTIMATE'
+PIPELINE = '7-round passive-first evidence correlation'
+LIVE_MAP = 'local-first interactive 3D globe + 2D country/network map'
+SOURCE_POLICY = 'provider-backed observations, explicit gaps, no fabricated intelligence'

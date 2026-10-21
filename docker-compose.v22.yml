@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: k4
+      POSTGRES_USER: k4
+      POSTGRES_PASSWORD: change-me
+    ports: ["5432:5432"]
+    volumes: ["k4_pg:/var/lib/postgresql/data"]
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: k4admin
+      MINIO_ROOT_PASSWORD: change-me-now
+    ports: ["9000:9000","9001:9001"]
+    volumes: ["k4_minio:/data"]
+  opensearch:
+    image: opensearchproject/opensearch:2.17.1
+    environment:
+      discovery.type: single-node
+      DISABLE_SECURITY_PLUGIN: "true"
+      OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports: ["9200:9200"]
+    volumes: ["k4_search:/usr/share/opensearch/data"]
+volumes:
+  k4_pg:
+  k4_minio:
+  k4_search:

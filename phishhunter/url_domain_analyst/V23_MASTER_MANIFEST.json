@@ -1,0 +1,33 @@
+{
+  "version": "23.0.0",
+  "codename": "DOMINUS ULTIMATE",
+  "runtime": "phishhunter/url_domain_analyst",
+  "source_blueprint": "Pasted text(20261007-121816).txt + Pasted text (2)(20261007-122054).txt",
+  "major_modules": 22,
+  "field_registry_count": 5809,
+  "capability_contracts": 600,
+  "source_catalog_entries": 520,
+  "scan_rounds": 7,
+  "scan_profiles": {
+    "quick": "~2 min",
+    "standard": "~8 min",
+    "deep": "~25 min",
+    "forensic": "~60 min"
+  },
+  "live_map": "local-first 3D canvas globe + 2D canvas map with bundled 204-country index; provider-backed network/corporate points",
+  "domain_information_fields": [
+    "Domain",
+    "Registered On",
+    "Expires On",
+    "Updated On",
+    "Status",
+    "Name Servers",
+    "Registrar",
+    "IANA ID",
+    "Abuse Email",
+    "Abuse Phone",
+    "Registrant Contact"
+  ],
+  "domaintools": "adapter + official navigation; requires authorized API credentials for live provider data",
+  "safety": "passive-first; provider-backed; no fabricated intelligence; no direct illicit/dark-web crawling; no arbitrary shell execution"
+}

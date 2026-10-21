@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+:root{--bg:#05070c;--panel:#080d16;--line:#1a2638;--text:#eaf4ff;--muted:#71839a;--cyan:#25c4ef;--green:#35d69a;--red:#ff667d}
+.ud{min-height:calc(100vh - 120px);background:radial-gradient(circle at 50% 8%,#0c2032 0,#05070c 34%,#020307 100%);color:var(--text);font-family:Inter,system-ui,sans-serif}.ud *{box-sizing:border-box}
+.ud-wrap{width:min(1180px,92vw);margin:0 auto;padding:76px 0 90px;text-align:center}.ud-eyebrow{font:12px ui-monospace,monospace;color:#dce8f5;letter-spacing:.08em}.ud-title{font-size:46px;line-height:1.05;letter-spacing:-.045em;font-weight:900;margin:18px 0 12px}.ud-sub{max-width:780px;margin:0 auto;color:var(--muted);font-size:13px;line-height:1.8}.ud-form{max-width:800px;margin:30px auto 0;display:grid;grid-template-columns:1fr 132px;gap:10px}.ud-input{height:54px;background:#070c14;border:1px solid #31465e;border-radius:7px;color:#f4faff;padding:0 16px;font:14px ui-monospace,monospace;outline:none}.ud-input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,196,239,.08)}.ud-submit{height:54px;border:1px solid #22bfe9;border-radius:7px;background:#062018;color:#43e1a9;font-weight:800;cursor:pointer}.ud-submit:hover{background:#0a2b23}.ud-submit:disabled{opacity:.55;cursor:wait}.ud-example{margin-top:9px;text-align:left;max-width:800px;margin-left:auto;margin-right:auto;color:#53677e;font:10px ui-monospace,monospace}.ud-features{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin:26px auto 0}.ud-pill{border:1px solid #1d3044;border-radius:999px;padding:7px 10px;color:#7790a7;background:#07101a;font-size:9px}.ud-status{display:none;max-width:800px;margin:24px auto 0;border:1px solid #1b344b;background:rgba(5,12,20,.94);border-radius:9px;text-align:left;padding:15px}.ud-status.active{display:block}.ud-status-top{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:11px}.ud-stage{color:#c9d9e8}.ud-pct{color:#42dbab;font-family:ui-monospace,monospace}.ud-track{height:6px;background:#142235;border-radius:99px;overflow:hidden;margin:11px 0}.ud-track i{display:block;height:100%;width:0;background:linear-gradient(90deg,#24bfe8,#36d9a1);transition:width .25s ease}.ud-detail{color:#6f8499;font:9px ui-monospace,monospace;min-height:14px}.ud-log{margin-top:11px;max-height:150px;overflow:auto;border-top:1px solid #132338;padding-top:8px}.ud-log div{font:9px ui-monospace,monospace;color:#60758b;padding:3px 0}.ud-log .done{color:#6fddb1}.ud-log .bad{color:#ff7589}.ud-result{display:none;margin-top:14px}.ud-result a{display:inline-block;border:1px solid #2ac6ee;background:#082333;color:#dff7ff;border-radius:6px;padding:9px 13px;text-decoration:none;font-size:10px}.ud-note{max-width:760px;margin:28px auto 0;color:#43566d;font-size:9px;line-height:1.7}.ud-foot{margin-top:65px;color:#3f5064;font:8px ui-monospace,monospace}
+@media(max-width:700px){.ud-wrap{padding-top:48px}.ud-title{font-size:34px}.ud-form{grid-template-columns:1fr}.ud-submit{width:100%}}
+.uha-modebar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:18px 0}.uha-modebar label{display:flex;gap:7px;align-items:center;padding:9px 12px;border:1px solid #18354b;border-radius:10px;background:#06101b;color:#b6d2e2;cursor:pointer}.uha-modebar label:has(input:checked){border-color:#2ccfe7;box-shadow:0 0 0 1px #2ccfe744 inset}.uha-modebar input{accent-color:#20cbe6}.uha-modebar small{color:#67879c}.uha-modebar span{font-weight:700}</style>
+<div class="ud">
+  <main class="ud-wrap">
+    <div class="ud-eyebrow">dns recon &amp; research, find &amp; lookup dns records</div>
+    <h1 class="ud-title">Deep URL &amp; Domain Intelligence</h1>
+    <p class="ud-sub">Enter one URL or domain. Phish-Hunter normalizes the target, runs a passive-first investigation, correlates DNS and infrastructure evidence, and builds a source-aware analyst case.</p>
+
+    <form id="udForm" class="ud-form">
+      <input id="target" class="ud-input" name="target" required autocomplete="off" spellcheck="false" placeholder="Enter a URL or Domain to Test" aria-label="Enter a URL or Domain to Test">
+      <button id="startBtn" class="ud-submit" type="submit">Start Test!</button>
+    </form>
+    <div class="ud-example">Examples: example.com · www.example.com · https://example.com/login</div>
+
+    <div class="ud-features">
+      <span class="ud-pill">DNS / DNSSEC</span><span class="ud-pill">RDAP / WHOIS</span><span class="ud-pill">Certificate Transparency</span><span class="ud-pill">ASN / Hosting</span><span class="ud-pill">HTTP / TLS</span><span class="ud-pill">Technology</span><span class="ud-pill">OSINT pivots</span><span class="ud-pill">Evidence graph</span><span class="ud-pill">Risk reasoning</span>
+    </div>
+
+    <section id="status" class="ud-status" aria-live="polite">
+      <div class="ud-status-top"><span id="stage" class="ud-stage">Preparing investigation…</span><span id="pct" class="ud-pct">0%</span></div>
+      <div class="ud-track"><i id="bar"></i></div>
+      <div id="detail" class="ud-detail">Submitting target to the investigation engine.</div>
+      <div id="log" class="ud-log"></div>
+      <div id="result" class="ud-result"><a id="resultLink" href="#">Open Investigation Report</a></div>
+    </section>
+
+    <div class="ud-note">Public/provider-backed observations are kept separate from analyst inference. Unconfigured providers are shown as unavailable; the engine does not fabricate findings.</div>
+    <div class="ud-foot">PHISH-HUNTER · URL &amp; DOMAIN ANALYST · PASSIVE-FIRST DEEP INVESTIGATION</div>
+  </main>
+</div>
+<script>
+(function(){
+  const form=document.getElementById('udForm'), input=document.getElementById('target'), btn=document.getElementById('startBtn');
+  const box=document.getElementById('status'), stage=document.getElementById('stage'), pct=document.getElementById('pct'), bar=document.getElementById('bar'), detail=document.getElementById('detail'), log=document.getElementById('log'), result=document.getElementById('result'), resultLink=document.getElementById('resultLink');
+  let es=null;
+  function addLog(text,cls){const d=document.createElement('div');d.textContent=text; if(cls)d.className=cls; log.prepend(d); while(log.children.length>30)log.lastChild.remove();}
+  function setProgress(p,s,d){p=Math.max(0,Math.min(100,Number(p)||0)); pct.textContent=p+'%'; bar.style.width=p+'%'; if(s)stage.textContent=s; if(d)detail.textContent=d;}
+  function finish(url){btn.disabled=false; input.disabled=false; result.style.display='block'; resultLink.href=url; setProgress(100,'Investigation complete','Evidence package is ready.'); addLog('Investigation completed','done');}
+
+  async function recover(){
+    const q=new URLSearchParams(location.search), job=q.get('job'); if(!job) return;
+    try{
+      const r=await fetch('/services/url-domain-analyst/scan/'+encodeURIComponent(job)+'/status'); const x=await r.json();
+      if(!r.ok) return; box.classList.add('active'); input.value=x.target||''; input.disabled=true; btn.disabled=true;
+      setProgress(x.progress||0,x.stage||'reconnecting','Reconnected to investigation '+job);
+      if(x.status==='completed'){finish('/services/url-domain-analyst/scan/'+encodeURIComponent(job)+'/result');return;}
+      if(x.status==='failed'){setProgress(100,'Investigation failed',x.error||'The worker reported an error.');btn.disabled=false;input.disabled=false;return;}
+      es=new EventSource('/services/url-domain-analyst/scan/'+encodeURIComponent(job)+'/events');
+      es.addEventListener('progress',onRecoverProgress); es.addEventListener('job.completed',ev=>{const z=JSON.parse(ev.data);finish(z.result_url);es.close();});
+      es.addEventListener('job.failed',ev=>{const z=JSON.parse(ev.data);setProgress(100,'Investigation failed',z.error||'Worker error');btn.disabled=false;input.disabled=false;es.close();});
+    }catch(_){}
+  }
+  function onRecoverProgress(ev){try{const x=JSON.parse(ev.data);setProgress(x.percent,x.stage,x.detail);}catch(_){} }
+  form.addEventListener('submit',async function(e){
+    e.preventDefault(); const target=input.value.trim(); if(!target){input.focus();return;}
+    if(es){es.close();es=null;} btn.disabled=true; input.disabled=true; box.classList.add('active'); result.style.display='none'; log.innerHTML=''; setProgress(1,'Queueing investigation','Creating a live investigation job.');
+    try{
+      const fd=new FormData(); fd.append('target',target); fd.append('profile',document.querySelector('input[name=scan-mode]:checked')?.value || 'standard');
+      const r=await fetch('/services/url-domain-analyst/scan',{method:'POST',body:fd,headers:{'Accept':'application/json'}});
+      const data=await r.json(); if(!r.ok||data.status!=='accepted') throw new Error(data.error||'The investigation could not be started.');
+      addLog('Job '+data.job_id+' accepted');
+      es=new EventSource(data.stream_url);
+      const onProgress=(ev)=>{try{const x=JSON.parse(ev.data);setProgress(x.percent,x.stage,x.detail);addLog((x.state||'running')+' · '+(x.stage||'stage')+(x.detail?' · '+x.detail:''),x.state==='completed'?'done':'');}catch(_){} };
+      es.addEventListener('job.queued',onProgress); es.addEventListener('job.started',onProgress); es.addEventListener('progress',onProgress);
+      es.addEventListener('job.completed',ev=>{const x=JSON.parse(ev.data); finish(x.result_url); es.close();});
+      es.addEventListener('job.failed',ev=>{const x=JSON.parse(ev.data); setProgress(100,'Investigation failed',x.error||'Unknown engine error'); addLog(x.error||'Investigation failed','bad'); btn.disabled=false; input.disabled=false; es.close();});
+      es.onerror=()=>{ if(!es) return; addLog('Live stream reconnecting…'); };
+    }catch(err){setProgress(0,'Unable to start investigation',err.message||String(err));addLog(err.message||String(err),'bad');btn.disabled=false;input.disabled=false;}
+  });
+  recover();
+})();
+</script>
+{% endblock %}

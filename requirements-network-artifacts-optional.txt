@@ -1,0 +1,15 @@
+# Optional integrations for the Network Artifacts subsystem.
+# The core local analyzer does not require these packages.
+scapy>=2.6
+pyshark>=0.6
+networkx>=3.2
+weasyprint>=62
+stix2>=3.0
+yara-python>=4.5
+maxminddb>=2.6
+geoip2>=5.0
+redis>=5.0
+celery>=5.4
+requests>=2.32
+langgraph>=0.2
+langchain-core>=0.3

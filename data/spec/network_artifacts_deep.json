@@ -1,0 +1,7 @@
+{
+  "name": "K4 Network Artifacts Deep Investigation",
+  "version": "10.4.0",
+  "families": ["pcap", "pcapng", "zeek", "suricata", "netflow", "firewall", "proxy", "dns", "dhcp"],
+  "analysis": ["hashing", "file-static-analysis", "bounded-tcp-reassembly", "passive-file-carving", "protocol-analysis", "tls-metadata", "dns-anomaly", "behavioral-detection", "identity-profiling", "correlation", "mitre-candidate-mapping", "incident-response", "graph", "timeline", "reporting"],
+  "reports": ["html", "pdf", "json", "ioc-csv", "events-csv", "stix-2.1"]
+}

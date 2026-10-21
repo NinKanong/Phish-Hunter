@@ -1,0 +1,2 @@
+import{useQuery}from'@tanstack/react-query';import{api}from'../api/client';import{Card,Badge}from'../components/common/Card';
+export function JobsPage(){const q=useQuery({queryKey:['jobs'],queryFn:api.jobs,refetchInterval:4000});return <Card title="Investigation jobs" sub="Persistent job metadata + live WebSocket progress"><div className="table">{(q.data||[]).map((x:any)=><div className="tr" key={x.job_id}><span className="mono">{x.job_id.slice(0,18)}</span><span>{x.message}</span><span>{x.progress}%</span><Badge tone={x.status}>{x.status}</Badge></div>)}</div></Card>}

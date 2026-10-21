@@ -1,0 +1,17 @@
+# Python 3.12-3.14 compatible baseline.
+# Pins use releases compatible with CPython 3.12-3.14; pydantic and pydantic-core are an exact compatible pair.
+fastapi==0.141.1
+uvicorn[standard]==0.54.0
+jinja2==3.1.6
+python-multipart==0.0.32
+pydantic==2.13.5
+pydantic-core==2.46.5
+pydantic-settings==2.15.0
+SQLAlchemy==2.0.54
+argon2-cffi==25.1.0
+PyJWT==2.13.0
+httpx==0.28.1
+beautifulsoup4==4.14.3
+# Office/report exports used by the deep reporting suite.
+openpyxl==3.1.5
+python-pptx==1.0.2

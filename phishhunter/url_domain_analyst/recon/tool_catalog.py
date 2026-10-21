@@ -1,0 +1,190 @@
+from __future__ import annotations
+from dataclasses import asdict, dataclass
+
+@dataclass(frozen=True)
+class ToolSpec:
+    name: str
+    category: str
+    mode: str
+    integration: str
+    authorization: str
+    purpose: str
+
+# Named open-source/security-community tools. These are integration contracts,
+# not claims that every binary is installed or connected on the host.
+TOOLS = [
+    # Discovery / passive
+    ("Amass","passive-discovery","passive","adapter","public-or-authorized","asset discovery and graph enrichment"),
+    ("Subfinder","passive-discovery","passive","adapter","public-or-authorized","passive subdomain discovery"),
+    ("Assetfinder","passive-discovery","passive","adapter","public-or-authorized","domain relationship discovery"),
+    ("Findomain","passive-discovery","passive","adapter","public-or-authorized","subdomain discovery"),
+    ("Sublist3r","passive-discovery","passive","adapter","public-or-authorized","subdomain enumeration"),
+    ("Chaos","passive-discovery","passive","api","authorized","asset dataset discovery"),
+    ("crt.sh","certificate-transparency","passive","api","public","certificate transparency search"),
+    ("CertSpotter","certificate-transparency","passive","api","public","certificate monitoring"),
+    ("Censys","certificate-transparency","provider","api","authorized","certificate and host intelligence"),
+    ("DNSDumpster","dns-recon","passive","api","authorized","DNS and attack-surface mapping"),
+    ("SecurityTrails","passive-dns","provider","api","authorized","historical DNS and infrastructure"),
+    ("VirusTotal","threat-intel","provider","api","authorized","DNS, reputation and relationship pivots"),
+    ("RiskIQ PassiveTotal","passive-dns","provider","api","authorized","passive DNS and infrastructure history"),
+    ("DNSDB","passive-dns","provider","api","authorized","historical DNS observations"),
+    ("CIRCL Passive DNS","passive-dns","provider","api","authorized","passive DNS observations"),
+    ("Robtex","passive-dns","public-web","public","public","DNS and IP relationship research"),
+    ("RapidDNS","passive-dns","public-web","public","public","DNS/subdomain discovery"),
+    ("ViewDNS","passive-dns","public-web","public","public","DNS and reverse relationship research"),
+    ("ThreatMiner","threat-intel","public-web","public","public","threat and DNS pivots"),
+    ("SpyOnWeb","reverse-pivots","public-web","public","public","shared analytics and infrastructure pivots"),
+    # DNS / resolution
+    ("MassDNS","dns-resolution","authorized-active","adapter","explicit-scope","high-throughput DNS resolution"),
+    ("PureDNS","dns-resolution","authorized-active","adapter","explicit-scope","wildcard-aware DNS validation"),
+    ("ShuffleDNS","dns-resolution","authorized-active","adapter","explicit-scope","DNS resolution and wildcard filtering"),
+    ("DNSx","dns-resolution","authorized-active","adapter","explicit-scope","DNS probing and validation"),
+    ("DNSRecon","dns-recon","authorized-active","adapter","explicit-scope","DNS record and zone-transfer assessment"),
+    ("Fierce","dns-recon","authorized-active","adapter","explicit-scope","DNS reconnaissance"),
+    ("dnsenum","dns-recon","authorized-active","adapter","explicit-scope","DNS enumeration"),
+    ("dnspython","dns-resolution","local-library","native","explicit-scope","DNS protocol handling"),
+    ("Unbound","dns-resolution","local-service","native","explicit-scope","recursive resolver service"),
+    ("CoreDNS","dns-resolution","local-service","native","explicit-scope","resolver and DNS service"),
+    # Mutation / family analysis
+    ("dnsgen","permutation","authorized-active","adapter","explicit-scope","subdomain permutation generation"),
+    ("AlterX","permutation","authorized-active","adapter","explicit-scope","template-based permutation generation"),
+    ("Gotator","permutation","authorized-active","adapter","explicit-scope","domain permutation generation"),
+    ("dnstwist","brand-protection","passive-first","adapter","explicit-scope","typosquat and homoglyph analysis"),
+    ("urlcrazy","brand-protection","passive-first","adapter","explicit-scope","domain mutation analysis"),
+    ("tld","brand-protection","passive-first","library","explicit-scope","TLD permutation support"),
+    # HTTP / web metadata
+    ("httpx","http-probing","authorized-active","adapter","explicit-scope","HTTP metadata and technology probing"),
+    ("httprobe","http-probing","authorized-active","adapter","explicit-scope","HTTP/HTTPS reachability"),
+    ("Katana","web-crawling","authorized-active","adapter","explicit-scope","web crawling and endpoint discovery"),
+    ("Hakrawler","web-crawling","authorized-active","adapter","explicit-scope","URL discovery"),
+    ("Gospider","web-crawling","authorized-active","adapter","explicit-scope","web crawling"),
+    ("gau","web-archives","passive","adapter","public-or-authorized","known URL collection"),
+    ("waybackurls","web-archives","passive","adapter","public","Wayback URL collection"),
+    ("waybackpy","web-archives","passive","library","public","Wayback API access"),
+    ("Common Crawl","web-archives","passive","api","public","web archive collection"),
+    ("Gobuster","web-enumeration","authorized-active","adapter","explicit-scope","directory/DNS enumeration"),
+    ("Feroxbuster","web-enumeration","authorized-active","adapter","explicit-scope","content discovery"),
+    ("ffuf","web-enumeration","authorized-active","adapter","explicit-scope","web content discovery"),
+    ("Wappalyzer","technology","provider","api","authorized","technology fingerprinting"),
+    ("WhatWeb","technology","authorized-active","adapter","explicit-scope","web technology fingerprinting"),
+    ("Webanalyze","technology","authorized-active","adapter","explicit-scope","technology detection"),
+    ("Retire.js","javascript-analysis","authorized-active","adapter","explicit-scope","JavaScript dependency risk metadata"),
+    ("LinkFinder","javascript-analysis","authorized-active","adapter","explicit-scope","endpoint discovery in JavaScript"),
+    ("SecretFinder","javascript-analysis","authorized-active","adapter","explicit-scope","potential secret-pattern discovery"),
+    ("TruffleHog","code-secrets","passive","adapter","authorized","secret discovery in repositories"),
+    ("Gitleaks","code-secrets","passive","adapter","authorized","secret discovery in Git repositories"),
+    ("Semgrep","code-analysis","local-analysis","adapter","authorized","static code analysis"),
+    ("Ripgrep","content-analysis","local-analysis","native","authorized","fast text search"),
+    # TLS / certificates
+    ("testssl.sh","tls","authorized-active","adapter","explicit-scope","TLS configuration assessment"),
+    ("sslyze","tls","authorized-active","adapter","explicit-scope","TLS configuration analysis"),
+    ("OpenSSL","tls","local-tool","native","authorized","certificate and TLS inspection"),
+    ("ZGrab2","service-metadata","authorized-active","adapter","explicit-scope","application-layer metadata"),
+    ("Certgraph","certificate-transparency","passive","adapter","public","certificate relationship graphing"),
+    # Network / service metadata (gated)
+    ("Nmap","service-enumeration","authorized-active","adapter","explicit-scope","authorized service discovery"),
+    ("Naabu","service-enumeration","authorized-active","adapter","explicit-scope","authorized port discovery"),
+    ("Masscan","service-enumeration","authorized-active","adapter","explicit-scope","high-speed authorized port discovery"),
+    ("RustScan","service-enumeration","authorized-active","adapter","explicit-scope","authorized port discovery"),
+    ("Unicornscan","service-enumeration","authorized-active","adapter","explicit-scope","authorized service discovery"),
+    ("ZMap","service-enumeration","authorized-active","adapter","explicit-scope","authorized large-scale measurement"),
+    ("Shodan CLI","service-metadata","provider","api","authorized","internet service metadata"),
+    ("Censys CLI","service-metadata","provider","api","authorized","internet host metadata"),
+    ("FOFA","service-metadata","provider","api","authorized","internet asset metadata"),
+    ("ZoomEye","service-metadata","provider","api","authorized","internet asset metadata"),
+    # Cloud / infrastructure
+    ("CloudEnum","cloud-discovery","passive-first","adapter","explicit-scope","cloud asset enumeration"),
+    ("CloudBrute","cloud-discovery","authorized-active","adapter","explicit-scope","cloud bucket/service discovery"),
+    ("S3Scanner","cloud-discovery","authorized-active","adapter","explicit-scope","S3 exposure checks"),
+    ("TruffleHog","cloud-discovery","passive","adapter","authorized","cloud/repository secret discovery"),
+    ("ScoutSuite","cloud-audit","authorized","adapter","authorized","cloud configuration assessment"),
+    ("Prowler","cloud-audit","authorized","adapter","authorized","cloud security assessment"),
+    ("Steampipe","cloud-audit","authorized","adapter","authorized","cloud inventory and SQL-like analysis"),
+    ("Cartography","graph","authorized","adapter","authorized","infrastructure graph ingestion"),
+    # Graph / knowledge
+    ("Neo4j","graph-storage","local-service","connector","authorized","relationship graph storage"),
+    ("Cytoscape.js","graph-ui","local-library","native","local","interactive relationship visualization"),
+    ("D3.js","graph-ui","local-library","native","local","custom relationship visualization"),
+    ("Graphistry","graph-ui","provider","api","authorized","large graph visualization"),
+    ("Memgraph","graph-storage","local-service","connector","authorized","graph storage and analytics"),
+    ("Redis","cache","local-service","connector","authorized","provider result caching"),
+    # Threat intelligence / DFIR
+    ("MISP","threat-intel","authorized","api","authorized","indicator and threat sharing"),
+    ("OpenCTI","threat-intel","authorized","api","authorized","knowledge graph threat intelligence"),
+    ("OpenSearch","siem","local-service","connector","authorized","search and detection analytics"),
+    ("Wazuh","siem","authorized","connector","authorized","endpoint/security telemetry"),
+    ("Zeek","network-monitoring","authorized","adapter","authorized","network telemetry"),
+    ("Suricata","ids","authorized","adapter","authorized","network intrusion detection"),
+    ("Arkime","pcap-dfir","authorized","adapter","authorized","network session analysis"),
+    ("Wireshark","pcap-dfir","local-analysis","adapter","authorized","packet analysis"),
+    ("tshark","pcap-dfir","local-analysis","adapter","authorized","packet extraction"),
+    ("YARA","malware-analysis","local-analysis","adapter","authorized","malware pattern matching"),
+    ("YARA-X","malware-analysis","local-analysis","adapter","authorized","modern YARA-compatible matching"),
+    ("Sigma","detection","local-analysis","adapter","authorized","detection rule normalization"),
+    ("LOKI","detection","local-analysis","adapter","authorized","IOC-based detection"),
+    ("Velociraptor","dfir","authorized","api","authorized","endpoint DFIR collection"),
+    ("TheHive","case-management","authorized","api","authorized","incident/case management"),
+    ("Cortex","case-management","authorized","api","authorized","observable analyzers"),
+    ("Timesketch","timeline","authorized","api","authorized","timeline analysis"),
+    # Identity / AD (only inside explicit authorized scope)
+    ("BloodHound CE","ad-enumeration","authorized-internal","adapter","explicit-scope","AD relationship mapping"),
+    ("SharpHound","ad-enumeration","authorized-internal","adapter","explicit-scope","AD collection for BloodHound"),
+    ("ldapsearch","ad-enumeration","authorized-internal","native","explicit-scope","authorized LDAP enumeration"),
+    ("Impacket","ad-enumeration","authorized-internal","adapter","explicit-scope","authorized Windows protocol/AD tooling"),
+    ("NetExec","ad-enumeration","authorized-internal","adapter","explicit-scope","authorized Windows/AD assessment"),
+    ("ADExplorer","ad-enumeration","authorized-internal","adapter","explicit-scope","authorized AD snapshot analysis"),
+    ("Snaffler","ad-enumeration","authorized-internal","adapter","explicit-scope","authorized AD file-share auditing"),
+    ("Coercer","ad-enumeration","authorized-internal","adapter","explicit-scope","authorized Windows protocol exposure assessment"),
+    # OSINT / public records
+    ("SpiderFoot","osint","passive","adapter","public-or-authorized","automated OSINT correlation"),
+    ("Recon-ng","osint","passive","adapter","public-or-authorized","modular reconnaissance"),
+    ("theHarvester","osint","passive","adapter","public-or-authorized","email/domain/public source collection"),
+    ("Maltego","osint","authorized","connector","authorized","visual OSINT relationship analysis"),
+    ("Sherlock","identity-osint","passive","adapter","public","username presence discovery"),
+    ("Maigret","identity-osint","passive","adapter","public","username presence discovery"),
+    ("WhatsMyName","identity-osint","passive","adapter","public","username presence discovery"),
+    ("Holehe","identity-osint","passive","adapter","public","email account-presence checks"),
+    ("GHunt","identity-osint","passive","adapter","public-or-authorized","Google account OSINT"),
+    ("Blackbird","identity-osint","passive","adapter","public","username discovery"),
+    ("ExifTool","media-osint","local-analysis","native","authorized","metadata extraction"),
+    ("MediaInfo","media-osint","local-analysis","native","authorized","media metadata extraction"),
+    ("InVID","media-osint","public-web","adapter","public","video/image verification"),
+    ("ExifTool-vendored","media-osint","local-library","native","authorized","metadata extraction library"),
+    # Supply-chain / vulnerability context
+    ("Nuclei","vulnerability-metadata","authorized-active","adapter","explicit-scope","authorized template-based assessment"),
+    ("Nuclei Templates","vulnerability-metadata","local-data","catalog","explicit-scope","assessment template metadata"),
+    ("Nuclei","web-security","authorized-active","adapter","explicit-scope","authorized web security checks"),
+    ("NVD","vulnerability-intel","public","api","public","CVE metadata"),
+    ("CVE.org","vulnerability-intel","public","api","public","CVE records"),
+    ("CISA KEV","vulnerability-intel","public","feed","public","known exploited vulnerability catalog"),
+    ("OSV.dev","vulnerability-intel","public","api","public","open-source vulnerability metadata"),
+    ("GitHub Advisory Database","vulnerability-intel","public","api","public","package advisory metadata"),
+    ("deps.dev","vulnerability-intel","public","api","public","dependency risk metadata"),
+    ("OWASP Dependency-Check","dependency-analysis","authorized","adapter","authorized","dependency vulnerability analysis"),
+    ("Trivy","container-security","authorized","adapter","authorized","container and dependency scanning"),
+    ("Grype","container-security","authorized","adapter","authorized","container/package vulnerability scanning"),
+    ("Syft","sbom","authorized","adapter","authorized","SBOM generation"),
+    ("CycloneDX","sbom","local-data","adapter","authorized","SBOM normalization"),
+    # Evidence / reporting
+    ("jq","evidence-processing","local-tool","native","authorized","JSON normalization"),
+    ("yq","evidence-processing","local-tool","native","authorized","YAML normalization"),
+    ("Pandas","evidence-processing","local-library","native","authorized","structured evidence analysis"),
+    ("DuckDB","evidence-processing","local-service","native","authorized","analytical evidence queries"),
+    ("SQLite","evidence-storage","local-service","native","authorized","case storage"),
+    ("PostgreSQL","evidence-storage","local-service","connector","authorized","case storage"),
+    ("OpenTelemetry","observability","local-service","connector","authorized","pipeline telemetry"),
+    ("Prometheus","observability","local-service","connector","authorized","metrics"),
+    ("Grafana","observability","local-service","connector","authorized","operational dashboards"),
+]
+
+TOOL_CATALOG = [asdict(ToolSpec(*x)) for x in TOOLS]
+
+
+def stats() -> dict:
+    by={}
+    for t in TOOL_CATALOG:
+        by[t['category']]=by.get(t['category'],0)+1
+    return {'total':len(TOOL_CATALOG),'by_category':dict(sorted(by.items())),
+            'passive_first':sum(t['mode'] in {'passive','public','passive-first'} for t in TOOL_CATALOG),
+            'gated_active':sum('active' in t['mode'] or t['mode'] in {'authorized','authorized-internal'} for t in TOOL_CATALOG),
+            'note':'Catalog entries are named integration contracts. Installation, credentials and execution scope are explicit.'}

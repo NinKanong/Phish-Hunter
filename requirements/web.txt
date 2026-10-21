@@ -1,0 +1,1 @@
+# Optional browser/UI helpers. Kept Python-only; no Node/npm build step.

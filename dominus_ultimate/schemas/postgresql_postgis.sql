@@ -1,0 +1,12 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE IF NOT EXISTS cases (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), target TEXT NOT NULL, target_type TEXT NOT NULL, profile TEXT NOT NULL, status TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now(), completed_at TIMESTAMPTZ, risk_score NUMERIC, verdict TEXT, tenant_id UUID);
+CREATE TABLE IF NOT EXISTS observations (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), case_id UUID REFERENCES cases(id) ON DELETE CASCADE, entity_type TEXT NOT NULL, entity_key TEXT NOT NULL, value JSONB NOT NULL, source_id TEXT NOT NULL, observed_at TIMESTAMPTZ NOT NULL DEFAULT now(), confidence NUMERIC, provenance TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS observations_case_entity_idx ON observations(case_id, entity_type, entity_key);
+CREATE TABLE IF NOT EXISTS domain_registration (case_id UUID PRIMARY KEY REFERENCES cases(id) ON DELETE CASCADE, domain TEXT, registered_on TIMESTAMPTZ, expires_on TIMESTAMPTZ, updated_on TIMESTAMPTZ, status JSONB, name_servers JSONB, registrar JSONB, registrant JSONB, admin_contact JSONB, tech_contact JSONB, billing_contact JSONB, history JSONB);
+CREATE TABLE IF NOT EXISTS geo_locations (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), case_id UUID REFERENCES cases(id) ON DELETE CASCADE, kind TEXT NOT NULL, name TEXT, country_code TEXT, country_name TEXT, city TEXT, region TEXT, lat DOUBLE PRECISION, lon DOUBLE PRECISION, point GEOGRAPHY(POINT,4326), precision TEXT, source_id TEXT NOT NULL, evidence_id UUID, metadata JSONB);
+CREATE INDEX IF NOT EXISTS geo_locations_point_idx ON geo_locations USING GIST(point);
+CREATE TABLE IF NOT EXISTS isolate_state (case_id UUID PRIMARY KEY REFERENCES cases(id) ON DELETE CASCADE, filters JSONB NOT NULL DEFAULT '{}'::jsonb, breadcrumbs JSONB NOT NULL DEFAULT '[]'::jsonb, updated_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS evidence (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), case_id UUID REFERENCES cases(id) ON DELETE CASCADE, sha256 TEXT NOT NULL, media_type TEXT, source_id TEXT, captured_at TIMESTAMPTZ, payload_uri TEXT, chain JSONB);
+CREATE TABLE IF NOT EXISTS silent_ai (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), case_id UUID REFERENCES cases(id) ON DELETE CASCADE, entity_id TEXT, field_id TEXT, insight TEXT, confidence NUMERIC, reasoning TEXT, prediction JSONB, anomaly JSONB, model TEXT, created_at TIMESTAMPTZ DEFAULT now());

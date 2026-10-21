@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Phish-Hunter is a free, open-source defensive security analysis platform for phishing, malware, network evidence, indicators and threat intelligence.">
+  <meta property="og:title" content="{{ title or 'Phish-Hunter' }}">
+  <meta property="og:description" content="Free and open-source defensive analysis for email, URLs, files, PCAP and threat intelligence.">
+  <title>{{ title or 'Phish-Hunter' }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <link rel="icon" type="image/png" href="/static/images/k4-logo-mark.png">
+  <link rel="apple-touch-icon" href="/static/images/k4-logo-mark.png">
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100" data-theme="dark">
+<a href="#main" class="sr-only focus:not-sr-only fixed left-4 top-4 z-[100] rounded-lg bg-white px-4 py-2 text-black shadow-xl">Skip to content</a>
+
+<header class="k4-header">
+  <div class="k4-header-inner">
+    <a href="/" class="k4-brand" aria-label="Phish-Hunter home">
+      <span class="k4-logo k4-logo-image"><img src="/static/images/k4-logo-mark.png" alt="Phish-Hunter logo"></span>
+      <span class="k4-brand-text">Phish-Hunter<span>-k4</span><small>DEFENSIVE INTELLIGENCE</small></span>
+    </a>
+
+    <nav class="k4-nav" aria-label="Primary navigation">
+      <a class="k4-nav-link" href="/">Home</a>{% if authenticated %}<a class="k4-nav-link k4-dashboard-nav" href="/dashboard">Dashboard</a><a class="k4-nav-link k4-dashboard-nav" href="/workbench">Workbench</a>{% endif %}
+
+      <div class="k4-nav-drop k4-services-drop">
+        <button class="k4-nav-link k4-drop-trigger" type="button" aria-haspopup="true">Services <span class="k4-chevron">⌄</span></button>
+        <div class="k4-dropdown k4-mega" role="menu">
+          <div class="k4-mega-head">
+            <div><span class="k4-eyebrow">ANALYST WORKSPACES</span><strong>Choose an investigation surface</strong></div>
+            <a href="/services" class="k4-all-link">View all services <span>→</span></a>
+          </div>
+          <div class="k4-mega-grid">
+            <section class="k4-menu-col">
+              <div class="k4-menu-title"><i class="k4-menu-icon cyan">⌁</i> Analyze</div>
+              {% for key in ["email-analyst","url-domain-analyst","file-analyst","ip-analyst","pcap-analyst"] %}
+              <a class="k4-menu-card" href="/services/{{ key }}" role="menuitem"><span class="k4-menu-card-icon">{{ loop.index }}</span><span><b>{{ services.get(key, {}).get("title", key.replace("-"," ").title()) }}</b><small>{{ services.get(key, {}).get("description","")[:70] }}</small></span></a>
+              {% endfor %}
+            </section>
+            <section class="k4-menu-col">
+              <div class="k4-menu-title"><i class="k4-menu-icon red">◈</i> Investigate</div>
+              {% for key in ["malware-analyst","ransomware-analyst","ioc-analyst","phishing-kit-analyst","threat-intelligence","sandbox"] %}
+              <a class="k4-menu-card" href="/services/{{ key }}" role="menuitem"><span class="k4-menu-card-icon rednum">{{ loop.index }}</span><span><b>{{ services.get(key, {}).get("title", key.replace("-"," ").title()) }}</b><small>{{ services.get(key, {}).get("description","")[:70] }}</small></span></a>
+              {% endfor %}
+            </section>
+            <section class="k4-menu-col">
+              <div class="k4-menu-title"><i class="k4-menu-icon purple">◉</i> Operate</div>
+              {% for key in ["reports","campaigns","actors","graph","feeds"] %}
+              <a class="k4-menu-card" href="/services/{{ key }}" role="menuitem"><span class="k4-menu-card-icon purplenum">{{ loop.index }}</span><span><b>{{ services.get(key, {}).get("title", key.replace("-"," ").title()) }}</b><small>{{ services.get(key, {}).get("description","")[:70] }}</small></span></a>
+              {% endfor %}
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <div class="k4-nav-drop">
+        <button class="k4-nav-link k4-drop-trigger" type="button" aria-haspopup="true">Investigate <span class="k4-chevron">⌄</span></button>
+        <div class="k4-dropdown k4-compact-menu" role="menu">
+          <a href="/services/ioc-analyst" role="menuitem"><b>IOC Analyst</b><small>Extract, normalize and correlate indicators</small></a>
+          <a href="/services/threat-intelligence" role="menuitem"><b>Threat Intelligence</b><small>Enrichment and threat context</small></a>
+          <a href="/services/graph" role="menuitem"><b>IOC Graph</b><small>Explore relationships and pivots</small></a>
+                  </div>
+      </div>
+
+      <a class="k4-nav-link" href="/blog">Blog</a>
+      <a class="k4-nav-link" href="/about">About</a>
+      {% if authenticated and user.is_admin %}<a class="k4-admin-nav-button" href="/admin">Admin Control</a>{% endif %}
+
+      <div class="k4-nav-drop">
+        <button class="k4-nav-link k4-drop-trigger" type="button" aria-haspopup="true">Resources <span class="k4-chevron">⌄</span></button>
+        <div class="k4-dropdown k4-resource-menu" role="menu">
+          <div class="k4-resource-grid">
+            <div><div class="k4-resource-title">LEARN</div><a href="/docs" role="menuitem">Documentation</a><a href="/docs/api" role="menuitem">API Reference</a><a href="/docs/sdk" role="menuitem">SDK &amp; CLI</a><a href="/docs/yara" role="menuitem">YARA Guide</a></div>
+            <div><div class="k4-resource-title">COMMUNITY</div><a href="/blog" role="menuitem">Blog</a><a href="/changelog" role="menuitem">Changelog</a><a href="/status" role="menuitem">System Status</a><a href="/community" role="menuitem">Community</a></div>
+            <div><div class="k4-resource-title">SUPPORT</div><a href="/support" role="menuitem">Support Center</a><a href="/contact" role="menuitem">Contact Us</a><a href="/support/bug" role="menuitem">Report a Bug</a><a href="/support/feature" role="menuitem">Feature Request</a></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="k4-actions">
+      {% if authenticated %}
+      <div class="k4-profile-wrap" data-account-wrap>
+        <button class="k4-avatar-button" type="button" data-account-toggle aria-expanded="false" aria-haspopup="menu" title="Open account menu">
+          {% if profile and profile.avatar_url %}<img src="{{ profile.avatar_url }}" alt="Profile avatar">{% else %}<span>{{ (profile.display_name if profile else user.email).strip()[:1]|upper }}</span>{% endif %}
+        </button>
+        <div class="k4-account-menu" data-account-menu role="menu" aria-hidden="true">
+          <div class="k4-account-menu-head">
+            <div class="k4-avatar-large">{% if profile and profile.avatar_url %}<img src="{{ profile.avatar_url }}" alt="">{% else %}<span>{{ (profile.display_name if profile else user.email).strip()[:1]|upper }}</span>{% endif %}</div>
+            <div><strong>{{ profile.display_name if profile else user.email.split('@')[0] }}</strong><small>{{ user.email }}</small><small>{{ profile.job_title if profile else 'Analyst' }}</small></div>
+          </div>
+          <div class="k4-account-menu-group">
+            <a href="/dashboard" role="menuitem">Dashboard <span>→</span></a><a href="/workbench" role="menuitem">Investigation Workbench <span>→</span></a>
+            <a href="/reports" role="menuitem">My scans &amp; reports <span>→</span></a>
+          </div>
+          <div class="k4-account-menu-group">
+            <a href="/account" role="menuitem">View account <span>→</span></a>
+            <a href="/settings" role="menuitem">Manage account <span>→</span></a>
+          </div>
+          {% if user.is_admin %}<div class="k4-account-menu-group"><a class="admin" href="{{ admin_site_url }}/" role="menuitem">Admin console <span>↗</span></a></div>{% endif %}
+          <form method="post" action="/logout" class="k4-account-signout"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit">Sign out</button></form>
+        </div>
+      </div>
+      {% else %}<a href="/login" class="k4-signin">Sign in</a><a href="/register" class="k4-signup">Create account</a>{% endif %}
+      <button class="k4-mobile-button" type="button" data-mobile-button aria-label="Open navigation">☰</button>
+    </div>
+  </div>
+
+  <div class="k4-mobile-menu hidden" data-mobile-menu>
+    <div class="k4-mobile-grid">
+      <a href="/">Home</a>{% if authenticated %}<a href="/dashboard">Dashboard</a><a href="/workbench">Workbench</a>{% endif %}<a href="/services">All Services</a><a href="/services/email-analyst">Email Analyst</a><a href="/services/url-domain-analyst">URL &amp; Domain Analyst</a><a href="/services/file-analyst">File Analyst</a><a href="/services/threat-intelligence">Threat Intelligence</a><a href="/reports">Reports</a><a href="/blog">Blog</a><a href="/about">About</a><a href="/docs">Documentation</a><a href="/support">Support</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">{% block content %}{% endblock %}</main>
+
+<footer class="k4-footer">
+  <div class="mx-auto grid max-w-[1500px] gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-5">
+    <div class="lg:col-span-2">
+      <div class="k4-footer-brand"><span class="k4-logo small k4-logo-image"><img src="/static/images/k4-logo-mark.png" alt="Phish-Hunter logo"></span> Phish-Hunter</div>
+      <p class="mt-4 max-w-md text-sm leading-7 text-slate-500">A free, open-source defensive analysis platform for phishing, malware, network evidence, indicators and threat intelligence.</p>
+      <div class="k4-socials" aria-label="Social links">
+        <a href="https://t.me/k44n00ng" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.7 3.3 18.6 20c-.2 1.2-.9 1.5-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6 13.6l-4.9-1.6c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.2.3Z"/></svg></a>
+        <a href="https://www.linkedin.com/in/nin-kanong/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.2H3.2V21h3.3V8.2ZM4.9 3A1.9 1.9 0 1 0 5 6.8 1.9 1.9 0 0 0 4.9 3ZM21 13.7c0-3.9-2.1-5.7-4.9-5.7-2.3 0-3.3 1.3-3.9 2.2V8.2H8.9V21h3.3v-6.3c0-1.7.3-3.4 2.5-3.4 2.2 0 2.2 2 2.2 3.5V21H21v-7.3Z"/></svg></a>
+        <a href="https://www.facebook.com/7lvnjrxvze" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-7.3h2.5l.4-3h-2.9V8.8c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v1.7H7.3v3h2.7V21h3.7Z"/></svg></a>
+        <a href="https://github.com/Nin-Kanong/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.3-.3-4.7-1.2-4.7-5.1 0-1.1.4-2 .9-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5.1 0c2-1.3 2.8-1 2.8-1 .5 1.3.2 2.3.1 2.6.6.7.9 1.6.9 2.7 0 3.9-2.4 4.8-4.7 5.1.4.3.7 1 .7 1.9v2.8c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.2Z"/></svg></a>
+      </div>
+      <a class="k4-phone" href="tel:+855978297806"><span>Phone</span><strong>097 829 7806</strong></a>
+    </div>
+    <div><h3>Services</h3><div class="k4-footer-links"><a href="/services/email-analyst">Email Analyst</a><a href="/services/url-domain-analyst">URL &amp; Domain Analyst</a><a href="/services/file-analyst">File Analyst</a><a href="/services/pcap-analyst">PCAP Analyst</a><a href="/services/threat-intelligence">Threat Intelligence</a></div></div>
+    <div><h3>Resources</h3><div class="k4-footer-links"><a href="/docs">Documentation</a><a href="/blog">Blog</a><a href="/status">Status</a><a href="/community">Community</a><a href="/contact">Contact</a></div></div>
+    <div><h3>Security</h3><div class="k4-footer-links"><a href="/security">Security</a><a href="/security/bug-bounty">Bug Bounty</a><a href="/legal/privacy">Privacy</a><a href="/legal/terms">Terms</a><a href="/accessibility">Accessibility</a></div></div>
+  </div>
+  <div class="border-t border-slate-900"><div class="mx-auto flex max-w-[1500px] flex-col gap-2 px-5 py-6 text-xs text-slate-600 sm:flex-row sm:justify-between"><span>© 2026 Phish-Hunter · v24.3.0 · Free &amp; Open Source</span><span>Built for authorized defensive security research and analysis.</span></div></div>
+</footer>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

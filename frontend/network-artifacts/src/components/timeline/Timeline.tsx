@@ -1,0 +1,2 @@
+import {Card,Empty} from '../common';import {useAnalysisStore} from '../../store/analysisStore';
+export function Timeline(){const r=useAnalysisStore(s=>s.result);if(!r)return <Empty>Run an investigation first.</Empty>;return <Card title="Unified network timeline"><div className="timeline">{r.timeline.slice(0,300).map((e:any,i)=><div className="time-row" key={i}><span>{e.timestamp||'timestamp unavailable'}</span><b>{e.event_type||'event'}</b><small>{e.source}</small><p>{e.src_ip||''} {e.dst_ip?'→ '+e.dst_ip:''} {e.message||''}</p></div>)}</div></Card>}

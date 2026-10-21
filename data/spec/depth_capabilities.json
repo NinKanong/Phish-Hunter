@@ -1,0 +1,3672 @@
+{
+  "email-analyst": {
+    "service": "email-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002171+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "EMAIL OVERVIEW",
+        "items": [
+          "File format (EML / MSG / MBOX / PST / EMLX / MHT)",
+          "File size",
+          "Message size (decoded)",
+          "Message ID",
+          "Subject (decoded + raw)",
+          "Date (parsed + raw + timezone + UTC)",
+          "From (display name + address + raw)",
+          "To (every recipient with display name + address)",
+          "CC, BCC (every recipient)",
+          "Reply-To (address + mismatch check)",
+          "Return-Path (address + mismatch check)",
+          "Sender (address + mismatch check)",
+          "Envelope-From (from SMTP)",
+          "Envelope-To (from SMTP)",
+          "X-Mailer / User-Agent",
+          "MIME-Version",
+          "Content-Type",
+          "Content-Transfer-Encoding",
+          "Priority / Importance / X-Priority",
+          "Language (detected + confidence)",
+          "Attachment count",
+          "URL count",
+          "Embedded image count",
+          "Tracking pixel count",
+          "Verdict: legitimate / spam / phishing / BEC / malware",
+          "HEADER ANALYSIS (every header, every value)",
+          "Header name",
+          "Raw value",
+          "Parsed value",
+          "RFC compliance (valid / malformed)",
+          "Interpretation (why it matters)",
+          "Suspicious flag (yes/no)",
+          "Cross-reference with other headers",
+          "RECEIVED CHAIN (every hop)",
+          "Hop number",
+          "From hostname + IP",
+          "By hostname + IP",
+          "With protocol (SMTP, ESMTP, ESMTPS, ESMTPSA)",
+          "ID",
+          "Timestamp (raw + UTC)",
+          "Delay from previous hop (seconds)",
+          "Cumulative delay",
+          "IP geolocation (country, city)",
+          "ASN + ASN name",
+          "Reverse DNS",
+          "IP reputation (AbuseIPDB, IPQS, GreyNoise)",
+          "SPF result at this hop",
+          "DKIM result at this hop",
+          "DMARC result at this hop",
+          "TLS info (version, cipher, cert)",
+          "Anomalies (delay > 60s, private IP after public, etc.)",
+          "Verdict per hop"
+        ]
+      },
+      {
+        "name": "AUTHENTICATION",
+        "items": []
+      },
+      {
+        "name": "SPF:",
+        "items": [
+          "Envelope-from domain",
+          "SPF record (raw TXT)",
+          "DNS lookups used (of 10)",
+          "Every mechanism evaluated (a, mx, ip4, ip6, include, exists, ptr, all)",
+          "Match result (pass / fail / softfail / neutral / none / permerror)",
+          "Qualifier (~all, -all, ?all, +all)",
+          "Explanation",
+          "Sending IP vs SPF record",
+          "include resolution (every IP)",
+          "Historical SPF changes",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "DKIM:",
+        "items": [
+          "Every DKIM-Signature header",
+          "Selector",
+          "Domain (d=)",
+          "Algorithm (rsa-sha256, ed25519-sha256)",
+          "Canonicalization (relaxed/relaxed, simple/simple)",
+          "Body hash (bh=)",
+          "Header hash (b=)",
+          "Public key DNS TXT record",
+          "Signature verification (pass / fail / permfail / temperror)",
+          "Signed headers list (h=)",
+          "Timestamp (t=)",
+          "Expiration (x=)",
+          "Body length (l=)",
+          "Verification error (if any)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "DMARC:",
+        "items": [
+          "DMARC record (raw TXT)",
+          "Policy (p=none / quarantine / reject)",
+          "Subdomain policy (sp=)",
+          "Alignment mode (adkim, aspf: r or s)",
+          "Aggregate report URI (rua=)",
+          "Forensic report URI (ruf=)",
+          "SPF alignment (pass / fail)",
+          "DKIM alignment (pass / fail)",
+          "DMARC result (pass / fail / none / temperror)",
+          "Lookalike domain confidence",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ARC:",
+        "items": [
+          "ARC-Seal",
+          "ARC-Message-Signature",
+          "ARC-Authentication-Results",
+          "Chain validation (pass / fail)",
+          "Instance number",
+          "Signer",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "BIMI:",
+        "items": [
+          "BIMI record (raw TXT)",
+          "Logo URL",
+          "VMC (Verified Mark Certificate)",
+          "Certificate validity",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "MTA-STS:",
+        "items": [
+          "MTA-STS TXT record",
+          "Policy file (fetched)",
+          "Mode (enforce / testing / none)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "DANE/TLSA:",
+        "items": [
+          "TLSA record",
+          "Certificate match",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "SENDER ANALYSIS",
+        "items": [
+          "Sender domain:",
+          "Registered domain",
+          "Domain age (WHOIS)",
+          "Registrar",
+          "Nameservers",
+          "Privacy protection",
+          "Historical WHOIS changes",
+          "Domain reputation",
+          "Lookalike of known brands (Levenshtein, homoglyph)",
+          "Verdict",
+          "Sender IP:",
+          "Every sending IP from Received chain",
+          "ASN + ASN name",
+          "Geolocation (country, city, coordinates)",
+          "Reverse DNS",
+          "Reputation (AbuseIPDB score, IPQS risk, GreyNoise class)",
+          "Open ports (via Shodan/Censys if key)",
+          "Blocklist status (Spamhaus, Barracuda, SORBS, etc.)",
+          "Historical activity",
+          "Verdict",
+          "Infrastructure:",
+          "Mail server hostname",
+          "Mail server software (Postfix, Exim, Sendmail)",
+          "TLS version",
+          "TLS cipher",
+          "Certificate (issuer, subject, validity)",
+          "HELO/EHLO name",
+          "HELO/EHLO validation",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CONTENT ANALYSIS",
+        "items": [
+          "Subject:",
+          "Raw",
+          "Decoded (MIME encoded-word)",
+          "Language",
+          "Urgency score",
+          "Threat score",
+          "Manipulation score",
+          "Brand impersonation score",
+          "Keyword matches (from phishing keyword list)",
+          "Verdict",
+          "Body (plain text):",
+          "Full text",
+          "Language",
+          "Urgency score",
+          "Threat score",
+          "Manipulation score",
+          "Sentiment",
+          "Every URL extracted (defanged)",
+          "Every email address",
+          "Every phone number",
+          "Every crypto wallet address",
+          "Every Telegram/WhatsApp link",
+          "Every sentence with urgency keywords highlighted",
+          "Verdict",
+          "Body (HTML):",
+          "Raw HTML",
+          "Sanitized HTML (for safe rendering)",
+          "Every <a> tag (href, text, mismatch check)",
+          "Every <form> (action, method, every field)",
+          "Every <img> (src, alt, tracking pixel check)",
+          "Every <script> (external + inline)",
+          "Every CSS rule (hidden text, offscreen, tiny fonts)",
+          "Hidden text detection (white-on-white, zero-width, RTL override)",
+          "Invisible form detection",
+          "Overlay trick detection",
+          "Tracking pixel detection (1x1, unique URL)",
+          "Web bug detection",
+          "Base64-encoded content decoded",
+          "Hex-encoded content decoded",
+          "ROT13 / JS obfuscation detection",
+          "Every external resource",
+          "Verdict",
+          "Links:",
+          "Every URL (raw + defanged)",
+          "Anchor text",
+          "Anchor text vs href mismatch check",
+          "Redirect chain (if resolvable)",
+          "Domain reputation",
+          "URL risk score",
+          "Typo-squatting check",
+          "Homoglyph check",
+          "Verdict per URL",
+          "Forms:",
+          "Every <form>",
+          "Action URL (internal / external)",
+          "Method (GET / POST)",
+          "Every field (name, type, placeholder, required, pattern)",
+          "Password fields",
+          "Credit card fields",
+          "OTP fields",
+          "Hidden fields",
+          "CSRF token presence",
+          "Brand match",
+          "Verdict",
+          "Social Engineering:",
+          "Urgency phrases (\"urgent\", \"immediate action\", \"account suspended\")",
+          "Threat phrases (\"account will be closed\", \"legal action\")",
+          "Authority phrases (\"CEO\", \"IT department\", \"bank\")",
+          "Reward phrases (\"prize\", \"bonus\", \"refund\")",
+          "Fear phrases (\"hacked\", \"compromised\", \"unusual activity\")",
+          "Trust phrases (\"verified\", \"official\", \"secure\")",
+          "Every matched phrase with position",
+          "Verdict",
+          "URL ANALYSIS (within email)",
+          "Raw URL",
+          "Defanged URL",
+          "Scheme, host, path, query, fragment",
+          "Domain age",
+          "Domain reputation",
+          "IP resolution"
+        ]
+      },
+      {
+        "name": "ATTACHMENT ANALYSIS",
+        "items": [
+          "Filename (raw + decoded)",
+          "Filename anomaly (double extension, RTLO, unicode tricks)",
+          "MIME type (declared)",
+          "MIME type (magic bytes)",
+          "MIME type mismatch check",
+          "Size",
+          "Hashes (MD5, SHA1, SHA256, ssdeep, TLSH)",
+          "File type (TRID)",
+          "Metadata (author, company, created, modified)",
+          "Macro detection (VBA, XLM, Excel 4.0)",
+          "OLE extraction",
+          "PDF JS extraction",
+          "Embedded file extraction",
+          "Password-protected archive detection",
+          "Password brute-force (10,000 common passwords)",
+          "Nested archive extraction (10 levels)",
+          "Every extracted file \u2192 FILE ANALYZER (recursive)",
+          "Threat intel lookup",
+          "Verdict per attachment"
+        ]
+      },
+      {
+        "name": "IOC EXTRACTION",
+        "items": [
+          "Every IP (defanged)",
+          "Every domain (defanged)",
+          "Every URL (defanged)",
+          "Every hash (MD5/SHA1/SHA256)",
+          "Every email address",
+          "Every crypto wallet",
+          "Every Telegram bot token",
+          "Every Discord webhook",
+          "Every Slack webhook",
+          "Every mutex",
+          "Every registry key",
+          "Every file path",
+          "Deduplicated with confidence + first/last seen"
+        ]
+      },
+      {
+        "name": "THREAT INTELLIGENCE",
+        "items": [
+          "VirusTotal (every engine)",
+          "URLScan.io",
+          "Google Safe Browsing",
+          "Microsoft SmartScreen",
+          "PhishTank",
+          "OpenPhish",
+          "URLhaus",
+          "Spamhaus",
+          "AlienVault OTX",
+          "AbuseIPDB",
+          "IPQualityScore",
+          "GreyNoise",
+          "MISP (internal)",
+          "OpenCTI (internal)",
+          "Aggregate verdict"
+        ]
+      },
+      {
+        "name": "PHISHING DETECTION (ML)",
+        "items": [
+          "Classifier score (0-100)",
+          "Verdict (phishing / BEC / spam / legitimate)",
+          "Feature importance (top 20 features)",
+          "Similar past phishing samples (vector search)",
+          "Campaign attribution"
+        ]
+      },
+      {
+        "name": "RISK SCORE",
+        "items": [
+          "Score: 0-100",
+          "Verdict: Malicious / Suspicious / Clean / Unknown",
+          "Confidence: 0-100",
+          "Every signal with weight + contribution",
+          "Top contributing signals",
+          "Counter-signals",
+          "Explanation paragraph"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "Every technique identified",
+          "Technique ID + name + tactic",
+          "Evidence per technique",
+          "Confidence per technique",
+          "Sub-techniques"
+        ]
+      },
+      {
+        "name": "EVIDENCE",
+        "items": [
+          "Raw headers (full)",
+          "Raw body (plain + HTML)",
+          "Raw attachments (with hashes)",
+          "Raw Received chain",
+          "Raw auth results",
+          "Raw URLs (defanged)",
+          "Raw IOCs",
+          "Screenshots"
+        ]
+      },
+      {
+        "name": "TIMELINE",
+        "items": [
+          "Email sent (from Date header)",
+          "Every hop timestamp",
+          "Every URL resolution",
+          "Every threat intel lookup",
+          "Every file scan",
+          "Chronological view"
+        ]
+      },
+      {
+        "name": "INVESTIGATION REPORT",
+        "items": [
+          "All sections above",
+          "30+ export formats",
+          "Raw evidence appendix",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 20,
+    "capability_count": 300,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "url-analyst": {
+    "service": "url-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002229+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "Evidence",
+        "items": [
+          "raw evidence",
+          "interpretation",
+          "source reference",
+          "first seen / last seen"
+        ]
+      },
+      {
+        "name": "Confidence",
+        "items": [
+          "0-100 calibrated confidence",
+          "confidence rationale"
+        ]
+      },
+      {
+        "name": "Threat Intelligence",
+        "items": [
+          "configured-provider lookups",
+          "lookup timestamps",
+          "provider status"
+        ]
+      },
+      {
+        "name": "Timeline",
+        "items": [
+          "event timestamp",
+          "observation timestamp",
+          "first/last seen"
+        ]
+      },
+      {
+        "name": "Correlation",
+        "items": [
+          "related findings",
+          "related IOCs",
+          "graph pivot identifiers"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "technique ID",
+          "technique name",
+          "evidence reference",
+          "confidence"
+        ]
+      },
+      {
+        "name": "Reporting",
+        "items": [
+          "raw evidence appendix",
+          "machine-readable result",
+          "analyst report",
+          "self-verification"
+        ]
+      }
+    ],
+    "section_count": 7,
+    "capability_count": 23,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "file-analyst": {
+    "service": "file-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002237+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "FILE IDENTIFICATION",
+        "items": [
+          "Original filename",
+          "Filename anomaly (double extension, RTLO, unicode tricks, homoglyph)",
+          "File size (bytes, KB, MB)",
+          "Extension",
+          "MIME (claimed)",
+          "MIME (magic bytes)",
+          "MIME (TRID)",
+          "MIME (libmagic)",
+          "MIME mismatch check",
+          "File type confidence",
+          "MD5, SHA1, SHA256, SHA512",
+          "ssdeep",
+          "TLSH",
+          "imphash (PE)",
+          "authentihash (PE)",
+          "Rich header hash (PE)",
+          "Section hashes (PE/ELF/Mach-O)",
+          "Fuzzy hash neighbors (in local DB)",
+          "First seen (VirusTotal)",
+          "Last seen (VirusTotal)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "FILE METADATA",
+        "items": [
+          "Created",
+          "Modified",
+          "Accessed",
+          "Author",
+          "Company",
+          "Producer",
+          "Creator",
+          "Last saved by",
+          "Revision number",
+          "Template",
+          "Custom properties (every one)",
+          "EXIF (images)",
+          "GPS coordinates (if present)",
+          "Camera make/model (if present)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "FILE STRUCTURE",
+        "items": [
+          "Every section/stream/segment",
+          "Every chunk/atom/box",
+          "Every table (import, export, resource, reloc, debug, TLS)",
+          "Every directory entry",
+          "Every string table",
+          "Every header field with offset + raw bytes",
+          "Overlay (offset, size, entropy, carved)",
+          "Header checksum validation",
+          "Structural anomalies",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "STRINGS",
+        "items": [
+          "ASCII strings (min 4, deduplicated, categorized):",
+          "URLs (with defang + threat intel)",
+          "Domains",
+          "IPs",
+          "Email addresses",
+          "Windows paths",
+          "Unix paths",
+          "Registry keys",
+          "Mutex names",
+          "Named pipes",
+          "User agents",
+          "API endpoints",
+          "Command lines",
+          "Crypto wallet addresses",
+          "Base64 blobs (>40 chars, decoded + re-scanned)",
+          "Hex blobs",
+          "SQL queries",
+          "Error messages",
+          "Encryption constants",
+          "Shellcodes",
+          "C2 indicators",
+          "Unicode strings (UTF-16LE/BE)",
+          "Stack strings (emulated)",
+          "Tight strings",
+          "FLOSS strings",
+          "Each string: offset, encoding, category, threat score"
+        ]
+      },
+      {
+        "name": "ENTROPY",
+        "items": [
+          "Whole-file entropy",
+          "Per-section entropy",
+          "Per-chunk entropy (16-byte windows)",
+          "Entropy chart data",
+          "High-entropy regions (>7.5) with offsets",
+          "Low-entropy regions (<1.0) with offsets",
+          "Compression/encryption indicators",
+          "Packer likelihood score"
+        ]
+      },
+      {
+        "name": "EMBEDDED OBJECTS",
+        "items": [
+          "Every embedded file extracted",
+          "Every nested archive extracted (10 levels)",
+          "Every OLE object extracted",
+          "Every PDF attachment extracted",
+          "Every macro extracted",
+          "Every resource extracted",
+          "Every image extracted",
+          "Every script extracted",
+          "Every extracted file \u2192 recursively analyzed",
+          "Verdict per extracted object"
+        ]
+      },
+      {
+        "name": "PE ANALYSIS",
+        "items": [
+          "DOS header: every field",
+          "NT headers: every field",
+          "File header:",
+          "Machine",
+          "Number of sections",
+          "Timestamp (raw + UTC, anomaly check)",
+          "Characteristics (every flag)",
+          "Pointer to symbol table",
+          "Optional header:",
+          "Magic",
+          "Entry point",
+          "Image base",
+          "Section alignment",
+          "File alignment",
+          "Subsystem",
+          "DllCharacteristics (every flag)",
+          "Size of stack/heap reserve/commit",
+          "Checksum (validate)",
+          "Number of RVA and sizes",
+          "Every section:",
+          "Name",
+          "Virtual address",
+          "Virtual size",
+          "Raw pointer",
+          "Raw size",
+          "Characteristics (every flag)",
+          "Entropy",
+          "MD5",
+          "SHA256",
+          "Suspicious strings",
+          "Suspicious imports",
+          "Verdict",
+          "Every import:",
+          "DLL name",
+          "Function name (or ordinal)",
+          "Resolved address",
+          "Category",
+          "MITRE technique",
+          "Suspicion score",
+          "Evidence",
+          "Every export:",
+          "Name",
+          "Ordinal",
+          "RVA",
+          "Forwarder",
+          "Suspicion",
+          "Every resource:",
+          "Type",
+          "Name",
+          "Language",
+          "Size",
+          "Hash",
+          "Extracted content",
+          "Nested PE detection",
+          "Verdict",
+          "Manifest:",
+          "Requested execution level",
+          "DPI awareness",
+          "UAC settings",
+          "Supported OS",
+          "Verdict",
+          "Rich header:",
+          "Every build ID",
+          "Checksum",
+          "Anomalies",
+          "Verdict",
+          "Debug directory:",
+          "PDB path",
+          "GUID",
+          "Age",
+          "Timestamp",
+          "Verdict",
+          "Authenticode:",
+          "Signature present",
+          "Signer",
+          "Issuer",
+          "Cert chain",
+          "Validity",
+          "Timestamp (RFC 3161)",
+          "Revocation (OCSP + CRL)"
+        ]
+      },
+      {
+        "name": "YARA",
+        "items": [
+          "For EVERY rule match:",
+          "Rule name",
+          "Author",
+          "Description",
+          "Reference",
+          "Tags",
+          "Every matched string (offset, length, context, hex)",
+          "Rule severity",
+          "Rule category",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CAPA",
+        "items": [
+          "For EVERY capability:",
+          "Capability name",
+          "MITRE ATT&CK technique",
+          "MBC mapping",
+          "Function addresses",
+          "Matching features (strings, APIs, numbers)",
+          "Confidence",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CONFIGURATION EXTRACTION",
+        "items": [
+          "For EVERY family detected:",
+          "Family name",
+          "Config type",
+          "Decryption method",
+          "Every C2 server",
+          "Encryption keys",
+          "Bot tokens",
+          "Discord webhooks",
+          "SMTP credentials",
+          "FTP credentials",
+          "Bitcoin wallets",
+          "Campaign IDs",
+          "Build IDs",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "THREAT INTELLIGENCE",
+        "items": [
+          "VirusTotal (every engine + result + version + date)",
+          "MalwareBazaar (family + tags + first seen + signature)",
+          "ThreatFox (family + confidence + reference + date)",
+          "Hybrid Analysis (verdict + family + score + date)",
+          "Joe Sandbox (verdict + family + score + date)",
+          "ANY.RUN (verdict + family + tags + date)",
+          "Triage (verdict + family + score + date)",
+          "Internal cache (prior sightings)",
+          "Aggregate verdict"
+        ]
+      },
+      {
+        "name": "BEHAVIORAL PREDICTION",
+        "items": [
+          "Based on imports + strings + entropy + structure",
+          "Likely behavior 1 with evidence + confidence",
+          "Likely behavior 2 with evidence + confidence",
+          "... (every predicted behavior)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "IOC EXTRACTION",
+        "items": [
+          "Every IP (defang + first/last seen + confidence)",
+          "Every domain (defang + first/last seen + confidence)",
+          "Every URL (defang + first/last seen + confidence)",
+          "Every hash (MD5/SHA1/SHA256)",
+          "Every email",
+          "Every mutex",
+          "Every registry key",
+          "Every file path",
+          "Every named pipe",
+          "Every crypto wallet",
+          "Deduplicated + sorted by confidence"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "Every technique",
+          "Technique ID + name + tactic",
+          "Evidence per technique",
+          "Confidence per technique",
+          "Sub-techniques",
+          "RISK SCORE (explainable)",
+          "Score: 0-100",
+          "Verdict",
+          "Confidence",
+          "Every signal with weight + contribution",
+          "Top contributing signals",
+          "Counter-signals",
+          "Explanation paragraph"
+        ]
+      },
+      {
+        "name": "SIMILARITY & CLUSTERING",
+        "items": [
+          "ssdeep similarity",
+          "TLSH similarity",
+          "imphash neighbors",
+          "Section-hash neighbors",
+          "String-set similarity",
+          "Code similarity",
+          "Cluster ID",
+          "Family attribution with confidence",
+          "SANDBOX (deep, optional)",
+          "Every process spawned",
+          "Every file touched",
+          "Every registry key touched",
+          "Every network connection",
+          "Every DNS query",
+          "Every HTTP request/response",
+          "Every TLS session",
+          "Every mutex created",
+          "Every service installed",
+          "Every scheduled task created",
+          "Every screenshot",
+          "Memory dumps with secrets",
+          "Anti-VM / anti-debug events",
+          "Multi-stage payload follow-up"
+        ]
+      },
+      {
+        "name": "REPORT",
+        "items": [
+          "All sections populated",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 16,
+    "capability_count": 268,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "domain-analyst": {
+    "service": "domain-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002244+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "DOMAIN OVERVIEW",
+        "items": [
+          "Domain name",
+          "FQDN",
+          "Registered domain",
+          "Subdomain depth",
+          "Length",
+          "Entropy",
+          "Punycode decode",
+          "IDN homoglyph check",
+          "Mixed-script check",
+          "Typosquatting check (Levenshtein, keyboard-adjacent, homophone,",
+          "\u2502 bitsquatting, vowel-swap, TLD-swap, hyphenation, plural, omission)",
+          "Lookalike brand matches (top 20)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "WHOIS / RDAP",
+        "items": [
+          "Registrar",
+          "Registrar URL",
+          "Registrar IANA ID",
+          "WHOIS server",
+          "Creation date",
+          "Updated date",
+          "Expiration date",
+          "Domain age (days)",
+          "Registrant name / org / email / phone / address (if public)",
+          "Admin contact",
+          "Tech contact",
+          "Name servers (every one with IP)",
+          "DNSSEC status",
+          "Status codes (clientTransferProhibited, etc.)",
+          "Privacy protection (yes/no + provider)",
+          "Historical WHOIS changes (every change with date)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "DNS RECORDS",
+        "items": [
+          "For EVERY record type:",
+          "A (every IP with TTL + first/last seen)",
+          "AAAA (every IP with TTL + first/last seen)",
+          "CNAME (every target)",
+          "MX (every server with priority + IP)",
+          "NS (every server with IP)",
+          "TXT (every value \u2014 SPF, DKIM, DMARC, verification, etc.)",
+          "SOA (every field)",
+          "PTR (every reverse)",
+          "SRV (every service)",
+          "CAA (every issuer)",
+          "NAPTR",
+          "DNSKEY / DS / RRSIG (DNSSEC)",
+          "TLSA",
+          "SSHFP",
+          "HINFO",
+          "ANY (if allowed)"
+        ]
+      },
+      {
+        "name": "DNS SECURITY",
+        "items": [
+          "DNSSEC validation",
+          "DNSKEY presence",
+          "DS record at parent",
+          "RRSIG signatures",
+          "NSEC / NSEC3 records",
+          "Chain of trust validation",
+          "Zone walking possible",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "PASSIVE DNS",
+        "items": [
+          "Every historical A record (with first/last seen)",
+          "Every historical AAAA record",
+          "Every historical MX record",
+          "Every historical NS record",
+          "Every historical TXT record",
+          "Every IP ever associated",
+          "Timeline of changes",
+          "Fast-flux detection",
+          "IP rotation patterns",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "SUBDOMAINS",
+        "items": [
+          "Every subdomain discovered (crt.sh, passive DNS, brute-force)",
+          "Every subdomain with A record",
+          "Every subdomain with response code",
+          "Every subdomain with title",
+          "Every subdomain with screenshot (if resolvable)",
+          "Wildcard detection",
+          "Subdomain takeover risk",
+          "Verdict per subdomain"
+        ]
+      },
+      {
+        "name": "CERTIFICATE TRANSPARENCY",
+        "items": [
+          "Every certificate ever issued",
+          "Every SAN",
+          "Every issuer",
+          "Every validity window",
+          "Every CT log entry",
+          "Every related domain (via SAN)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "IP ASSOCIATIONS",
+        "items": [
+          "Every IP ever associated",
+          "Every IP with ASN",
+          "Every IP with geolocation",
+          "Every IP with hosting provider",
+          "Every IP with reverse DNS",
+          "Every IP with open ports",
+          "Reverse IP neighbors (up to 100)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CERTIFICATE ASSOCIATIONS",
+        "items": [
+          "Every certificate ever issued",
+          "Every certificate issuer",
+          "Every certificate SAN",
+          "Shared certificate neighbors (up to 100)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "RELATED DOMAINS",
+        "items": [
+          "Same registrant",
+          "Same nameservers",
+          "Same MX",
+          "Same IP",
+          "Same certificate",
+          "Same favicon",
+          "Same analytics ID",
+          "Same Google AdSense ID",
+          "Same Cloudflare account",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REPUTATION",
+        "items": [
+          "VirusTotal domain report",
+          "[URLScan.io](https://urlscan.io/) reports",
+          "Google Safe Browsing",
+          "Microsoft SmartScreen",
+          "PhishTank",
+          "OpenPhish",
+          "URLhaus",
+          "Spamhaus",
+          "Cisco Talos",
+          "AlienVault OTX",
+          "IPQualityScore",
+          "GreyNoise",
+          "MISP (internal)",
+          "OpenCTI (internal)",
+          "Aggregate verdict"
+        ]
+      },
+      {
+        "name": "BRAND / TYPOSQUATTING",
+        "items": [
+          "Every brand match",
+          "Levenshtein distance",
+          "Homoglyph analysis",
+          "Mixed-script analysis",
+          "Hyphenation pattern",
+          "TLD swap",
+          "Vowel swap",
+          "Bit-squatting",
+          "Plural/singular",
+          "Omission/insertion",
+          "Verdict per match"
+        ]
+      },
+      {
+        "name": "IOC EXTRACTION",
+        "items": [
+          "Every IP",
+          "Every subdomain",
+          "Every URL",
+          "Every email",
+          "Every certificate hash",
+          "Every favicon hash",
+          "Deduplicated + sorted"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "T1583.001 Acquire Infrastructure: Domains",
+          "T1585.002 Establish Accounts: Email Accounts",
+          "T1071.001 Application Layer Protocol: Web Protocols",
+          "T1071.004 Application Layer Protocol: DNS",
+          "Every applicable technique with evidence"
+        ]
+      },
+      {
+        "name": "RISK SCORE",
+        "items": [
+          "Score 0-100",
+          "Verdict",
+          "Confidence",
+          "Every signal with weight + contribution",
+          "Explanation"
+        ]
+      },
+      {
+        "name": "REPORT",
+        "items": [
+          "All sections",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 16,
+    "capability_count": 151,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "ip-analyst": {
+    "service": "ip-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002302+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "IP OVERVIEW",
+        "items": [
+          "IP address (v4 or v6)",
+          "IP range (CIDR)",
+          "IP type (public, private, reserved, multicast, loopback, etc.)",
+          "Reverse DNS (PTR)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "GEOLOCATION",
+        "items": [
+          "Country (name + code)",
+          "Region / state",
+          "City",
+          "Postal code",
+          "Latitude / longitude",
+          "Timezone",
+          "Accuracy radius",
+          "Multiple source comparison (MaxMind, IP2Location, DB-IP)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ASN",
+        "items": [
+          "ASN number",
+          "ASN name",
+          "ASN country",
+          "ASN organization",
+          "ASN reputation",
+          "ASN malicious ratio",
+          "ASN type (hosting, ISP, education, government, business)",
+          "ASN peers",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "HOSTING",
+        "items": [
+          "Hosting provider",
+          "Hosting type (cloud, VPS, dedicated, shared, bulletproof)",
+          "Bulletproof hosting score",
+          "Abuse contact",
+          "Abuse email",
+          "Reporting history",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REVERSE DNS",
+        "items": [
+          "PTR record",
+          "Forward confirmation",
+          "Mismatch check",
+          "Verdict",
+          "OPEN SERVICES (deep, via Shodan/Censys)",
+          "Every open port",
+          "Every service banner",
+          "Every service version",
+          "Every SSL cert",
+          "Every technology",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "PORTS",
+        "items": [
+          "Every open port",
+          "Every filtered port",
+          "Every closed port",
+          "Port scan history",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REPUTATION",
+        "items": [
+          "AbuseIPDB (score, reports, last report)",
+          "IPQualityScore (risk score, fraud score)",
+          "GreyNoise (classification, last seen)",
+          "VirusTotal (detections)",
+          "Spamhaus (blocklist status)",
+          "SORBS",
+          "Barracuda",
+          "CINS",
+          "UCEPROTECT",
+          "Aggregate verdict"
+        ]
+      },
+      {
+        "name": "ABUSE REPORTS",
+        "items": [
+          "Every report (source, date, category, comment)",
+          "Report trends (timeline)",
+          "Reporting organizations",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "RELATED DOMAINS",
+        "items": [
+          "Every domain ever pointing to this IP",
+          "Every domain with same ASN",
+          "Passive DNS history",
+          "First/last seen per domain",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "RELATED CERTIFICATES",
+        "items": [
+          "Every certificate issued for this IP",
+          "Every certificate with this IP as SAN",
+          "Certificate issues",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "HISTORICAL ACTIVITY",
+        "items": [
+          "First seen",
+          "Last seen",
+          "Historical ASN",
+          "Historical geolocation",
+          "Historical reputation",
+          "Traffic patterns",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "IOC CORRELATION",
+        "items": [
+          "Every IOC associated with this IP",
+          "Every report referencing this IP",
+          "Every campaign using this IP",
+          "Every actor using this IP",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "Every technique associated with this IP's activity",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "RISK SCORE",
+        "items": [
+          "Score 0-100",
+          "Verdict",
+          "Confidence",
+          "Every signal with weight + contribution",
+          "Explanation"
+        ]
+      },
+      {
+        "name": "REPORT",
+        "items": [
+          "All sections",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 15,
+    "capability_count": 93,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "pcap-analyst": {
+    "service": "pcap-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002306+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "CAPTURE METADATA",
+        "items": [
+          "File format (pcap, pcapng, cap, snoop, 5views)",
+          "Interface list (every one)",
+          "Snap length",
+          "Link type",
+          "First packet timestamp (raw + UTC)",
+          "Last packet timestamp (raw + UTC)",
+          "Duration",
+          "Total packets",
+          "Total bytes",
+          "Average packet size",
+          "Packet size histogram (per size bucket: 0-64, 65-128, ..., 1500+)",
+          "Capture comment (if any)",
+          "OS (if in pcapng)",
+          "Application (if in pcapng)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "PROTOCOL HIERARCHY",
+        "items": [
+          "For EVERY protocol:",
+          "Packet count",
+          "Byte count",
+          "Percentage",
+          "Sub-protocols",
+          "Anomalies",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CONVERSATIONS",
+        "items": [
+          "For EVERY 5-tuple:",
+          "Src IP + port",
+          "Dst IP + port",
+          "Protocol",
+          "Packet count (each direction)",
+          "Byte count (each direction)",
+          "First packet",
+          "Last packet",
+          "Duration",
+          "Packets/second",
+          "Bytes/second",
+          "TCP flags summary",
+          "State",
+          "Suspicion score",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ENDPOINTS",
+        "items": [
+          "For EVERY IP:",
+          "IP",
+          "Packets sent",
+          "Packets received",
+          "Bytes sent",
+          "Bytes received",
+          "Geolocation",
+          "ASN",
+          "WHOIS org",
+          "Reverse DNS",
+          "Reputation",
+          "Suspicion",
+          "Verdict",
+          "DNS (deep) \u2014 every query with 15+ fields (already listed)",
+          "HTTP (deep) \u2014 every request/response with 20+ fields (already listed)",
+          "TLS (deep) \u2014 every session with 30+ fields (already listed)",
+          "TCP (deep) \u2014 every stream with 15+ fields (already listed)",
+          "FILE CARVING \u2014 every carved file with type-specific extraction",
+          "BEACONING DETECTION \u2014 every beacon with 15+ fields",
+          "DGA DETECTION \u2014 every DGA candidate with 10+ fields",
+          "DNS TUNNELING \u2014 every tunnel with 12+ fields",
+          "LATERAL MOVEMENT \u2014 every lateral movement with 10+ fields",
+          "CREDENTIAL EXTRACTION \u2014 every credential with 12+ fields (redacted)",
+          "FINGERPRINTS \u2014 JA3, JA3S, JA4, JA4S, JA4H, JA4X, HASSH, HASSHServer, p0f",
+          "NETWORK GRAPH \u2014 force-directed graph with nodes + edges",
+          "TIMELINE \u2014 every event",
+          "MITRE ATT&CK \u2014 every technique at PCAP level",
+          "RISK SCORE \u2014 explainable",
+          "REPORT \u2014 all sections + raw evidence appendix",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 4,
+    "capability_count": 67,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "malware-analyst": {
+    "service": "malware-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002337+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "SAMPLE IDENTIFICATION",
+        "items": [
+          "Sample filename",
+          "Sample size",
+          "Sample type",
+          "Every hash",
+          "Fuzzy hashes",
+          "First seen",
+          "Last seen",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "HASH INTELLIGENCE",
+        "items": [
+          "For every hash:",
+          "VirusTotal (every engine)",
+          "MalwareBazaar",
+          "ThreatFox",
+          "Hybrid Analysis",
+          "Joe Sandbox",
+          "ANY.RUN",
+          "Triage",
+          "Internal cache",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "STATIC ANALYSIS",
+        "items": [
+          "PE / ELF / Mach-O parsing (every field)",
+          "Strings (ASCII + Unicode + stack + tight + FLOSS)",
+          "Imports (every one with MITRE)",
+          "Exports (every one)",
+          "Sections (every one with entropy + hash)",
+          "Resources (every one extracted)",
+          "Entropy (whole + per section + per chunk)",
+          "Packer detection",
+          "Compiler detection",
+          "Language detection",
+          "Timestamps",
+          "Debug symbols",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REVERSE ENGINEERING",
+        "items": [
+          "Disassembly (every function)",
+          "Function graph",
+          "Call graph",
+          "Cross-references",
+          "String references",
+          "Crypto constant detection (S-boxes, Rcon, IVs)",
+          "Shellcode detection",
+          "Obfuscation detection",
+          "Verdict",
+          "YARA (deep) \u2014 every match with 10+ fields",
+          "CONFIGURATION EXTRACTION (deep) \u2014 every field",
+          "BEHAVIORAL ANALYSIS (deep, from sandbox) \u2014 every event",
+          "NETWORK ANALYSIS (deep, from sandbox) \u2014 every connection",
+          "C2 DETECTION (deep) \u2014 pattern matching + ML"
+        ]
+      },
+      {
+        "name": "IOC EXTRACTION",
+        "items": []
+      },
+      {
+        "name": "THREAT INTELLIGENCE",
+        "items": []
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "MALWARE FAMILY (deep) \u2014 identification with confidence",
+          "CAMPAIGN CORRELATION (deep) \u2014 via Neo4j graph"
+        ]
+      },
+      {
+        "name": "REPORT",
+        "items": [
+          "---"
+        ]
+      }
+    ],
+    "section_count": 8,
+    "capability_count": 48,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "ransomware-analyst": {
+    "service": "ransomware-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002341+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "SAMPLE ANALYSIS",
+        "items": [
+          "Sample identification",
+          "Hashes",
+          "File type",
+          "Packer",
+          "Compiler",
+          "First seen",
+          "Family guess",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "RANSOM NOTE ANALYSIS",
+        "items": [
+          "Every ransom note extracted",
+          "Every ransom note decoded",
+          "Every ransom note hashed",
+          "Language",
+          "Every payment address (BTC, XMR, etc.)",
+          "Every email address",
+          "Every TOX ID",
+          "Every onion URL",
+          "Every Telegram handle",
+          "Every deadline",
+          "Every threat (leak, DDoS, etc.)",
+          "Every victim-specific data",
+          "Family attribution",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "EXTENSION ANALYSIS",
+        "items": [
+          "Every file extension appended",
+          "Extension length",
+          "Extension entropy",
+          "Extension pattern",
+          "Family match",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ENCRYPTION BEHAVIOR",
+        "items": [
+          "Crypto algorithm (AES, ChaCha20, RSA, ECC)",
+          "Key size",
+          "IV / nonce",
+          "Key generation method",
+          "Key storage (in memory, in file, in registry)",
+          "File targeting (every extension)",
+          "File size thresholds",
+          "Partial encryption (header-only, footer-only, full)",
+          "Ransom note drop location",
+          "Encryption speed",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "FILE TARGETING",
+        "items": [
+          "Every targeted extension (documents, images, databases, etc.)",
+          "Every targeted folder",
+          "Every excluded folder (system, backup)",
+          "Every excluded extension",
+          "Network share targeting",
+          "Cloud storage targeting",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "PROCESS BEHAVIOR",
+        "items": [
+          "Every process spawned",
+          "Every command line",
+          "Every parent-child relationship",
+          "Self-deletion",
+          "Process hollowing",
+          "Code injection",
+          "Token manipulation",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "PERSISTENCE",
+        "items": [
+          "Every registry key modified",
+          "Every scheduled task created",
+          "Every service installed",
+          "Every startup folder entry",
+          "Every WMI event subscription",
+          "Every COM hijack",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "SHADOW COPY ACTIVITY",
+        "items": [
+          "vssadmin delete shadows",
+          "wbadmin delete catalog",
+          "bcdedit /set recoveryenabled No",
+          "wmic shadowcopy delete",
+          "Every command with full path",
+          "Every command with full arguments",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "BACKUP DESTRUCTION",
+        "items": [
+          "Every backup service stopped",
+          "Every backup service deleted",
+          "Every backup file deleted",
+          "Every backup share accessed",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "C2 INFRASTRUCTURE",
+        "items": [
+          "Every C2 server (Tor, I2P, clearnet, Telegram)",
+          "Every C2 protocol",
+          "Every C2 encryption",
+          "Every C2 fallback",
+          "Every C2 config",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "IOC EXTRACTION",
+        "items": [
+          "Every IP",
+          "Every domain",
+          "Every URL",
+          "Every hash",
+          "Every email",
+          "Every crypto wallet",
+          "Every extension",
+          "Every mutex",
+          "Every registry key",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "RANSOMWARE FAMILY",
+        "items": [
+          "Family identification",
+          "Family confidence",
+          "Family variant",
+          "Family version",
+          "Family signature",
+          "Family known tools",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "THREAT ACTOR / CAMPAIGN",
+        "items": [
+          "Actor attribution",
+          "Actor confidence",
+          "Campaign attribution",
+          "Campaign confidence",
+          "Prior victims",
+          "Prior IOCs",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "Every technique",
+          "Every technique with evidence",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "KILL CHAIN",
+        "items": [
+          "Reconnaissance",
+          "Weaponization",
+          "Delivery",
+          "Exploitation",
+          "Installation",
+          "Command & Control",
+          "Actions on Objectives",
+          "Every stage with evidence"
+        ]
+      },
+      {
+        "name": "IMPACT ASSESSMENT",
+        "items": [
+          "Estimated blast radius (files, folders, shares)",
+          "Estimated downtime",
+          "Estimated data loss",
+          "Estimated recovery cost",
+          "Regulatory impact",
+          "Reputational impact",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "EVIDENCE",
+        "items": [
+          "Every ransom note",
+          "Every encrypted file sample",
+          "Every registry export",
+          "Every scheduled task XML",
+          "Every process dump",
+          "Every memory dump",
+          "Every network capture",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "TIMELINE",
+        "items": [
+          "First file encrypted",
+          "Last file encrypted",
+          "Ransom note dropped",
+          "Persistence established",
+          "C2 contacted",
+          "Backup destroyed",
+          "Every event with timestamp"
+        ]
+      },
+      {
+        "name": "INCIDENT REPORT",
+        "items": [
+          "Executive summary",
+          "Technical findings",
+          "Impact assessment",
+          "Recommendations",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 19,
+    "capability_count": 144,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "ioc-analyst": {
+    "service": "ioc-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002345+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "IOC OVERVIEW",
+        "items": [
+          "IOC value",
+          "IOC type (IP, domain, URL, hash, email, certificate, wallet)",
+          "Defanged value",
+          "Normalized value",
+          "First seen",
+          "Last seen",
+          "Source(s)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "IOC ENRICHMENT",
+        "items": [
+          "For every IOC:",
+          "VirusTotal (every engine + result + date)",
+          "[URLScan.io](https://urlscan.io/)",
+          "Google Safe Browsing",
+          "Microsoft SmartScreen",
+          "PhishTank",
+          "OpenPhish",
+          "URLhaus",
+          "Spamhaus",
+          "AlienVault OTX",
+          "AbuseIPDB",
+          "IPQualityScore",
+          "GreyNoise",
+          "MISP (internal)",
+          "OpenCTI (internal)",
+          "WHOIS / RDAP",
+          "DNS records",
+          "Passive DNS",
+          "SSL certificate",
+          "ASN",
+          "Geolocation",
+          "Aggregate verdict"
+        ]
+      },
+      {
+        "name": "IOC CORRELATION",
+        "items": [
+          "Every related IOC",
+          "Every shared infrastructure",
+          "Every shared certificate",
+          "Every shared favicon",
+          "Every shared ASN",
+          "Every shared nameserver",
+          "Every shared registrant",
+          "Graph visualization",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CONFIDENCE",
+        "items": [
+          "Per-source confidence",
+          "Aggregate confidence",
+          "Confidence breakdown",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REPUTATION",
+        "items": [
+          "Aggregate reputation score",
+          "Per-source reputation",
+          "Reputation trend over time",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "FIRST SEEN / LAST SEEN",
+        "items": [
+          "First seen per source",
+          "Last seen per source",
+          "First seen globally",
+          "Last seen globally",
+          "Timeline chart",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "RELATED INFRASTRUCTURE",
+        "items": [
+          "Every related IP",
+          "Every related domain",
+          "Every related URL",
+          "Every related hash",
+          "Every related certificate",
+          "Every related favicon",
+          "Every related ASN",
+          "Every related nameserver",
+          "Every related registrant",
+          "Graph visualization"
+        ]
+      },
+      {
+        "name": "IOC EXPORT",
+        "items": [
+          "STIX 2.1 bundle",
+          "MISP event",
+          "OpenIOC",
+          "MAEC",
+          "CSV",
+          "JSON",
+          "YAML",
+          "FireEye IOC",
+          "Every format"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "Every technique associated with this IOC",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REPORT",
+        "items": [
+          "All sections",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 10,
+    "capability_count": 79,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "phishing-kit-analyst": {
+    "service": "phishing-kit-analyst",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002348+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "KIT IDENTIFICATION",
+        "items": [
+          "Kit name (if known)",
+          "Kit version",
+          "Kit family (16Shop, Monkey, LogoKit, Caffeine, XBAP, etc.)",
+          "Kit fingerprint (HTML structure, JS structure, file paths)",
+          "Kit confidence",
+          "Kit source (if available on GitHub/pastebin)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "HTML ANALYSIS",
+        "items": [
+          "Full raw HTML",
+          "Sanitized HTML",
+          "Every tag",
+          "Every form",
+          "Every input",
+          "Every hidden field",
+          "Every CSS rule (hidden text, offscreen, tiny fonts)",
+          "Every JavaScript reference",
+          "Every external resource",
+          "Obfuscation techniques",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "JAVASCRIPT ANALYSIS",
+        "items": [
+          "Full AST",
+          "Every eval / Function / setTimeout / setInterval",
+          "Every obfuscation layer peeled",
+          "Every network call",
+          "Every DOM manipulation",
+          "Every crypto operation",
+          "Every form grab",
+          "Every keyboard event listener",
+          "Every clipboard operation",
+          "Detected kit behavior",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CREDENTIAL FORM DETECTION",
+        "items": [
+          "Every form",
+          "Action URL",
+          "Method",
+          "Every field (name, type, placeholder, required, pattern)",
+          "Password fields",
+          "Email fields",
+          "OTP fields",
+          "Credit card fields",
+          "Hidden fields (with values)",
+          "Multi-step form detection",
+          "Form validation rules",
+          "Where the form submits (attacker panel)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "BRAND DETECTION",
+        "items": [
+          "Every brand matched",
+          "SSIM score",
+          "Favicon mmh3",
+          "Logo detection",
+          "Title match",
+          "Copyright text match",
+          "Layout similarity",
+          "Color palette similarity",
+          "Wording similarity",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "OBFUSCATION DETECTION",
+        "items": [
+          "HTML entities",
+          "JS escapes",
+          "Base64",
+          "ROT13",
+          "XOR",
+          "Unicode escapes",
+          "String array rotation",
+          "Dead code injection",
+          "Anti-debug",
+          "Anti-VM",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "IOC EXTRACTION",
+        "items": [
+          "Every URL (defanged)",
+          "Every domain (defanged)",
+          "Every IP (defanged)",
+          "Every email",
+          "Every Telegram bot token",
+          "Every Discord webhook",
+          "Every Slack webhook",
+          "Every Bitcoin wallet",
+          "Every panel URL",
+          "Every exfil endpoint",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "INFRASTRUCTURE MAPPING",
+        "items": [
+          "Every server",
+          "Every CDN",
+          "Every panel URL",
+          "Every exfil endpoint",
+          "Every redirect chain",
+          "Every SSL certificate",
+          "Every ASN",
+          "Every geolocation",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CAMPAIGN CORRELATION",
+        "items": [
+          "Every related campaign",
+          "Every related actor",
+          "Every shared IOC",
+          "Every shared infrastructure",
+          "Graph visualization",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "T1566.002 Spearphishing Link",
+          "T1204.001 User Execution: Malicious Link",
+          "T1583.001 Acquire Infrastructure: Domains",
+          "T1585.002 Establish Accounts: Email Accounts",
+          "T1071.001 Application Layer Protocol: Web Protocols",
+          "Every applicable technique with evidence"
+        ]
+      },
+      {
+        "name": "RISK SCORE",
+        "items": [
+          "Score 0-100",
+          "Verdict",
+          "Confidence",
+          "Every signal with weight + contribution",
+          "Explanation"
+        ]
+      },
+      {
+        "name": "REPORT",
+        "items": [
+          "All sections",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 12,
+    "capability_count": 105,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "threat-intelligence": {
+    "service": "threat-intelligence",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002352+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "THREAT INTEL OVERVIEW",
+        "items": [
+          "Total IOCs tracked",
+          "Total campaigns",
+          "Total actors",
+          "Total feeds",
+          "Total sources",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "IOC CORRELATION",
+        "items": [
+          "Every IOC",
+          "Every related IOC",
+          "Every relationship type",
+          "Every confidence level",
+          "Graph visualization",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "MALWARE",
+        "items": [
+          "Every malware family",
+          "Every family with IOCs",
+          "Every family with TTPs",
+          "Every family with campaign",
+          "Every family with actor",
+          "Verdict per family"
+        ]
+      },
+      {
+        "name": "CAMPAIGN TRACKING",
+        "items": [
+          "Every campaign",
+          "Every campaign with IOCs",
+          "Every campaign with TTPs",
+          "Every campaign with actor",
+          "Every campaign timeline",
+          "Every campaign victim",
+          "Verdict per campaign"
+        ]
+      },
+      {
+        "name": "THREAT ACTOR",
+        "items": [
+          "Every actor",
+          "Every actor with aliases",
+          "Every actor with TTPs",
+          "Every actor with campaigns",
+          "Every actor with IOCs",
+          "Every actor with targets",
+          "Every actor with attribution confidence",
+          "Verdict per actor"
+        ]
+      },
+      {
+        "name": "RELATIONSHIP GRAPH",
+        "items": [
+          "Every entity (IOC, campaign, actor, malware, TTP)",
+          "Every relationship",
+          "Every relationship confidence",
+          "Every relationship source",
+          "Interactive graph (Cytoscape)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "FEED INGESTION",
+        "items": [
+          "Every feed (PhishTank, OpenPhish, URLhaus, etc.)",
+          "Every feed with update frequency",
+          "Every feed with record count",
+          "Every feed with last update",
+          "Every feed with new records (delta)",
+          "Every feed with reputation",
+          "Verdict per feed"
+        ]
+      },
+      {
+        "name": "INTEGRATION",
+        "items": [
+          "Push to MISP",
+          "Push to OpenCTI",
+          "Push to SIEM (Splunk, Sentinel, QRadar)",
+          "Push to SOAR (Cortex XSOAR, Tines, Torq)",
+          "Push to ticketing (Jira, ServiceNow)",
+          "Every push with status + timestamp",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REPORT",
+        "items": [
+          "All sections",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 9,
+    "capability_count": 58,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "sandbox": {
+    "service": "sandbox",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002355+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "SANDBOX OVERVIEW",
+        "items": [
+          "Sandbox name (CAPEv2, ANY.RUN, Joe, Hybrid, VMRay, Triage)",
+          "Task ID",
+          "Status",
+          "Queue position",
+          "Estimated time",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "SUBMISSION",
+        "items": [
+          "Sample (file or URL)",
+          "Options (timeout, machine, network, etc.)",
+          "Submission timestamp",
+          "Submission response",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "EXECUTION",
+        "items": [
+          "Every process spawned (name, PID, PPID, cmdline, integrity)",
+          "Every file touched (create/write/delete + path + hash)",
+          "Every registry key touched",
+          "Every network connection (IP, port, protocol, bytes)",
+          "Every DNS query",
+          "Every HTTP request/response",
+          "Every TLS session",
+          "Every mutex created",
+          "Every service installed",
+          "Every scheduled task created",
+          "Every screenshot (with timestamp)",
+          "Every memory dump with secrets",
+          "Anti-VM / anti-debug events",
+          "Verdict per event"
+        ]
+      },
+      {
+        "name": "NETWORK CAPTURE",
+        "items": [
+          "Full PCAP (linked to PCAP ANALYST)",
+          "Every connection",
+          "Every DNS query",
+          "Every HTTP request",
+          "Every TLS session",
+          "Every C2 callback",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CONFIG EXTRACTION",
+        "items": [
+          "Every family-specific config",
+          "Every C2 server",
+          "Every encryption key",
+          "Every bot token",
+          "Every campaign ID",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ANTI-EVASION",
+        "items": [
+          "Anti-VM checks (VMware, VirtualBox, Hyper-V, QEMU)",
+          "Anti-debug checks",
+          "Anti-sandbox checks",
+          "Timing checks",
+          "Sleep skipping",
+          "Multi-round detonation",
+          "Verdict per technique"
+        ]
+      },
+      {
+        "name": "MULTI-STAGE FOLLOW-UP",
+        "items": [
+          "Every dropped file re-analyzed",
+          "Every C2 payload downloaded",
+          "Every lateral movement",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "IOC EXTRACTION",
+        "items": [
+          "Every IP",
+          "Every domain",
+          "Every URL",
+          "Every hash",
+          "Every mutex",
+          "Every registry key",
+          "Every file path",
+          "Every wallet",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "items": [
+          "Every technique observed",
+          "Every technique with evidence",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REPORT",
+        "items": [
+          "All sections",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 10,
+    "capability_count": 66,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "reports": {
+    "service": "reports",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002358+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "REPORT OVERVIEW",
+        "items": [
+          "Report ID",
+          "Report type (technical, executive, compliance, etc.)",
+          "Report version",
+          "Report hash (SHA256)",
+          "Generated at",
+          "Generated by",
+          "Reviewed by",
+          "Status (draft, final, signed)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REPORT CONTENT",
+        "items": [
+          "Cover page",
+          "Classification banner",
+          "Table of contents",
+          "Executive summary (AI + human-editable)",
+          "Verdict + risk score",
+          "Key findings",
+          "MITRE ATT&CK summary",
+          "Timeline",
+          "IOC table",
+          "URL analysis section",
+          "Email analysis section",
+          "File analysis section",
+          "Domain analysis section",
+          "IP analysis section",
+          "PCAP analysis section",
+          "Malware analysis section",
+          "Ransomware analysis section",
+          "IOC analysis section",
+          "Phishing kit analysis section",
+          "Threat intelligence section",
+          "Sandbox section",
+          "Correlation section",
+          "Recommendations",
+          "Appendix A: Raw headers",
+          "Appendix B: Raw JSON",
+          "Appendix C: YARA rules",
+          "Appendix D: Detection rules",
+          "Appendix E: Blocklists",
+          "Appendix F: Glossary",
+          "Appendix G: References",
+          "Appendix H: Report metadata",
+          "Signature block"
+        ]
+      },
+      {
+        "name": "REPORT EXPORTS",
+        "items": [
+          "HTML (self-contained)",
+          "HTML (print)",
+          "HTML (public)",
+          "HTML (widget)",
+          "PDF (WeasyPrint)",
+          "PDF/A",
+          "DOCX",
+          "XLSX",
+          "PPTX",
+          "Markdown",
+          "Plain text",
+          "RTF",
+          "ODT",
+          "EPUB",
+          "JSON",
+          "JSON (minified)",
+          "JSON-LD",
+          "XML",
+          "YAML",
+          "CSV",
+          "TSV",
+          "Parquet",
+          "Avro",
+          "STIX 2.1",
+          "STIX JSON",
+          "STIX XML",
+          "TAXII",
+          "MISP event",
+          "MISP attribute",
+          "OpenIOC",
+          "CybOX",
+          "MAEC",
+          "VERIS",
+          "FireEye IOC",
+          "YARA",
+          "Sigma",
+          "Suricata",
+          "Snort",
+          "Zeek",
+          "KQL",
+          "SPL",
+          "AQL",
+          "EQL",
+          "Sigma correlation",
+          "Blocklist iptables",
+          "Blocklist nftables",
+          "Blocklist pfSense",
+          "Blocklist Palo Alto",
+          "Blocklist Fortinet",
+          "Blocklist Cisco ASA",
+          "Blocklist Check Point",
+          "Blocklist BIND",
+          "Blocklist Unbound",
+          "Blocklist Pi-hole",
+          "Blocklist AdGuard",
+          "Blocklist Squid",
+          "Blocklist Bluecoat",
+          "Blocklist Zscaler",
+          "Blocklist Cloudflare",
+          "Blocklist AWS WAF",
+          "Blocklist Azure WAF",
+          "Blocklist Windows",
+          "Blocklist macOS",
+          "GraphML",
+          "GEXF",
+          "DOT",
+          "Mermaid",
+          "SVG",
+          "PNG",
+          "MITRE Navigator layer",
+          "MITRE D3FEND",
+          "Kill Chain",
+          "Diamond Model",
+          "SARIF",
+          "CycloneDX",
+          "SPDX",
+          "OpenAPI",
+          "Postman Collection",
+          "Jupyter Notebook",
+          "R Markdown"
+        ]
+      },
+      {
+        "name": "REPORT FEATURES",
+        "items": [
+          "White-label branding",
+          "Multi-language (en, fr, es, ar, zh)",
+          "Executive + technical audiences",
+          "Editable DOCX",
+          "Presentable PPTX",
+          "Analyzable XLSX",
+          "Shareable public link (expiry + password)",
+          "Embeddable HTML widget",
+          "Comparable (diff two reports)",
+          "Scheduled delivery",
+          "Versioned",
+          "Hashable",
+          "Signable (GPG, X.509)",
+          "Watermarkable",
+          "Redactable",
+          "Searchable",
+          "Annotatable",
+          "Exportable as ZIP",
+          "API-accessible",
+          "Webhook-delivered",
+          "Compliance-ready (SOC 2, ISO 27001, PCI, HIPAA, GDPR)",
+          "Guest-accessible (with guest footer)"
+        ]
+      },
+      {
+        "name": "REPORT API",
+        "items": [
+          "30+ endpoints (one per format)",
+          "Regenerate endpoint",
+          "Sign endpoint",
+          "Watermark endpoint",
+          "Redact endpoint",
+          "Share endpoint",
+          "Schedule endpoint",
+          "Compare endpoint",
+          "Annotate endpoint",
+          "Every endpoint documented"
+        ]
+      },
+      {
+        "name": "REPORT STORAGE",
+        "items": [
+          "S3/MinIO per-tenant prefix",
+          "Postgres metadata",
+          "Elasticsearch full-text index",
+          "Signed URLs (expiry 1h)",
+          "Retention policy per tier",
+          "Automatic cleanup of old versions",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "REPORT VERIFICATION",
+        "items": [
+          "SHA256 hash",
+          "Digital signature (if signed)",
+          "Timestamp",
+          "Chain of custody",
+          "Verdict",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 7,
+    "capability_count": 166,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "cases": {
+    "service": "cases",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002361+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "CASE OVERVIEW",
+        "items": [
+          "Case ID",
+          "Case title",
+          "Case description",
+          "Case status (new, triage, investigating, contained, closed, FP)",
+          "Priority (P1-P4)",
+          "Severity (critical, high, medium, low, info)",
+          "SLA deadline",
+          "Assignee",
+          "Watchers",
+          "Tags",
+          "Custom fields",
+          "Created at",
+          "Updated at",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CASE EVIDENCE",
+        "items": [
+          "Every linked scan",
+          "Every linked report",
+          "Every linked IOC",
+          "Every linked file",
+          "Every linked email",
+          "Every linked URL",
+          "Every linked PCAP",
+          "Every linked sandbox run",
+          "Chain of custody",
+          "Immutable audit log",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CASE TIMELINE",
+        "items": [
+          "Every event chronologically",
+          "Every action by every user",
+          "Every state change",
+          "Every comment",
+          "Every attachment",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CASE COLLABORATION",
+        "items": [
+          "Every comment (threaded)",
+          "Every @mention",
+          "Every attachment",
+          "Every watcher",
+          "Every notification",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CASE WORKFLOW",
+        "items": [
+          "Kanban board",
+          "List view",
+          "Calendar view",
+          "Bulk actions",
+          "Templates (phishing, malware, BEC)",
+          "Playbooks (automated steps)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CASE REPORTING",
+        "items": [
+          "Case summary",
+          "Timeline",
+          "IOCs",
+          "Recommendations",
+          "Export PDF",
+          "Export DOCX",
+          "Export STIX",
+          "Send to SIEM/SOAR",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CASE METRICS",
+        "items": [
+          "MTTD (mean time to detect)",
+          "MTTR (mean time to respond)",
+          "MTTA (mean time to acknowledge)",
+          "Analyst productivity",
+          "SLA compliance",
+          "False positive rate",
+          "Verdict",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 7,
+    "capability_count": 61,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "campaigns": {
+    "service": "campaigns",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002364+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "CAMPAIGN OVERVIEW",
+        "items": [
+          "Campaign ID",
+          "Campaign name",
+          "Campaign description",
+          "Campaign type (phishing, malware, ransomware, BEC, etc.)",
+          "First seen",
+          "Last seen",
+          "Status (active, dormant, closed)",
+          "Confidence",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CAMPAIGN IOCs",
+        "items": [
+          "Every IP",
+          "Every domain",
+          "Every URL",
+          "Every hash",
+          "Every email",
+          "Every certificate",
+          "Every favicon",
+          "Every ASN",
+          "Every mutex",
+          "Every registry key",
+          "Verdict per IOC"
+        ]
+      },
+      {
+        "name": "CAMPAIGN TTPs",
+        "items": [
+          "Every MITRE technique",
+          "Every technique with evidence",
+          "Every tool",
+          "Every infrastructure pattern",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CAMPAIGN VICTIMS",
+        "items": [
+          "Every victim (if available)",
+          "Every victim sector",
+          "Every victim country",
+          "Every victim size",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CAMPAIGN TIMELINE",
+        "items": [
+          "Every event chronologically",
+          "Every evolution",
+          "Every infrastructure change",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CAMPAIGN ATTRIBUTION",
+        "items": [
+          "Actor attribution",
+          "Actor confidence",
+          "Prior campaigns by same actor",
+          "Shared infrastructure",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "CAMPAIGN REPORT",
+        "items": [
+          "All sections",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 7,
+    "capability_count": 44,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "actors": {
+    "service": "actors",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002367+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "ACTOR OVERVIEW",
+        "items": [
+          "Actor ID",
+          "Actor name",
+          "Actor aliases",
+          "Actor type (APT, cybercrime, hacktivist, insider, etc.)",
+          "Actor country",
+          "Actor motivation",
+          "Actor sophistication",
+          "First seen",
+          "Last seen",
+          "Status (active, dormant, retired)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ACTOR TTPs",
+        "items": [
+          "Every MITRE technique",
+          "Every technique with evidence",
+          "Every tool",
+          "Every infrastructure pattern",
+          "Every delivery mechanism",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ACTOR CAMPAIGNS",
+        "items": [
+          "Every campaign",
+          "Every campaign with timeline",
+          "Every campaign with victims",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ACTOR IOCs",
+        "items": [
+          "Every IP",
+          "Every domain",
+          "Every URL",
+          "Every hash",
+          "Every certificate",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ACTOR TARGETS",
+        "items": [
+          "Every sector",
+          "Every country",
+          "Every organization type",
+          "Every organization size",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ACTOR ATTRIBUTION",
+        "items": [
+          "Attribution confidence",
+          "Attribution evidence",
+          "Competing hypotheses",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "ACTOR REPORT",
+        "items": [
+          "All sections",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 7,
+    "capability_count": 41,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "graph": {
+    "service": "graph",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002370+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "GRAPH OVERVIEW",
+        "items": [
+          "Total nodes",
+          "Total edges",
+          "Node types (IOC, campaign, actor, malware, TTP)",
+          "Edge types (resolves_to, hosts, redirects_to, drops, contacts,",
+          "\u2502 uses, attributed_to, targets, related_to, shares_cert,",
+          "\u2502 shares_favicon, shares_ip)",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "GRAPH VISUALIZATION",
+        "items": [
+          "Interactive Cytoscape graph",
+          "Node size = importance",
+          "Node color = verdict",
+          "Edge thickness = confidence",
+          "Filter by entity type",
+          "Filter by confidence",
+          "Expand node (load neighbors)",
+          "Shortest path between two IOCs",
+          "Cluster detection",
+          "Community detection",
+          "Timeline overlay",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "GRAPH ANALYSIS",
+        "items": [
+          "Centrality metrics (degree, betweenness, closeness, eigenvector)",
+          "Community detection (Louvain, Leiden)",
+          "Clustering coefficient",
+          "PageRank",
+          "Shortest paths",
+          "Connected components",
+          "Anomaly detection",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "GRAPH EXPORT",
+        "items": [
+          "GraphML",
+          "GEXF",
+          "DOT",
+          "Mermaid",
+          "SVG",
+          "PNG",
+          "JSON",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "GRAPH QUERIES",
+        "items": [
+          "Pivot by IOC",
+          "Pivot by campaign",
+          "Pivot by actor",
+          "Pivot by malware family",
+          "Pivot by infrastructure",
+          "Find all IOCs seen with this IOC",
+          "Find all campaigns using this IOC",
+          "Find all actors using this IOC",
+          "Verdict",
+          "---"
+        ]
+      }
+    ],
+    "section_count": 5,
+    "capability_count": 45,
+    "source_spec": "Pasted markdown(9).md"
+  },
+  "feeds": {
+    "service": "feeds",
+    "depth_contract": "K4-UNIVERSAL-DEPTH-1",
+    "generated_at": "2026-09-30T19:29:55.002373+00:00",
+    "universal_requirements": {
+      "Evidence": [
+        "raw evidence",
+        "interpretation",
+        "source reference",
+        "first seen / last seen"
+      ],
+      "Confidence": [
+        "0-100 calibrated confidence",
+        "confidence rationale"
+      ],
+      "Threat Intelligence": [
+        "configured-provider lookups",
+        "lookup timestamps",
+        "provider status"
+      ],
+      "Timeline": [
+        "event timestamp",
+        "observation timestamp",
+        "first/last seen"
+      ],
+      "Correlation": [
+        "related findings",
+        "related IOCs",
+        "graph pivot identifiers"
+      ],
+      "MITRE ATT&CK": [
+        "technique ID",
+        "technique name",
+        "evidence reference",
+        "confidence"
+      ],
+      "Reporting": [
+        "raw evidence appendix",
+        "machine-readable result",
+        "analyst report",
+        "self-verification"
+      ]
+    },
+    "deep_sections": [
+      {
+        "name": "FEED OVERVIEW",
+        "items": [
+          "Total feeds",
+          "Total records",
+          "Last update",
+          "Update frequency",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "FEED LIST",
+        "items": [
+          "For EVERY feed:",
+          "Feed name (PhishTank, OpenPhish, URLhaus, MalwareBazaar, etc.)",
+          "Feed type (phishing, malware, ransomware, etc.)",
+          "Feed URL",
+          "Feed format (JSON, CSV, XML, STIX, TAXII)",
+          "Feed authentication",
+          "Feed update frequency",
+          "Feed last update",
+          "Feed record count",
+          "Feed new records (delta)",
+          "Feed quality score",
+          "Verdict per feed"
+        ]
+      },
+      {
+        "name": "FEED INGESTION",
+        "items": [
+          "Every record ingested",
+          "Every record deduplicated",
+          "Every record enriched",
+          "Every record timestamped",
+          "Every record with source",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "FEED CORRELATION",
+        "items": [
+          "Every record cross-referenced with internal data",
+          "Every record linked to campaigns",
+          "Every record linked to actors",
+          "Verdict"
+        ]
+      },
+      {
+        "name": "FEED REPORT",
+        "items": [
+          "Feed summary",
+          "Feed trends",
+          "Feed quality",
+          "Raw evidence appendix",
+          "30+ export formats",
+          "Self-verification passed",
+          "---"
+        ]
+      },
+      {
+        "name": "# PART 3 \u2014 UPDATED FULL CODE STRUCTURE",
+        "items": [
+          "Add these to the tree from the v3 prompt:",
+          "cyber_phish_k4/",
+          "\u2500 analyzers/",
+          "\u2500 email/ # 40+ files",
+          "\u2500 url/ # 35+ files",
+          "\u2500 file/ # 70+ files",
+          "\u2500 domain/ # 15+ files",
+          "\u2500 ip/ # 15+ files",
+          "\u2500 pcap/ # 70+ files",
+          "\u2500 malware/ # 15+ files",
+          "\u2500 ransomware/ # 20+ files",
+          "\u2500 ioc/ # 10+ files",
+          "\u2500 phishing_kit/ # 12+ files",
+          "\u2500 threat_intelligence/ # 12+ files",
+          "\u2500 common/",
+          "\u2500 ioc_extract.py",
+          "\u2500 defang.py",
+          "\u2500 normalize.py",
+          "\u2500 validators.py",
+          "\u2500 scoring_helpers.py",
+          "\u2500 entropy_helpers.py",
+          "\u2500 evidence.py # NEW: raw evidence capture",
+          "\u2500 mitre_map.py # NEW: MITRE mapping helper",
+          "\u2500 confidence.py # NEW: confidence scoring",
+          "\u2500 timeline.py # NEW: timeline builder",
+          "\u2502",
+          "\u2500 reports/",
+          "\u2500 builder.py",
+          "\u2500 renderer.py",
+          "\u2500 postprocess.py",
+          "\u2500 evidence_appendix.py # NEW: raw evidence appendix builder",
+          "\u2500 exporters/ # 100+ files",
+          "\u2500 templates/",
+          "\u2500 base_report.html.j2",
+          "\u2500 sections/ # 60+ sections",
+          "\u2500 styles/",
+          "\u2502",
+          "\u2500 tasks/",
+          "\u2500 email_tasks.py",
+          "\u2500 url_tasks.py",
+          "\u2500 file_tasks.py",
+          "\u2500 domain_tasks.py",
+          "\u2500 ip_tasks.py",
+          "\u2500 pcap_tasks.py",
+          "\u2500 malware_tasks.py",
+          "\u2500 ransomware_tasks.py",
+          "\u2500 ioc_tasks.py",
+          "\u2500 phishing_kit_tasks.py",
+          "\u2500 threat_intelligence_tasks.py",
+          "\u2500 sandbox_tasks.py",
+          "\u2500 enrichment_tasks.py",
+          "\u2500 ai_tasks.py",
+          "\u2500 report_tasks.py",
+          "\u2500 report_export_tasks.py",
+          "\u2500 report_schedule_tasks.py",
+          "\u2500 notification_tasks.py",
+          "\u2500 feed_tasks.py",
+          "\u2500 integration_tasks.py",
+          "\u2500 status_tasks.py",
+          "\u2500 guest_tasks.py",
+          "\u2500 maintenance_tasks.py",
+          "\u2502",
+          "\u2500 workers/ # matching worker files for every task",
+          "\u2502",
+          "\u2500 services/ # matching service files for every analyzer",
+          "\u2502",
+          "\u2500 models/ # matching models for every analyzer",
+          "\u2502",
+          "\u2500 schemas/ # matching schemas for every analyzer",
+          "\u2502",
+          "\u2500 api/v1/ # matching API routes for every analyzer",
+          "\u2502",
+          "\u2500 web/routes/ # matching web routes for every analyzer"
+        ]
+      }
+    ],
+    "section_count": 6,
+    "capability_count": 107,
+    "source_spec": "Pasted markdown(9).md"
+  }
+}

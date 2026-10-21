@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="grid-bg border-b border-slate-800">
+  <div class="mx-auto max-w-[1500px] px-5 py-20 lg:py-28">
+    <div class="max-w-4xl">
+      <div class="text-xs font-black uppercase tracking-[.3em] text-cyan-300">Analyst services</div>
+      <h1 class="mt-4 text-5xl font-black tracking-tight sm:text-6xl">One platform. Isolated analyst workspaces.</h1>
+      <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-400">Every service opens its own focused workspace while sharing IOC extraction, enrichment, evidence, graphing and reporting foundations.</p>
+    </div>
+    <div class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {% for key, service in services.items() %}
+      <a href="/services/{{ key }}" class="glass glow group rounded-2xl border border-slate-800 p-6 transition hover:-translate-y-1 hover:border-cyan-400/40">
+        <div class="flex items-start justify-between gap-4"><span class="text-xs font-black tracking-[.18em] text-cyan-300">{{ service.eyebrow }}</span><span class="rounded-full border border-slate-700 px-2 py-1 text-[10px] font-bold text-slate-500">OPEN</span></div>
+        <h2 class="mt-3 text-2xl font-black">{{ service.title }}</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-400">{{ service.description }}</p>
+        <div class="mt-5 text-sm font-bold text-cyan-300">Open workspace →</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

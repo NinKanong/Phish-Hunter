@@ -1,0 +1,8 @@
+{
+  "version": "20.0.0",
+  "canonical_runtime": "phishhunter/url_domain_analyst",
+  "source_mirror": "phishhunter/url & domain analyst",
+  "landing": "DNSDumpster-style one-field URL/domain intake with Start Test!",
+  "pipeline": "real asynchronous SSE progress + passive-first deep evidence correlation",
+  "provider_policy": "live observations are separated from catalog-only/provider-dependent capabilities"
+}

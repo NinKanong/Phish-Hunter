@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex flex-wrap items-end justify-between gap-4"><div><div class="text-xs font-bold uppercase tracking-[0.25em] text-red-400">Evidence graph</div><h1 class="mt-2 text-4xl font-black">Scan #{{ scan.id }} relationships</h1><p class="mt-2 text-slate-500">{{ scan.target }}</p></div><a class="rounded-lg border border-slate-800 px-3 py-2 text-sm" href="/reports/{{ scan.id }}/json">Raw JSON</a></div>
+<div class="mt-8 grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
+<section class="rounded-2xl border border-slate-800 bg-slate-900 p-5"><h2 class="text-xl font-bold">Nodes</h2><div class="mt-4 space-y-2">{% for node in graph.nodes %}<div class="rounded-xl border border-slate-800 p-3"><div class="text-xs uppercase tracking-widest text-slate-500">{{ node.kind }}</div><div class="mt-1 break-all font-mono text-sm">{{ node.label }}</div></div>{% else %}<p class="text-slate-500">No nodes generated.</p>{% endfor %}</div></section>
+<section class="rounded-2xl border border-slate-800 bg-slate-900 p-5"><h2 class="text-xl font-bold">Relationships</h2><div class="mt-4 space-y-2">{% for edge in graph.edges %}<div class="rounded-xl border border-slate-800 p-3 text-sm"><span class="font-mono text-slate-300">{{ edge.source }}</span><span class="mx-2 text-red-400">→ {{ edge.relation }} →</span><span class="font-mono text-slate-300">{{ edge.target }}</span></div>{% else %}<p class="text-slate-500">No relationships generated.</p>{% endfor %}</div></section>
+</div>
+{% endblock %}

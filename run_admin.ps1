@@ -1,0 +1,1 @@
+$ErrorActionPreference='Stop'; Set-Location -LiteralPath $PSScriptRoot; $python=Join-Path (Get-Location) '.venv\Scripts\python.exe'; if(-not(Test-Path $python)){ $python='python' }; & $python run_admin.py

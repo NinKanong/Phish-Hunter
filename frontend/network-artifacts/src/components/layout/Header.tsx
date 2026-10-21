@@ -1,0 +1,2 @@
+import {useAnalysisStore} from '../../store/analysisStore';
+export function Header(){const job=useAnalysisStore(s=>s.job);return <header className="topbar"><div><span className="eyebrow">NETWORK FORENSICS / PCAP SIBLINGS</span><h1>Network Artifacts Investigation Center</h1></div><div className="top-actions"><span className={`status-dot ${job?.status==='completed'?'done':job?.status==='running'?'run':''}`}></span><span>{job?job.status:'Ready'}</span><button onClick={()=>window.location.reload()}>Refresh</button></div></header>}

@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block content %}
+{% set scan_id = saved_scan.id if saved_scan else (guest_scan.id if guest_scan else 'live') %}
+{% set target_value = saved_scan.target if saved_scan else (guest_scan.target if guest_scan else 'submitted evidence') %}
+{% set inv = result.investigation_summary or {} %}
+{% set findings = result.finding_catalog or [] %}
+<section class="grid-bg min-h-[calc(100vh-106px)] border-b border-slate-800">
+  <div class="mx-auto max-w-[1580px] px-5 py-8 lg:py-12">
+    <div class="flex flex-wrap items-start justify-between gap-6">
+      <div class="max-w-6xl">
+        <div class="text-[10px] font-black uppercase tracking-[.32em] text-cyan-300">{{ service.eyebrow }} · INVESTIGATION RESULT</div>
+        <h1 class="mt-3 text-4xl font-black tracking-tight sm:text-5xl">{{ service.title }}</h1>
+        <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+          <span class="k4-chip">Scan #{{ scan_id }}</span><span>Target:</span><code class="k4-target">{{ target_value }}</code>
+          {% if authenticated %}<span class="k4-chip k4-chip-green">ACCOUNT SAVED</span>{% else %}<span class="k4-chip k4-chip-amber">GUEST · 24H</span>{% endif %}
+        </div>
+      </div>
+      <div class="k4-risk-hero">
+        <div class="text-[10px] font-black uppercase tracking-[.2em] text-slate-500">Risk score</div>
+        <div class="mt-1 text-5xl font-black {% if result.risk_score|int >= 70 %}text-red-300{% elif result.risk_score|int >= 40 %}text-amber-300{% else %}text-emerald-300{% endif %}">{{ result.risk_score|int }}</div>
+        <div class="mt-1 text-[10px] font-black uppercase tracking-widest text-slate-500">{{ result.verdict or 'unknown' }}</div>
+      </div>
+    </div>
+
+    <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+      <div class="k4-metric-card"><span>Findings</span><strong>{{ inv.finding_count or findings|length }}</strong><small>{{ inv.critical or 0 }} critical · {{ inv.high or 0 }} high</small></div>
+      <div class="k4-metric-card"><span>IOCs</span><strong>{{ (result.iocs or {})|map(attribute='value')|list|length if false else ((result.iocs.values()|map('length')|sum) if result.iocs else 0) }}</strong><small>Extracted indicators</small></div>
+      <div class="k4-metric-card"><span>Evidence</span><strong>{{ (result.evidence or [])|length }}</strong><small>Structured observations</small></div>
+      <div class="k4-metric-card"><span>ATT&amp;CK</span><strong>{{ (result.mitre_techniques or [])|length }}</strong><small>Mapped observations</small></div>
+      <div class="k4-metric-card"><span>Flows</span><strong>{{ (result.flows or [])|length }}</strong><small>Network flows retained</small></div>
+      <div class="k4-metric-card"><span>Analysis</span><strong>100%</strong><small>Completed</small></div>
+    </div>
+
+    <div class="mt-6 grid gap-6 xl:grid-cols-[1.7fr_.8fr]">
+      <section class="glass rounded-3xl border border-slate-800 p-6 lg:p-8">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div><div class="k4-section-label">Analyst disposition</div><h2 class="mt-2 text-2xl font-black">What did Phish-Hunter find?</h2></div>
+          <span class="k4-status-pill">{{ inv.analyst_disposition or 'review_required' }}</span>
+        </div>
+        <p class="mt-4 max-w-5xl text-sm leading-7 text-slate-400">{{ result.executive_summary }}</p>
+        <div class="mt-5 grid gap-3 md:grid-cols-4">
+          <div class="k4-severity critical"><b>{{ inv.critical or 0 }}</b><span>Critical</span></div>
+          <div class="k4-severity high"><b>{{ inv.high or 0 }}</b><span>High</span></div>
+          <div class="k4-severity medium"><b>{{ inv.medium or 0 }}</b><span>Medium</span></div>
+          <div class="k4-severity low"><b>{{ (inv.low or 0) + (inv.info or 0) }}</b><span>Low / Info</span></div>
+        </div>
+      </section>
+
+      <section class="k4-ai-card">
+        <div class="k4-ai-badge">K4 AI ANALYST</div>
+        <h2 class="mt-2 text-xl font-black">Explainable analyst briefing</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-300">{{ result.ai_analysis.briefing if result.ai_analysis else result.executive_summary }}</p>
+        <div class="mt-4 rounded-xl border border-violet-400/15 bg-violet-400/5 p-3 text-[11px] leading-5 text-violet-100/70">Local evidence-based copilot. It summarizes observed signals and does not invent attribution or replace human validation.</div>
+      </section>
+    </div>
+
+    {% if service_key == "email-analyst" %}
+    <section class="mt-6 grid gap-6 xl:grid-cols-[1.5fr_1fr]">
+      <section class="glass rounded-3xl border border-cyan-500/15 p-6 lg:p-8">
+        <div class="k4-section-label text-cyan-300">Ultra-deep email forensics</div>
+        <h2 class="mt-2 text-2xl font-black">Header → content → payload → intelligence</h2>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2">
+          <div class="rounded-2xl border border-slate-800 bg-slate-950/60 p-4"><div class="text-xs text-slate-500">SMTP hop graph</div><div class="mt-1 text-2xl font-black">{{ result.header_graph.hop_count or 0 }}</div><div class="text-xs text-slate-600">hops · max latency {{ result.header_graph.max_latency_ms or 0 }} ms</div></div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-950/60 p-4"><div class="text-xs text-slate-500">DOM inspection</div><div class="mt-1 text-2xl font-black">{{ result.deep_html.script_count or 0 }}</div><div class="text-xs text-slate-600">scripts · {{ result.deep_html.iframe_count or 0 }} iframes</div></div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-950/60 p-4"><div class="text-xs text-slate-500">Attachment deep scan</div><div class="mt-1 text-2xl font-black">{{ result.deep_attachments|length }}</div><div class="text-xs text-slate-600">true types · magic · OLE/VBA · smuggling</div></div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-950/60 p-4"><div class="text-xs text-slate-500">Pressure profile</div><div class="mt-1 text-2xl font-black">{{ result.psychological_pressure|length }}</div><div class="text-xs text-slate-600">urgency · fear · authority · greed · curiosity</div></div>
+        </div>
+        <div class="mt-5 rounded-2xl border border-slate-800 bg-black/30 p-4"><div class="text-xs font-black uppercase tracking-widest text-slate-500">Header contradictions</div><div class="mt-3 space-y-2">{% for item in result.header_forgery_findings[:20] %}<div class="text-xs leading-5 text-amber-200"><span class="font-mono">{{ item.header }}</span> · {{ item.interpretation }}</div>{% else %}<div class="text-xs text-slate-600">No internal-header contradiction was established by static evidence.</div>{% endfor %}</div></div>
+      </section>
+
+      <section class="glass rounded-3xl border border-violet-500/15 p-6 lg:p-8">
+        <div class="k4-section-label text-violet-300">K4 Email Analyst Agent</div>
+        <h2 class="mt-2 text-2xl font-black">Investigation plan</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-400">{{ result.agent.objective }}</p>
+        <div class="mt-5 space-y-2">{% for pivot in result.agent.next_pivots %}<div class="rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-xs leading-5 text-slate-300"><span class="text-cyan-300">→</span> {{ pivot }}</div>{% endfor %}</div>
+        <div class="mt-5 rounded-xl border border-amber-500/15 bg-amber-500/5 p-4 text-[11px] leading-5 text-amber-100/70">Containment actions such as mailbox quarantine, firewall blocking, endpoint isolation and credential reset remain human-confirmed actions.</div>
+      </section>
+    </section>
+
+    <section class="mt-6 glass rounded-3xl border border-slate-800 p-6 lg:p-8">
+      <div class="flex flex-wrap items-end justify-between gap-4"><div><div class="k4-section-label">Open-source enrichment fabric</div><h2 class="mt-2 text-2xl font-black">{{ result.email_fabric.unique_open_source_tools }} open-source tool adapters · {{ result.email_fabric.connector_capabilities }} capability lanes</h2><p class="mt-2 text-sm leading-6 text-slate-500">This is an adapter-ready fabric, not a claim that every tool is installed or queried. Only configured connectors may execute and unavailable providers remain explicit.</p></div><span class="k4-chip">{{ result.email_fabric.connector_capabilities }} ready lanes</span></div>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{% for tool in result.email_fabric.profiles[:20] %}<div class="rounded-xl border border-slate-800 bg-slate-950/50 p-3"><div class="font-black text-sm">{{ tool.name }}</div><div class="mt-1 text-[10px] uppercase tracking-widest text-slate-600">{{ tool.category }}</div><div class="mt-2 text-[10px] text-cyan-300">{{ tool.capabilities|length }} capability lanes</div></div>{% endfor %}</div>
+    </section>
+    {% endif %}
+
+    <section class="mt-6 glass rounded-3xl border border-red-500/15 p-6 lg:p-8">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div><div class="k4-section-label text-red-300">Finding registry</div><h2 class="mt-2 text-2xl font-black">Every finding, explained</h2><p class="mt-2 text-sm text-slate-500">Each item has a stable ID, severity, confidence, affected asset, evidence source and analyst next steps.</p></div>
+        <span class="text-xs text-slate-500">{{ findings|length }} finding records</span>
+      </div>
+      <div class="mt-6 space-y-4">
+        {% for item in findings %}
+        <article class="k4-finding-card {{ item.severity }}">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div class="flex gap-3"><span class="k4-finding-id">{{ item.id }}</span><div><h3 class="text-base font-black">{{ item.name }}</h3><div class="mt-1 text-[11px] text-slate-500">{{ item.category }} · asset: <span class="font-mono text-slate-300">{{ item.affected_asset }}</span></div></div></div>
+            <div class="flex gap-2"><span class="k4-severity-badge">{{ item.severity }}</span><span class="k4-confidence">{{ item.confidence }}</span></div>
+          </div>
+          <div class="mt-5 grid gap-5 lg:grid-cols-[1.2fr_1fr_1fr]">
+            <div><div class="k4-finding-label">WHAT WAS FOUND</div><p class="mt-2 text-sm leading-6 text-slate-300">{{ item.what_found }}</p></div>
+            <div><div class="k4-finding-label">WHY IT MATTERS</div><p class="mt-2 text-sm leading-6 text-slate-400">{{ item.why_it_matters }}</p></div>
+            <div><div class="k4-finding-label">NEXT STEPS</div><ul class="mt-2 space-y-1 text-sm leading-6 text-slate-400">{% for step in item.recommended_next_steps %}<li>• {{ step }}</li>{% endfor %}</ul></div>
+          </div>
+          <details class="mt-4 rounded-xl border border-slate-800 bg-slate-950/60 p-3"><summary class="cursor-pointer text-xs font-bold text-slate-400">Underlying evidence · {{ item.source }}</summary><pre class="k4-code mt-3">{{ item.evidence|tojson(indent=2) }}</pre></details>
+        </article>
+        {% else %}
+        <div class="rounded-2xl border border-slate-800 bg-slate-950/60 p-6 text-sm text-slate-500">No finding records were generated. This is not proof of a clean artifact; review the technical evidence and IOCs below.</div>
+        {% endfor %}
+      </div>
+    </section>
+
+    {% if result.network_assessment %}
+    <section class="mt-6 glass rounded-3xl border border-cyan-500/15 p-6 lg:p-8">
+      <div class="k4-section-label">Network forensics assessment</div><h2 class="mt-2 text-2xl font-black">Victim, C2 and external-source pivots</h2>
+      <p class="mt-2 text-sm leading-6 text-slate-500">These are passive evidence candidates. “Potentially compromised” and “potential C2” are not definitive incident conclusions.</p>
+      <div class="mt-6 grid gap-6 xl:grid-cols-3">
+        <div><h3 class="k4-subhead">Potential victim / compromised hosts</h3><div class="mt-3 space-y-3">{% for x in result.network_assessment.potential_compromised_hosts or [] %}<div class="k4-pivot-card"><div class="flex justify-between"><b class="font-mono">{{ x.host }}</b><span>{{ x.score }}/100</span></div><div class="mt-2 text-xs text-slate-500">confidence: {{ x.confidence }}</div><ul class="mt-2 text-xs leading-5 text-slate-400">{% for r in x.reasons %}<li>• {{ r }}</li>{% endfor %}</ul></div>{% else %}<div class="k4-empty">No host compromise candidate met the configured threshold.</div>{% endfor %}</div></div>
+        <div><h3 class="k4-subhead">Potential C2 communications</h3><div class="mt-3 space-y-3">{% for x in result.network_assessment.potential_c2_candidates or [] %}<div class="k4-pivot-card"><div class="font-mono text-sm">{{ x.internal_host }} → {{ x.destination }}:{{ x.destination_port }}</div><div class="mt-2 flex gap-3 text-xs text-slate-500"><span>{{ x.protocol }}</span><span>{{ x.packets }} packets</span><span>{{ x.score }}/100</span></div><div class="mt-2 text-xs text-slate-400">{{ x.reasons|join(' · ') }}</div></div>{% else %}<div class="k4-empty">No potential C2 candidate met the configured threshold.</div>{% endfor %}</div></div>
+        <div><h3 class="k4-subhead">External source candidates</h3><div class="mt-3 space-y-3">{% for x in result.network_assessment.external_attacker_candidates or [] %}<div class="k4-pivot-card"><div class="font-mono text-sm">{{ x.source }}</div><div class="mt-2 text-xs text-slate-500">{{ x.connections_to_internal }} inbound connection(s)</div><div class="mt-2 text-xs text-slate-400">Targets: {{ x.internal_targets|join(', ') }}</div></div>{% else %}<div class="k4-empty">No external-source candidate met the configured threshold.</div>{% endfor %}</div></div>
+      </div>
+    </section>
+    {% endif %}
+
+    {% if result.host_profiles %}
+    <section class="mt-6 glass rounded-3xl border border-slate-800 p-6 lg:p-8"><div class="k4-section-label">Host inventory</div><h2 class="mt-2 text-2xl font-black">Internal and external network assets</h2><div class="mt-5 overflow-auto"><table class="k4-table"><thead><tr><th>Host</th><th>Scope</th><th>Bytes</th><th>Peers</th><th>Ports</th><th>DNS / HTTP / TLS</th></tr></thead><tbody>{% for h in result.host_profiles[:200] %}<tr><td class="font-mono text-cyan-200">{{ h.host or h.ip }}</td><td>{{ h.scope or 'unknown' }}</td><td>{{ h.bytes or (h.bytes_in + h.bytes_out) }}</td><td>{{ h.unique_peers or 0 }}</td><td>{{ (h.destination_ports or {})|list|join(', ') }}</td><td>{{ (h.dns_queries or [])[:8]|join(', ') }}{% if h.http_hosts %}<br>{{ h.http_hosts[:5]|join(', ') }}{% endif %}{% if h.tls_sni %}<br>{{ h.tls_sni[:5]|join(', ') }}{% endif %}</td></tr>{% endfor %}</tbody></table></div></section>
+    {% endif %}
+
+    <section class="mt-6 glass rounded-3xl border border-slate-800 p-6 lg:p-8">
+      <div class="flex flex-wrap items-end justify-between gap-4"><div><div class="k4-section-label">Evidence ledger</div><h2 class="mt-2 text-2xl font-black">Technical observations</h2></div><span class="text-xs text-slate-500">{{ (result.evidence or [])|length }} structured items</span></div>
+      <div class="mt-5 grid gap-3 lg:grid-cols-2">
+        {% for item in result.evidence or [] %}<article class="rounded-2xl border border-slate-800 bg-slate-950/55 p-4"><div class="flex justify-between gap-4"><span class="font-bold text-slate-200">{{ item.signal or item.type or item.title or 'Observation' }}</span><span class="k4-severity-badge">{{ item.severity or 'info' }}</span></div><p class="mt-2 text-sm leading-6 text-slate-400">{{ item.detail or item.description or item.value or item }}</p>{% if item.source %}<div class="mt-3 text-[10px] uppercase tracking-widest text-slate-600">source: {{ item.source }}</div>{% endif %}</article>{% else %}<div class="lg:col-span-2 k4-empty">No structured evidence items were generated.</div>{% endfor %}
+      </div>
+    </section>
+
+    {% if result.flows %}<section class="mt-6 glass rounded-3xl border border-slate-800 p-6 lg:p-8"><div class="k4-section-label">Network flow table</div><h2 class="mt-2 text-2xl font-black">Who communicated with whom?</h2><div class="mt-5 overflow-auto"><table class="k4-table"><thead><tr><th>Source</th><th>Destination</th><th>Protocol</th><th>Packets</th><th>Bytes</th><th>First / Last</th><th>Context</th></tr></thead><tbody>{% for f in result.flows[:500] %}<tr><td class="font-mono">{{ f.src }}:{{ f.sport }}</td><td class="font-mono">{{ f.dst }}:{{ f.dport }}</td><td>{{ f.protocol }}</td><td>{{ f.packets }}</td><td>{{ f.bytes }}</td><td>{{ f.first_seen }}<br>{{ f.last_seen }}</td><td>{{ (f.tls_sni or [])|join(', ') }}{% if f.http_hosts %}<br>{{ f.http_hosts|join(', ') }}{% endif %}</td></tr>{% endfor %}</tbody></table></div></section>{% endif %}
+
+    <section class="mt-6 grid gap-6 xl:grid-cols-2">
+      <section class="glass rounded-3xl border border-slate-800 p-6 lg:p-8"><div class="k4-section-label">Explainable risk</div><h2 class="mt-2 text-2xl font-black">Why did the engine score this?</h2><div class="mt-5 space-y-3">{% for signal in result.risk_breakdown.signals[:30] %}<div class="rounded-xl border border-slate-800 bg-slate-950/50 p-4"><div class="flex justify-between gap-3"><b>{{ signal.name }}</b><span class="font-mono text-cyan-300">{{ signal.weight }}</span></div><div class="mt-2 text-xs text-slate-500">finding {{ signal.finding_id }} · contribution {{ signal.contribution }}</div></div>{% else %}<div class="k4-empty">No positive risk signals were produced by the analyzer.</div>{% endfor %}</div><p class="mt-4 text-xs leading-6 text-slate-500">{{ result.risk_breakdown.explanation }}</p></section>
+      <section class="glass rounded-3xl border border-slate-800 p-6 lg:p-8"><div class="k4-section-label">Timeline</div><h2 class="mt-2 text-2xl font-black">Evidence chronology</h2><div class="mt-5 max-h-[430px] space-y-3 overflow-auto">{% for event in result.timeline[:300] %}<div class="border-l border-cyan-400/30 pl-4"><div class="font-mono text-[10px] text-cyan-300">{{ event.timestamp }}</div><div class="mt-1 text-sm font-bold">{{ event.event }}</div><div class="mt-1 text-xs leading-5 text-slate-500">{{ event.description }}</div><div class="mt-1 text-[10px] text-slate-600">{{ event.evidence_id }} · {{ event.source }}</div></div>{% else %}<div class="k4-empty">No timestamped evidence was generated.</div>{% endfor %}</div></section>
+    </section>
+
+    <section class="mt-6 glass rounded-3xl border border-slate-800 p-6 lg:p-8"><div class="flex flex-wrap items-end justify-between gap-4"><div><div class="k4-section-label">Raw evidence appendix</div><h2 class="mt-2 text-2xl font-black">Every retained artifact behind a finding</h2></div><span class="k4-chip">{{ result.raw_evidence|length }} evidence records</span></div><div class="mt-5 space-y-3">{% for ev in result.raw_evidence[:500] %}<details class="rounded-xl border border-slate-800 bg-slate-950/50 p-4"><summary class="cursor-pointer"><span class="font-mono text-cyan-300">{{ ev.id }}</span> · {{ ev.kind }} · {{ ev.source }}</summary><div class="mt-3 grid gap-3 lg:grid-cols-2"><div><div class="k4-finding-label">RAW</div><pre class="k4-code mt-2">{{ ev.raw|tojson(indent=2) }}</pre></div><div><div class="k4-finding-label">INTERPRETATION</div><p class="mt-2 text-sm leading-6 text-slate-400">{{ ev.interpretation }}</p><div class="mt-3 text-[10px] text-slate-600">Observed {{ ev.observed_at }} · location {{ ev.location }}</div></div></div></details>{% else %}<div class="k4-empty">No raw evidence records were retained.</div>{% endfor %}</div></section>
+
+    <section class="mt-6 rounded-3xl border border-cyan-500/15 bg-cyan-500/[.025] p-6 lg:p-8">
+      <div class="flex flex-wrap items-end justify-between gap-4"><div><div class="k4-section-label text-cyan-300">Professional reporting suite</div><h2 class="mt-2 text-3xl font-black">Generate the complete investigation report</h2><p class="mt-2 text-sm leading-6 text-slate-500">Every export uses the same normalized result, including findings, IOCs, evidence, ATT&amp;CK observations, network pivots, flows and enrichment.</p></div><span class="k4-chip">{{ result.report_formats|length }} formats</span></div>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {% for fmt in result.report_formats %}
+        <form method="post" action="/services/reports/export" class="k4-export-card"><input type="hidden" name="analysis_json" value='{{ result|tojson|e }}'><input type="hidden" name="title" value="{{ service.title }} - {{ target_value }}"><input type="hidden" name="format" value="{{ fmt.key }}"><div class="font-black">{{ fmt.label }}</div><div class="mt-1 text-xs leading-5 text-slate-500">{{ fmt.extension }} · structured analyst export</div><button class="mt-4 w-full rounded-xl border border-slate-700 px-3 py-2 text-xs font-black text-cyan-300">Export {{ fmt.label }}</button></form>
+        {% endfor %}
+      </div>
+    </section>
+
+    <div class="mt-6 grid gap-6 lg:grid-cols-2">
+      <section class="glass rounded-3xl border border-slate-800 p-6"><div class="k4-section-label">IOC inventory</div><pre class="k4-code mt-4">{{ result.iocs|tojson(indent=2) }}</pre></section>
+      <section class="glass rounded-3xl border border-slate-800 p-6"><div class="k4-section-label">Threat intelligence</div><pre class="k4-code mt-4">{{ result.enrichment|tojson(indent=2) }}</pre></section>
+    </div>
+
+    {% if result.mitre_techniques %}<section class="mt-6 glass rounded-3xl border border-slate-800 p-6"><div class="k4-section-label">ATT&amp;CK mapping</div><div class="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">{% for x in result.mitre_techniques %}<div class="k4-pivot-card"><div class="font-black">{{ x.id }} · {{ x.name }}</div><div class="mt-2 text-xs text-slate-500">Evidence count: {{ x.evidence_count or 0 }}</div></div>{% endfor %}</div></section>{% endif %}
+
+    <div class="mt-6 grid gap-6 lg:grid-cols-2">
+      <details class="glass rounded-3xl border border-slate-800 p-6"><summary class="cursor-pointer text-lg font-black">Relationship graph data</summary><pre class="k4-code mt-4">{{ result.graph|tojson(indent=2) }}</pre></details>
+      <details class="glass rounded-3xl border border-slate-800 p-6"><summary class="cursor-pointer text-lg font-black">Complete analysis JSON · normalized result</summary><pre class="k4-code mt-4">{{ result|tojson(indent=2) }}</pre></details>
+    </div>
+
+    {% if guest %}<div class="mt-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 text-sm text-amber-100">Guest result saved for 24 hours. <a class="font-black underline" href="/register">Create an account</a> to keep this investigation permanently and access account history.</div>{% else %}<div class="mt-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5 text-sm text-emerald-100">Saved to your account. You can leave this service and return through Dashboard → Scans without losing the investigation.</div>{% endif %}
+  </div>
+</section>
+{% endblock %}

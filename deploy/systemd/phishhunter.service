@@ -1,0 +1,21 @@
+[Unit]
+Description=PhishGuard Python web service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/phishhunter
+EnvironmentFile=/opt/phishhunter/.env
+ExecStart=/opt/phishhunter/.venv/bin/gunicorn -c /opt/phishhunter/gunicorn.conf.py phishhunter.asgi:app
+Restart=always
+RestartSec=5
+User=phishhunter
+Group=phishhunter
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/phishhunter/data
+
+[Install]
+WantedBy=multi-user.target

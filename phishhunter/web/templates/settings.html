@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="k4-settings-page">
+  <div class="k4-page-head-row">
+    <div><span class="k4-page-kicker">ACCOUNT / SETTINGS</span><h1 class="k4-page-title-sm">Manage account</h1><p class="k4-page-lead-sm">A cleaner control center for your profile, session security, workspace preferences and platform behavior.</p></div>
+    <a href="/account" class="k4-outline-button">View profile</a>
+  </div>
+
+  <div class="k4-settings-layout">
+    <aside class="k4-settings-nav">
+      <div class="k4-settings-nav-title">ACCOUNT CENTER</div>
+      <a class="active" href="#profile">Profile <span>01</span></a>
+      <a href="#security">Security <span>02</span></a>
+      <a href="#workspace">Workspace <span>03</span></a>
+      <a href="#privacy">Privacy &amp; data <span>04</span></a>
+    </aside>
+    <div class="k4-settings-content">
+      <section id="profile" class="k4-settings-section">
+        <div class="k4-settings-section-head"><div><span>01 / PROFILE</span><h2>Identity &amp; appearance</h2><p>Update your display identity and profile photo from the profile editor.</p></div><a href="/account" class="k4-small-button">Edit profile →</a></div>
+        <div class="k4-settings-profile-row"><div class="k4-profile-avatar-lg">{% if profile.avatar_url %}<img src="{{ profile.avatar_url }}" alt="Profile photo">{% else %}<span>{{ profile.display_name[:1]|upper }}</span>{% endif %}</div><div><b>{{ profile.display_name }}</b><small>{{ profile.job_title }} · {{ user.email }}</small><small>{{ profile.timezone }}</small></div><span class="k4-secure-chip">{{ 'ADMINISTRATOR' if user.is_admin else 'ANALYST' }}</span></div>
+      </section>
+
+      <section id="security" class="k4-settings-section">
+        <div class="k4-settings-section-head"><div><span>02 / SECURITY</span><h2>Session &amp; authentication</h2><p>Your account uses the shared K4 identity service for the main site and admin console.</p></div></div>
+        <div class="k4-security-grid">
+          <article><span>AUTHENTICATION</span><b>Argon2 password hashing</b><small>Passwords are never stored as plaintext.</small></article>
+          <article><span>SESSION</span><b>JWT access + refresh</b><small>Session cookies are HttpOnly and shared across the K4 surfaces.</small></article>
+          <article><span>ACCOUNT STATUS</span><b>{{ 'Active administrator' if user.is_admin else 'Active analyst' }}</b><small>{{ 'Full control-plane access is enabled.' if user.is_admin else 'Standard analyst access is enabled.' }}</small></article>
+          <article><span>LAST SIGN-IN</span><b>{{ control.last_login_at.strftime('%d %b %Y · %H:%M') if control and control.last_login_at else 'First session' }}</b><small>Recorded by the account security control.</small></article>
+        </div>
+      </section>
+
+      <section id="workspace" class="k4-settings-section">
+        <div class="k4-settings-section-head"><div><span>03 / WORKSPACE</span><h2>Investigation environment</h2><p>Core analysis remains local-first and evidence-focused.</p></div></div>
+        <div class="k4-preference-list">
+          <div><div><b>Workspace</b><small>Tenant #{{ user.tenant_id }} · shared SQL identity</small></div><span>CONNECTED</span></div>
+          <div><div><b>Default timezone</b><small>{{ profile.timezone }}</small></div><span>LOCAL</span></div>
+          <div><div><b>Dynamic execution</b><small>Sandbox execution is disabled by default for safer local analysis.</small></div><span>PROTECTED</span></div>
+        </div>
+      </section>
+
+      <section id="privacy" class="k4-settings-section">
+        <div class="k4-settings-section-head"><div><span>04 / PRIVACY &amp; DATA</span><h2>Evidence handling</h2><p>K4 keeps the application focused on authorized defensive analysis.</p></div></div>
+        <div class="k4-privacy-callout"><span>◎</span><div><b>Defensive-analysis workspace</b><p>Uploads, scan results, IOCs and reports are stored within the configured application workspace. Use authorized artifacts and follow your organization's retention and access requirements.</p></div></div>
+      </section>
+    </div>
+  </div>
+</section>
+{% endblock %}

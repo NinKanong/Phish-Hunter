@@ -1,0 +1,5 @@
+VERSION='22.0.0'
+NAME='URL & Domain Analyst — V22 Global Domain Intelligence'
+LANDING='DNSDumpster-style minimal URL/domain intake'
+PIPELINE='Deep DNS + RDAP/WHOIS + infrastructure + global geography + corporate locations + defensive C2'
+MODULE_AREA='phishhunter/url_domain_analyst'
